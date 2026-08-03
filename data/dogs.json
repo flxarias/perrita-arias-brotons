@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "generated_at": "2026-08-03T01:32:17Z",
- "count": 727,
+ "generated_at": "2026-08-03T10:39:22Z",
+ "count": 731,
  "dogs": [
   {
    "id": "miwuki:ihezwzpxnz",
@@ -1533,6 +1533,161 @@
      "value": 1.0,
      "weight": 6,
      "text": "buena con niños"
+    }
+   },
+   "flags": []
+  },
+  {
+   "id": "apadac:mikita",
+   "source": "apadac",
+   "source_label": "APADAC Callosa de Segura",
+   "url": "https://protectora-apadac.org/adopta/mikita",
+   "entry": "scraper",
+   "name": "Mika",
+   "sex": "hembra",
+   "sex_inferred": false,
+   "birth_date": null,
+   "age_months": 12,
+   "age_estimated": false,
+   "age_band": "joven",
+   "size": "pequeno",
+   "size_inferred": false,
+   "weight_kg": null,
+   "breed": "Mezcla de Podenco Andaluz",
+   "breed_type": "mezcla",
+   "ppp": false,
+   "province": "Alicante",
+   "location": "Callosa de Segura",
+   "shelter": "APADAC Callosa de Segura",
+   "shelter_url": "https://protectora-apadac.org",
+   "shelter_kind": "",
+   "contact": "",
+   "photo": "https://protectora-apadac.org/_next/image?url=%2Fapi%2Fmedia%2Ffile%2F850baff7-7988-4906-b751-6c847c18c500.jpg&w=3840&q=75",
+   "photos": [
+    "https://protectora-apadac.org/_next/image?url=%2Fapi%2Fmedia%2Ffile%2F850baff7-7988-4906-b751-6c847c18c500.jpg&w=3840&q=75",
+    "https://protectora-apadac.org/_next/image?url=%2Fapi%2Fmedia%2Ffile%2Fc184f74e-fa19-42a6-bddc-94dba135f4d4.jpg&w=3840&q=75",
+    "https://protectora-apadac.org/_next/image?url=%2Fapi%2Fmedia%2Ffile%2F7a6215a1-5faa-4f5e-a6c6-5e26c24114a6.jpg&w=3840&q=75"
+   ],
+   "description": "Adopción responsable Ella es Mika: entusiasmo puro, saltos de alegría y mimos infinitos esperándote. 💛 Convivencia Cuidados Historia 🐾 Mika , una explosión de felicidad que siempre te recibe con una sonrisa.",
+   "traits": {
+    "affectionate": true
+   },
+   "health": {},
+   "status": "disponible",
+   "urgent": false,
+   "first_seen": "2026-08-03T10:39:22Z",
+   "last_seen": "2026-08-03T10:39:22Z",
+   "updated_at": "2026-08-03T10:39:22Z",
+   "gone_since": null,
+   "content_hash": "8b916f16a6642e25",
+   "score": 91,
+   "score_breakdown": {
+    "sexo": {
+     "value": 1.0,
+     "weight": 26,
+     "text": "hembra"
+    },
+    "edad": {
+     "value": 0.8,
+     "weight": 26,
+     "text": "12 meses — muy joven"
+    },
+    "tamaño": {
+     "value": 1.0,
+     "weight": 18,
+     "text": "tamaño pequeno"
+    },
+    "zona": {
+     "value": 1.0,
+     "weight": 18,
+     "text": "Alicante",
+     "tier": "core"
+    },
+    "raza": {
+     "value": 0.85,
+     "weight": 6,
+     "text": "mezcla identificada"
+    },
+    "niñas": {
+     "value": 0.5,
+     "weight": 6,
+     "text": "convivencia con niños sin confirmar"
+    }
+   },
+   "flags": []
+  },
+  {
+   "id": "apadac:pepita",
+   "source": "apadac",
+   "source_label": "APADAC Callosa de Segura",
+   "url": "https://protectora-apadac.org/adopta/pepita",
+   "entry": "scraper",
+   "name": "Pepa",
+   "sex": "hembra",
+   "sex_inferred": false,
+   "birth_date": null,
+   "age_months": 12,
+   "age_estimated": false,
+   "age_band": "joven",
+   "size": "mediano",
+   "size_inferred": false,
+   "weight_kg": null,
+   "breed": "Mezcla de Bodeguero",
+   "breed_type": "mezcla",
+   "ppp": false,
+   "province": "Alicante",
+   "location": "Callosa de Segura",
+   "shelter": "APADAC Callosa de Segura",
+   "shelter_url": "https://protectora-apadac.org",
+   "shelter_kind": "",
+   "contact": "",
+   "photo": "https://protectora-apadac.org/_next/image?url=%2Fapi%2Fmedia%2Ffile%2FWhatsApp%2520Image%25202026-07-30%2520at%252023.33.07%2520(4).jpg&w=3840&q=75",
+   "photos": [
+    "https://protectora-apadac.org/_next/image?url=%2Fapi%2Fmedia%2Ffile%2FWhatsApp%2520Image%25202026-07-30%2520at%252023.33.07%2520(4).jpg&w=3840&q=75",
+    "https://protectora-apadac.org/_next/image?url=%2Fapi%2Fmedia%2Ffile%2FWhatsApp%2520Image%25202026-07-30%2520at%252023.33.07%2520(3).jpg&w=3840&q=75"
+   ],
+   "description": "Adopción responsable Ella es Pepa: intensidad, juego y un corazón gigante esperando por ti. 💛 Convivencia Cuidados Historia 🐾 Pepa , una terremoto de alegría con un corazón enorme.",
+   "traits": {},
+   "health": {},
+   "status": "disponible",
+   "urgent": false,
+   "first_seen": "2026-08-03T10:39:22Z",
+   "last_seen": "2026-08-03T10:39:22Z",
+   "updated_at": "2026-08-03T10:39:22Z",
+   "gone_since": null,
+   "content_hash": "dcf2f8368d72606a",
+   "score": 91,
+   "score_breakdown": {
+    "sexo": {
+     "value": 1.0,
+     "weight": 26,
+     "text": "hembra"
+    },
+    "edad": {
+     "value": 0.8,
+     "weight": 26,
+     "text": "12 meses — muy joven"
+    },
+    "tamaño": {
+     "value": 1.0,
+     "weight": 18,
+     "text": "tamaño mediano"
+    },
+    "zona": {
+     "value": 1.0,
+     "weight": 18,
+     "text": "Alicante",
+     "tier": "core"
+    },
+    "raza": {
+     "value": 0.85,
+     "weight": 6,
+     "text": "mezcla identificada"
+    },
+    "niñas": {
+     "value": 0.5,
+     "weight": 6,
+     "text": "convivencia con niños sin confirmar"
     }
    },
    "flags": []
@@ -18538,6 +18693,82 @@
    "flags": []
   },
   {
+   "id": "apadac:sopita",
+   "source": "apadac",
+   "source_label": "APADAC Callosa de Segura",
+   "url": "https://protectora-apadac.org/adopta/sopita",
+   "entry": "scraper",
+   "name": "Sopa",
+   "sex": "hembra",
+   "sex_inferred": false,
+   "birth_date": null,
+   "age_months": 24,
+   "age_estimated": false,
+   "age_band": "joven",
+   "size": "grande",
+   "size_inferred": false,
+   "weight_kg": null,
+   "breed": "Mastin",
+   "breed_type": "raza",
+   "ppp": false,
+   "province": "Alicante",
+   "location": "Callosa de Segura",
+   "shelter": "APADAC Callosa de Segura",
+   "shelter_url": "https://protectora-apadac.org",
+   "shelter_kind": "",
+   "contact": "",
+   "photo": "https://protectora-apadac.org/_next/image?url=%2Fapi%2Fmedia%2Ffile%2FSopa2-1.jpg&w=3840&q=75",
+   "photos": [
+    "https://protectora-apadac.org/_next/image?url=%2Fapi%2Fmedia%2Ffile%2FSopa2-1.jpg&w=3840&q=75",
+    "https://protectora-apadac.org/_next/image?url=%2Fapi%2Fmedia%2Ffile%2FSopa1.jpg&w=3840&q=75"
+   ],
+   "description": "Adopción responsable Cambia la vida de Sopa: un amor gigante listo para ser adoptado. 💛 Convivencia Cuidados Historia 🐾 Sopa , una gigantona divertida que siempre consigue sacarte una sonrisa.",
+   "traits": {},
+   "health": {},
+   "status": "disponible",
+   "urgent": false,
+   "first_seen": "2026-08-03T10:39:22Z",
+   "last_seen": "2026-08-03T10:39:22Z",
+   "updated_at": "2026-08-03T10:39:22Z",
+   "gone_since": null,
+   "content_hash": "f512e2589674cdc9",
+   "score": 67,
+   "score_breakdown": {
+    "sexo": {
+     "value": 1.0,
+     "weight": 26,
+     "text": "hembra"
+    },
+    "edad": {
+     "value": 0.35,
+     "weight": 26,
+     "text": "24 meses — joven"
+    },
+    "tamaño": {
+     "value": 0.25,
+     "weight": 18,
+     "text": "tamaño grande"
+    },
+    "zona": {
+     "value": 1.0,
+     "weight": 18,
+     "text": "Alicante",
+     "tier": "core"
+    },
+    "raza": {
+     "value": 1.0,
+     "weight": 6,
+     "text": "de raza"
+    },
+    "niñas": {
+     "value": 0.5,
+     "weight": 6,
+     "text": "convivencia con niños sin confirmar"
+    }
+   },
+   "flags": []
+  },
+  {
    "id": "miwuki:duondz4r3v",
    "source": "miwuki",
    "source_label": "Miwuki Pet Shelter",
@@ -20153,6 +20384,85 @@
      "value": 0.55,
      "weight": 6,
      "text": "mestiza"
+    },
+    "niñas": {
+     "value": 0.5,
+     "weight": 6,
+     "text": "convivencia con niños sin confirmar"
+    }
+   },
+   "flags": []
+  },
+  {
+   "id": "apadac:kiarita",
+   "source": "apadac",
+   "source_label": "APADAC Callosa de Segura",
+   "url": "https://protectora-apadac.org/adopta/kiarita",
+   "entry": "scraper",
+   "name": "Kiara",
+   "sex": "hembra",
+   "sex_inferred": false,
+   "birth_date": null,
+   "age_months": 24,
+   "age_estimated": false,
+   "age_band": "joven",
+   "size": "grande",
+   "size_inferred": false,
+   "weight_kg": null,
+   "breed": "Mezcla de Pastor Aleman",
+   "breed_type": "mezcla",
+   "ppp": false,
+   "province": "Alicante",
+   "location": "Callosa de Segura",
+   "shelter": "APADAC Callosa de Segura",
+   "shelter_url": "https://protectora-apadac.org",
+   "shelter_kind": "",
+   "contact": "",
+   "photo": "https://protectora-apadac.org/_next/image?url=%2Fapi%2Fmedia%2Ffile%2FWhatsApp%2520Image%25202026-07-30%2520at%252023.41.44.jpg&w=3840&q=75",
+   "photos": [
+    "https://protectora-apadac.org/_next/image?url=%2Fapi%2Fmedia%2Ffile%2FWhatsApp%2520Image%25202026-07-30%2520at%252023.41.44.jpg&w=3840&q=75",
+    "https://protectora-apadac.org/_next/image?url=%2Fapi%2Fmedia%2Ffile%2FWhatsApp%2520Image%25202026-07-30%2520at%252023.41.44%2520(1).jpg&w=3840&q=75",
+    "https://protectora-apadac.org/_next/image?url=%2Fapi%2Fmedia%2Ffile%2FWhatsApp%2520Image%25202026-07-31%2520at%252004.43.32-1.jpg&w=3840&q=75"
+   ],
+   "description": "Adopción responsable Ella es Kiara: un bellezón de mirada noble listo para ser tu compañera de aventuras. 💛 Historia 🐾 Kiara , una perra tan especial que se gana el corazón de todo el que la conoce. Si buscas una compañera inteligente, sociable y con la que compartir mil aventuras, Kiara está deseando conocerte. 💛 Es una perra súper sociable y equilibrada, tanto que en nuestra protectora de animales de Callosa de Segura es la encargada de ayudarnos a realizar las pruebas con otros perros. Su inteligencia, su buen carácter y su facilidad para relacionarse la convierten en una compañera excepcional. Y, por si fuera poco, es guapísima y tiene un pelazo tan suave que no podrás dejar de acariciarla. 🐶✨",
+   "traits": {
+    "calm": true
+   },
+   "health": {},
+   "status": "disponible",
+   "urgent": false,
+   "first_seen": "2026-08-03T10:39:22Z",
+   "last_seen": "2026-08-03T10:39:22Z",
+   "updated_at": "2026-08-03T10:39:22Z",
+   "gone_since": null,
+   "content_hash": "0765ff93c6da15c6",
+   "score": 66,
+   "score_breakdown": {
+    "sexo": {
+     "value": 1.0,
+     "weight": 26,
+     "text": "hembra"
+    },
+    "edad": {
+     "value": 0.35,
+     "weight": 26,
+     "text": "24 meses — joven"
+    },
+    "tamaño": {
+     "value": 0.25,
+     "weight": 18,
+     "text": "tamaño grande"
+    },
+    "zona": {
+     "value": 1.0,
+     "weight": 18,
+     "text": "Alicante",
+     "tier": "core"
+    },
+    "raza": {
+     "value": 0.85,
+     "weight": 6,
+     "text": "mezcla identificada"
     },
     "niñas": {
      "value": 0.5,
@@ -26510,7 +26820,7 @@
    "status": "disponible",
    "urgent": false,
    "first_seen": "2026-08-03T01:11:33Z",
-   "last_seen": "2026-08-03T01:32:17Z",
+   "last_seen": "2026-08-03T10:39:22Z",
    "updated_at": "2026-08-03T01:11:33Z",
    "gone_since": null,
    "content_hash": "6e15fba711907782",
@@ -36456,7 +36766,7 @@
    "status": "disponible",
    "urgent": false,
    "first_seen": "2026-08-03T01:11:33Z",
-   "last_seen": "2026-08-03T01:32:17Z",
+   "last_seen": "2026-08-03T10:39:22Z",
    "updated_at": "2026-08-03T01:11:33Z",
    "gone_since": null,
    "content_hash": "4f273fee53a2bbab",
@@ -41019,7 +41329,7 @@
    "status": "disponible",
    "urgent": false,
    "first_seen": "2026-08-03T01:11:33Z",
-   "last_seen": "2026-08-03T01:32:17Z",
+   "last_seen": "2026-08-03T10:39:22Z",
    "updated_at": "2026-08-03T01:11:33Z",
    "gone_since": null,
    "content_hash": "0f38a12bd5c3ff91",
@@ -44061,7 +44371,7 @@
    "status": "disponible",
    "urgent": false,
    "first_seen": "2026-08-03T01:11:33Z",
-   "last_seen": "2026-08-03T01:32:17Z",
+   "last_seen": "2026-08-03T10:39:22Z",
    "updated_at": "2026-08-03T01:11:33Z",
    "gone_since": null,
    "content_hash": "9f5309af542d04b3",
@@ -48203,7 +48513,7 @@
    "status": "disponible",
    "urgent": false,
    "first_seen": "2026-08-03T01:11:33Z",
-   "last_seen": "2026-08-03T01:32:17Z",
+   "last_seen": "2026-08-03T10:39:22Z",
    "updated_at": "2026-08-03T01:11:33Z",
    "gone_since": null,
    "content_hash": "ba68af42593a0383",
@@ -50626,7 +50936,7 @@
    "status": "disponible",
    "urgent": false,
    "first_seen": "2026-08-03T01:11:33Z",
-   "last_seen": "2026-08-03T01:32:17Z",
+   "last_seen": "2026-08-03T10:39:22Z",
    "updated_at": "2026-08-03T01:11:33Z",
    "gone_since": null,
    "content_hash": "3a0b69c86d194046",
@@ -51552,7 +51862,7 @@
    "status": "disponible",
    "urgent": false,
    "first_seen": "2026-08-03T01:11:33Z",
-   "last_seen": "2026-08-03T01:32:17Z",
+   "last_seen": "2026-08-03T10:39:22Z",
    "updated_at": "2026-08-03T01:11:33Z",
    "gone_since": null,
    "content_hash": "c989aa119007fdc3",
@@ -55191,7 +55501,7 @@
    "status": "disponible",
    "urgent": false,
    "first_seen": "2026-08-03T01:11:33Z",
-   "last_seen": "2026-08-03T01:32:17Z",
+   "last_seen": "2026-08-03T10:39:22Z",
    "updated_at": "2026-08-03T01:11:33Z",
    "gone_since": null,
    "content_hash": "42a9c44b0939cda2",
@@ -59354,7 +59664,7 @@
    "status": "disponible",
    "urgent": false,
    "first_seen": "2026-08-03T01:11:33Z",
-   "last_seen": "2026-08-03T01:32:17Z",
+   "last_seen": "2026-08-03T10:39:22Z",
    "updated_at": "2026-08-03T01:11:33Z",
    "gone_since": null,
    "content_hash": "859581e69c122bd5",
@@ -59432,7 +59742,7 @@
    "status": "disponible",
    "urgent": false,
    "first_seen": "2026-08-03T01:11:33Z",
-   "last_seen": "2026-08-03T01:32:17Z",
+   "last_seen": "2026-08-03T10:39:22Z",
    "updated_at": "2026-08-03T01:11:33Z",
    "gone_since": null,
    "content_hash": "9706c0ebaf5f7a74",
@@ -59509,7 +59819,7 @@
    "status": "disponible",
    "urgent": false,
    "first_seen": "2026-08-03T01:11:33Z",
-   "last_seen": "2026-08-03T01:32:17Z",
+   "last_seen": "2026-08-03T10:39:22Z",
    "updated_at": "2026-08-03T01:11:33Z",
    "gone_since": null,
    "content_hash": "822c2c54538f5ac4",
@@ -59591,7 +59901,7 @@
    "status": "disponible",
    "urgent": false,
    "first_seen": "2026-08-03T01:11:33Z",
-   "last_seen": "2026-08-03T01:32:17Z",
+   "last_seen": "2026-08-03T10:39:22Z",
    "updated_at": "2026-08-03T01:11:33Z",
    "gone_since": null,
    "content_hash": "df140155aad4d177",
@@ -59759,7 +60069,7 @@
    "status": "disponible",
    "urgent": false,
    "first_seen": "2026-08-03T01:11:33Z",
-   "last_seen": "2026-08-03T01:32:17Z",
+   "last_seen": "2026-08-03T10:39:22Z",
    "updated_at": "2026-08-03T01:11:33Z",
    "gone_since": null,
    "content_hash": "f6d8e5327ef51635",
@@ -60732,7 +61042,7 @@
    "status": "disponible",
    "urgent": false,
    "first_seen": "2026-08-03T01:11:33Z",
-   "last_seen": "2026-08-03T01:32:17Z",
+   "last_seen": "2026-08-03T10:39:22Z",
    "updated_at": "2026-08-03T01:11:33Z",
    "gone_since": null,
    "content_hash": "34f23faeb0697d77",
@@ -60895,7 +61205,7 @@
    "status": "disponible",
    "urgent": false,
    "first_seen": "2026-08-03T01:11:33Z",
-   "last_seen": "2026-08-03T01:32:17Z",
+   "last_seen": "2026-08-03T10:39:22Z",
    "updated_at": "2026-08-03T01:11:33Z",
    "gone_since": null,
    "content_hash": "858d680f237f684f",
@@ -61146,7 +61456,7 @@
    "status": "disponible",
    "urgent": false,
    "first_seen": "2026-08-03T01:11:33Z",
-   "last_seen": "2026-08-03T01:32:17Z",
+   "last_seen": "2026-08-03T10:39:22Z",
    "updated_at": "2026-08-03T01:11:33Z",
    "gone_since": null,
    "content_hash": "0dd3db4ea95d090a",

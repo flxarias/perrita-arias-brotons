@@ -96,11 +96,27 @@
      "seconds": 16.6
     }
    }
+  },
+  {
+   "at": "2026-08-03T10:39:22Z",
+   "new": 4,
+   "changed": 0,
+   "total": 731,
+   "sources": {
+    "apadac": {
+     "ok": true,
+     "dogs": 20,
+     "pages": 2,
+     "errors": [],
+     "seconds": 13.8
+    }
+   }
   }
  ],
- "last_run": "2026-08-03T01:32:17Z",
+ "last_run": "2026-08-03T10:39:22Z",
  "new_ids": [
   "apadac:mikita",
+  "apadac:kiarita",
   "apadac:pepita",
   "apadac:sopita"
  ],
@@ -117,7 +133,7 @@
    "dogs": 20,
    "pages": 2,
    "errors": [],
-   "seconds": 16.6
+   "seconds": 13.8
   }
  }
 }
