@@ -21,12 +21,94 @@
     <h1 class="hero__title">Perrita<br><span>Arias Brotóns</span></h1>
     <p class="hero__lede">
       Seguimiento diario de las protectoras de la zona. Cada ficha se puntúa
-      según su encaje —hembra joven, talla pequeña o mediana, cerca de casa— y
-      el listado se rehace cada noche.
+      según su encaje —hembra joven, talla mediana, cerca de casa— y el
+      listado se rehace cada noche.
     </p>
     <dl class="hero__stats" id="heroStats"></dl>
   </div>
   <div class="hero__glow" aria-hidden="true"></div>
+
+  <!-- Fondo animado: en lugar de un vídeo (megabytes, y un primer fotograma
+       en negro en móvil) es un SVG que pesa unos pocos kB, se ve nítido en
+       cualquier pantalla y se detiene si el sistema pide menos movimiento. -->
+  <div class="hero__film" aria-hidden="true">
+    <svg viewBox="0 0 1600 700" preserveAspectRatio="xMidYMax slice" focusable="false">
+      <defs>
+        <g id="d-trot">
+          <path d="M34 46 L28 76" stroke="currentColor" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M44 46 L50 76" stroke="currentColor" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M74 48 L68 76" stroke="currentColor" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M82 48 L90 76" stroke="currentColor" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <ellipse cx="58" cy="42" rx="30" ry="16"/>
+          <ellipse cx="79" cy="43" rx="15" ry="15"/>
+          <path d="M72 34 L90 16 L102 28 L84 46 Z"/>
+          <ellipse cx="98" cy="22" rx="15" ry="13.5"/>
+          <path d="M104 17 L117 21 A7.5 7.5 0 0 1 117 36 L104 33 Z"/>
+          <path d="M92 13 C 86 2, 86 -8, 94 -6 C 101 -4, 103 6, 100 13 Z"/>
+          <path d="M30 34 C 16 28, 10 14, 16 4" stroke="currentColor" stroke-width="8" stroke-linecap="round" fill="none"/>
+        </g>
+        <g id="d-pup">
+          <path d="M26 36 L22 56" stroke="currentColor" stroke-width="8.5" stroke-linecap="round" fill="none"/>
+          <path d="M35 36 L39 56" stroke="currentColor" stroke-width="8.5" stroke-linecap="round" fill="none"/>
+          <path d="M56 38 L52 56" stroke="currentColor" stroke-width="8.5" stroke-linecap="round" fill="none"/>
+          <path d="M63 38 L68 56" stroke="currentColor" stroke-width="8.5" stroke-linecap="round" fill="none"/>
+          <ellipse cx="45" cy="33" rx="23" ry="13"/>
+          <ellipse cx="61" cy="34" rx="12" ry="12"/>
+          <path d="M56 27 L70 13 L80 23 L66 37 Z"/>
+          <ellipse cx="77" cy="18" rx="12.5" ry="11.5"/>
+          <path d="M82 13 L94 17 A6.5 6.5 0 0 1 94 30 L82 28 Z"/>
+          <path d="M72 10 C 67 0, 67 -8, 74 -6 C 80 -4, 82 4, 79 10 Z"/>
+          <path d="M23 27 C 11 22, 6 11, 11 3" stroke="currentColor" stroke-width="7" stroke-linecap="round" fill="none"/>
+        </g>
+        <g id="d-sit">
+          <path d="M18 88 C 10 88, 8 74, 14 62 C 20 50, 36 46, 46 52 C 58 60, 58 88, 46 88 Z"/>
+          <ellipse cx="56" cy="56" rx="19" ry="26"/>
+          <path d="M60 62 L60 86" stroke="currentColor" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <path d="M72 62 L72 86" stroke="currentColor" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <path d="M50 38 L66 20 L78 31 L62 48 Z"/>
+          <ellipse cx="74" cy="24" rx="15" ry="13.5"/>
+          <path d="M80 19 L93 23 A7.5 7.5 0 0 1 93 38 L80 35 Z"/>
+          <path d="M68 15 C 62 4, 62 -6, 70 -4 C 77 -2, 79 8, 76 15 Z"/>
+          <path d="M18 84 C 4 84, -2 72, 4 62" stroke="currentColor" stroke-width="8" stroke-linecap="round" fill="none"/>
+        </g>
+        <g id="paw">
+          <ellipse cx="14" cy="16" rx="7" ry="9" transform="rotate(-20 14 16)"/>
+          <ellipse cx="30" cy="9" rx="7" ry="9.5"/>
+          <ellipse cx="47" cy="11" rx="7" ry="9.5" transform="rotate(12 47 11)"/>
+          <ellipse cx="61" cy="21" rx="6.5" ry="8.5" transform="rotate(28 61 21)"/>
+          <path d="M20 46 C 20 32, 32 26, 40 26 C 50 26, 58 33, 58 45 C 58 56, 48 60, 39 60 C 29 60, 20 56, 20 46 Z"/>
+        </g>
+
+        <!-- una baldosa de 800 se repite dos veces: el bucle no tiene costura -->
+        <g id="tile-back">
+          <use href="#d-pup"  transform="translate(20,485) scale(.62)"/>
+          <use href="#paw"    transform="translate(170,404) scale(.5) rotate(-12)"/>
+          <use href="#d-trot" transform="translate(255,467) scale(.7)"/>
+          <use href="#d-sit"  transform="translate(430,465) scale(.62)"/>
+          <use href="#paw"    transform="translate(560,398) scale(.44) rotate(18)"/>
+          <use href="#d-pup"  transform="translate(640,489) scale(.55)"/>
+        </g>
+        <g id="tile-front">
+          <use href="#d-trot" transform="translate(40,579) scale(1)"/>
+          <use href="#paw"    transform="translate(215,612) scale(.6) rotate(-8)"/>
+          <use href="#d-sit"  transform="translate(330,571) scale(.95)"/>
+          <use href="#d-pup"  transform="translate(500,605) scale(.9)"/>
+          <use href="#paw"    transform="translate(645,600) scale(.5) rotate(22)"/>
+        </g>
+      </defs>
+
+      <g class="film__row film__row--back">
+        <use href="#tile-back"/>
+        <use href="#tile-back" transform="translate(800,0)"/>
+        <use href="#tile-back" transform="translate(1600,0)"/>
+      </g>
+      <g class="film__row film__row--front">
+        <use href="#tile-front"/>
+        <use href="#tile-front" transform="translate(800,0)"/>
+        <use href="#tile-front" transform="translate(1600,0)"/>
+      </g>
+    </svg>
+  </div>
 </header>
 
 <div class="toolbar" id="toolbar">
