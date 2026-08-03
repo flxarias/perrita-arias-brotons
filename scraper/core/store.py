@@ -106,6 +106,37 @@ def merge(existing: dict[str, Dog], scraped: list[Dog]) -> tuple[dict[str, Dog],
     return merged, new, changed
 
 
+# Una misma imagen repartida entre muchas fichas no es la foto de ninguna: es
+# el logotipo de la protectora o su marcador de "sin foto". Dos fichas sí pueden
+# compartirla legítimamente (hermanos de camada), tres ya no.
+SHARED_PHOTO_LIMIT = 3
+KNOWN_PLACEHOLDERS = ("img.miwuki.com/no-pic",)
+
+
+def drop_shared_photos(dogs: list[Dog]) -> int:
+    """Quita las imágenes genéricas y deja la siguiente foto buena de la ficha."""
+    from collections import Counter
+
+    # se cuenta solo la foto principal: las galerías arrastran ruido de la
+    # plantilla y penalizarlas se llevaría por delante fotos buenas
+    uses: Counter[str] = Counter(d.photo for d in dogs if d.photo)
+
+    bad = {p for p, n in uses.items() if n >= SHARED_PHOTO_LIMIT}
+    bad |= {p for d in dogs for p in d.photos if any(k in p for k in KNOWN_PLACEHOLDERS)}
+    if not bad:
+        return 0
+
+    touched = 0
+    for d in dogs:
+        if not any(p in bad for p in d.photos) and d.photo not in bad:
+            continue
+        d.photos = [p for p in d.photos if p not in bad]
+        if d.photo in bad:
+            d.photo = d.photos[0] if d.photos else ""
+        touched += 1
+    return touched
+
+
 def annotate_duplicates(dogs: list[Dog]) -> None:
     """Marca fichas que parecen la misma perra en dos portales distintos."""
     groups: dict[str, list[Dog]] = {}

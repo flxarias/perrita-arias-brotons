@@ -38,9 +38,35 @@ def clean_text(s: str | None) -> str:
     return s.strip()
 
 
+ADOPTED_RE = re.compile(r"\badoptad[oa]s?\b", re.I)
+
+
+def looks_like_listing(name: str) -> bool:
+    """Descarta entradas que no son un animal.
+
+    Algunas webs publican las categorías y los formularios de donación con la
+    misma plantilla que las fichas: "Gatos En Adopción (4)", "Apadrinar (10)",
+    "Dona 2787" o un simple "¡Adopta!" acaban colándose como si fueran perros.
+    """
+    n = (name or "").strip()
+    if re.search(r"\(\d+\)\s*$", n):
+        return True
+    if re.match(r"^dona\s+\d+", n, re.I):
+        return True
+    k = key(n)
+    # "dona" a secas no entra: hay una perra que se llama así
+    if re.fullmatch(r"(adopta|apadrina|colabora|coopera|hazte socio|donaciones)", k):
+        return True
+    if re.search(r"\b(perros?|gatos?|gatas?|animales)\s+en\s+adopcion\b", k):
+        return True
+    return False
+
+
 def clean_name(s: str | None) -> str:
     s = clean_text(s)
     s = re.sub(r"^(adopta a|adoptar a|conoce a|ficha de)\s+", "", s, flags=re.I)
+    # "Chelsie. ADOPTADA!!" → "Chelsie"
+    s = re.sub(r"[.,;:\-–—]?\s*[¡!]*\s*adoptad[oa]s?\s*[!¡.]*\s*$", "", s, flags=re.I)
     s = re.sub(r"\s*\((adoptad[oa]|reservad[oa])\)\s*$", "", s, flags=re.I)
     s = s.strip(" -–—·|")
     # las protectoras escriben el nombre en mayúsculas o en minúsculas sin criterio

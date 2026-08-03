@@ -63,7 +63,11 @@ class Dog:
     # ------------------------------------------------------------------ helpers
     def finalize(self) -> "Dog":
         """Rellena campos derivados y deja la ficha coherente."""
-        self.name = N.clean_name(self.name) or "Sin nombre"
+        raw_name = self.name or ""
+        self.name = N.clean_name(raw_name) or "Sin nombre"
+        # muchas protectoras no cambian el estado: lo anuncian en el nombre
+        if N.ADOPTED_RE.search(raw_name):
+            self.status = "adoptado"
         self.description = N.clean_text(self.description)[:4000]
 
         if self.birth_date and self.age_months is None:

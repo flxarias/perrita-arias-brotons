@@ -111,6 +111,8 @@ class SiteSource(Source):
     def _postprocess(self, dog: Dog) -> Dog | None:
         if N.looks_like_cat(dog.breed, dog.name, dog.description[:300]):
             return None
+        if N.looks_like_listing(dog.name):
+            return None
         if not dog.province and self.default_province:
             dog.province = self.default_province
             dog.location = dog.location or self.default_province

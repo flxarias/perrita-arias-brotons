@@ -64,6 +64,39 @@ def run() -> int:
     eq(N.looks_like_cat("Podenco", "Camelia", "se lleva bien con gatos"), False,
        "convivir con gatos no la convierte en gata")
 
+    # --- entradas que no son un animal
+    for basura in ("Gatos En Adopción (4)", "Apadrinar (10)", "Dona 2787", "¡Adopta!"):
+        eq(N.looks_like_listing(basura), True, f"descartar {basura!r}")
+    for real in ("Dona", "Alma", "Chelsie. ADOPTADA!!", "Sin Nombre"):
+        eq(N.looks_like_listing(real), False, f"conservar {real!r}")
+    eq(N.clean_name("Chelsie. ADOPTADA!!"), "Chelsie", "nombre sin el sufijo de adoptada")
+    eq(Dog(id="t", name="Brook. ADOPTADO!").finalize().status, "adoptado", "estado desde el nombre")
+
+    # --- imágenes que no son la foto del animal
+    from .sources.generic import _usable_img, is_junk_img
+
+    # una URL sin extensión es válida si viene de un adaptador propio
+    eq(is_junk_img("https://img.miwuki.com/kZ1uO6n4"), False, "Miwuki sirve fotos sin extensión")
+    eq(_usable_img("https://img.miwuki.com/kZ1uO6n4"), False, "pero no se elige a ciegas desde el HTML")
+    eq(is_junk_img("https://asokaelgrande.org/ficha-banner-11747"), True, "el cartel sigue siendo basura")
+
+    for mala in (
+        "https://asokaelgrande.org/ficha-banner-11747",
+        "https://protectoradeibi.com/imagen_captcha.php",
+        "https://www.paypalobjects.com/es_ES/i/scr/pixel.gif",
+        "https://ui-avatars.com/api/?name=drac4paws&size=250",
+        "https://www.anaaweb.org/web/image/922/ANAA-ADOPTA-UN-PERRO.svg",
+        "https://asokaelgrande.org/imas/animales/_11715/thumbnail_square_mini.jpg",
+        "https://anaaweb.org/web/image/website/1/logo",
+    ):
+        eq(_usable_img(mala), False, f"rechazar {mala.split('/')[-1][:34]}")
+    for buena in (
+        "https://asokaelgrande.org/imas/animales/_11747/a_117471781430971.jpg",
+        "https://www.anaaweb.org/animals/image/43483?field=image_1920",
+        "https://protectoravillena.com/wp-content/uploads/Anael-1.jpg",
+    ):
+        eq(_usable_img(buena), True, f"aceptar {buena.split('/')[-1][:34]}")
+
     # --- geografía
     eq(N.norm_province("Callosa de Segura"), "Alicante", "municipio → provincia")
     eq(N.norm_province("Alicante, España"), "Alicante", "provincia directa")

@@ -67,6 +67,9 @@ def run(selected: list[str] | None, limit: int | None, dry_run: bool, use_browse
     # rescorear todo: los criterios pueden haber cambiado desde el último barrido
     for dog in merged.values():
         score_dog(dog, criteria)
+    limpiadas = store.drop_shared_photos(list(merged.values()))
+    if limpiadas:
+        log.info("%s fichas tenían una imagen genérica (logo o 'sin foto') y se ha quitado", limpiadas)
     store.annotate_duplicates(list(merged.values()))
 
     notifiable = [d for d in new if is_notifiable(d, criteria)]

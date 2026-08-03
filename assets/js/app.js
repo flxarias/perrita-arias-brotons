@@ -217,6 +217,7 @@
     $('#loadMore').hidden = n <= state.shown;
     syncQuickChips();
 
+    $$('.card__img img, .d-gallery img').forEach((img) => img.addEventListener('error', onImageError));
     $$('.card__fav').forEach((b) => b.addEventListener('click', (e) => {
       e.stopPropagation();
       const on = PAB.toggleFav(b.dataset.id);
@@ -249,6 +250,22 @@
     $$('[data-quick]').forEach((b) => b.setAttribute('aria-pressed', Boolean(on[b.dataset.quick])));
   }
 
+  /** Si una foto no carga, prueba la siguiente de la ficha; si no queda ninguna,
+      deja el marcador en vez de un hueco roto. */
+  function onImageError(e) {
+    const img = e.currentTarget;
+    const alts = (img.dataset.alts || '').split('|').filter(Boolean);
+    if (alts.length) {
+      img.dataset.alts = alts.slice(1).join('|');
+      img.src = alts[0];
+      return;
+    }
+    const ph = document.createElement('div');
+    ph.className = 'noimg';
+    ph.textContent = '🐕';
+    img.replaceWith(ph);
+  }
+
   function ringStyle(score) {
     const c = score >= 75 ? 'var(--green)' : score >= 55 ? 'var(--gold)' : 'var(--line-2)';
     return `--p:${score};--ring-c:${c}`;
@@ -270,11 +287,15 @@
       `<span class="tag${d.size ? '' : ' tag--soft'}">${esc(PAB.sizeText(d))}</span>`,
     ].join('');
 
+    // las protectoras borran fotos con el tiempo: se guardan las alternativas
+    // de la ficha para ir probándolas antes de rendirse
+    const alts = (d.photos || []).filter((p) => p && p !== d.photo).join('|');
+
     return `
 <article class="card" data-id="${esc(d.id)}" tabindex="0" role="button" aria-label="Ficha de ${esc(d.name)}">
   <div class="card__img">
     ${d.photo
-      ? `<img src="${esc(d.photo)}" alt="${esc(d.name)}" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'noimg',textContent:'🐕'}))">`
+      ? `<img src="${esc(d.photo)}" alt="${esc(d.name)}" loading="lazy" decoding="async" data-alts="${esc(alts)}">`
       : '<div class="noimg">🐕</div>'}
     <div class="card__ribbons">${ribbons.join('')}</div>
     <button class="card__fav" data-id="${esc(d.id)}" aria-pressed="${fav}" aria-label="Favorita">${fav ? '♥' : '♡'}</button>
@@ -305,6 +326,7 @@
     if (!d) return;
     if (pushHash) history.replaceState(null, '', '#' + encodeURIComponent(id));
     $('#detailBody').innerHTML = detailHTML(d);
+    $$('.d-gallery img').forEach((img) => img.addEventListener('error', onImageError));
     const dlg = $('#detail');
     dlg.showModal();
     dlg.scrollTop = 0;
@@ -327,7 +349,7 @@
   function detailHTML(d) {
     const photos = d.photos?.length ? d.photos : (d.photo ? [d.photo] : []);
     const gallery = photos.length
-      ? photos.map((p) => `<img src="${esc(p)}" alt="${esc(d.name)}" loading="lazy" onerror="this.remove()">`).join('')
+      ? photos.map((p) => `<img src="${esc(p)}" alt="${esc(d.name)}" loading="lazy">`).join('')
       : '<div class="noimg">🐕</div>';
 
     const facts = [

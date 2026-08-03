@@ -41,6 +41,8 @@ class Kerubi(Source):
         if not title:
             return None
         name = title.get_text(strip=True)
+        if N.looks_like_listing(name):
+            return None  # categorías y formularios de donación con plantilla de ficha
 
         # bloque "Detalles": <li> con .field-label y el valor al lado
         fields: dict[str, str] = {}
@@ -85,13 +87,21 @@ class Kerubi(Source):
                 if cand:
                     shelter = cand[0][:60]
 
+        # SOLO el carrusel de la ficha. La página trae además el avatar de la
+        # protectora, el bloque "Animales similares" y widgets del pie: si se
+        # cogen todas las <img>, las fotos de unos perros acaban en las fichas
+        # de otros (una sola llegó a aparecer en 189 galerías).
         photos = []
-        for img in s.select(".flexslider img[src], .list-detail img[src], img[src]"):
+        for img in s.select(".flexslider .slides img[src]"):
             src = img.get("src", "")
             if re.search(r"/wp-content/uploads/.+\.(jpe?g|png|webp)", src, re.I) and not re.search(
-                r"logo|avatar|icon|placeholder", src, re.I
+                r"logo|avatar|icon|placeholder|thumbnail", src, re.I
             ):
                 photos.append(re.sub(r"-\d+x\d+(?=\.\w+$)", "", src))
+        if not photos:
+            og = s.select_one('meta[property="og:image"]')
+            if og and og.get("content") and "logo" not in og["content"].lower():
+                photos.append(og["content"])
         photos = list(dict.fromkeys(photos))[:8]
 
         breed, breed_type = N.norm_breed(fields.get("raza"), desc)

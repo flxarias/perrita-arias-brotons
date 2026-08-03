@@ -103,20 +103,57 @@ def _main_text(s: BeautifulSoup) -> str:
     return re.sub(r"\n{3,}", "\n\n", "\n".join(keep))[:5000]
 
 
-JUNK_IMG = re.compile(r"logo|icon|avatar|placeholder|sprite|favicon|/theme|/assets/ui", re.I)
+# Todo lo que no es la foto del animal: adornos de la plantilla, cartelería de
+# redes sociales y chismes de terceros.
+#   banner   → Asoka e Ibi ponen en og:image un cartel de "¡Adóptame!" con el
+#              logotipo y texto encima; la foto de verdad está en la página.
+#   captcha  → "imagen_captcha.php" cuela por contener la subcadena "/image".
+#   thumbnail → en la barra lateral van las miniaturas de *otros* animales
+JUNK_IMG = re.compile(
+    r"logo|icon|avatar|placeholder|sprite|favicon|banner|captcha|pixel|spacer|"
+    r"thumbnail|/thumbs?/|_mini\b|/theme|/assets/ui|_mibambu|ministerio",
+    re.I,
+)
+FOREIGN_HOSTS = re.compile(
+    r"paypalobjects\.com|ui-avatars\.com|gravatar\.com|placehold|doubleclick|"
+    r"google-analytics|facebook\.com/tr",
+    re.I,
+)
+
+
+def is_junk_img(src: str) -> bool:
+    """¿La URL delata que la imagen no es la foto del animal?
+
+    Vale para cualquier fuente. Se queda en lo que se puede afirmar mirando la
+    URL: logotipos, cartelería, chismes de terceros y SVG.
+    """
+    if not src:
+        return True
+    if JUNK_IMG.search(src) or FOREIGN_HOSTS.search(src):
+        return True
+    return bool(re.search(r"\.svg(\?|$)", src, re.I))
+
+
+def _usable_img(src: str) -> bool:
+    """Además de no ser basura, ¿parece una imagen al elegir candidatas del HTML?
+
+    Aquí sí se exige extensión o ruta de imagen, porque hay que descartar
+    enlaces sueltos. No sirve para juzgar URLs ya validadas por un adaptador
+    propio: Miwuki, por ejemplo, sirve las fotos sin extensión.
+    """
+    if is_junk_img(src):
+        return False
+    return bool(re.search(r"\.(jpe?g|png|webp)", src, re.I) or "/image" in src or "/media/" in src)
 
 
 def _images(s: BeautifulSoup, base: str) -> list[str]:
     urls: list[str] = []
     og = s.select_one('meta[property="og:image"]')
-    # el og:image de muchas webs es el logotipo de la entidad, no el animal
-    if og and og.get("content") and not JUNK_IMG.search(og["content"]):
+    if og and _usable_img(og.get("content", "")):
         urls.append(urljoin(base, og["content"]))
     for img in s.select("main img[src], article img[src], .entry-content img[src], img[src]"):
         src = img.get("src") or ""
-        if not (re.search(r"\.(jpe?g|png|webp)", src, re.I) or "/image" in src or "/media/" in src):
-            continue
-        if JUNK_IMG.search(src):
+        if not _usable_img(src):
             continue
         w = img.get("width")
         if w and str(w).isdigit() and int(w) < 200:

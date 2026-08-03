@@ -48,6 +48,18 @@ Después, en el repositorio:
    pública (por ejemplo `https://usuario.github.io/perrita-arias-brotons`). Sirve
    para que los avisos enlacen a la ficha dentro de la web.
 
+### Repasar la base sin volver a barrer
+
+Cuando se corrige un normalizador, las fichas ya guardadas conservan el dato
+viejo hasta que su fuente vuelve a barrerse. `repair` las repasa todas en local
+—descarta lo que no es un animal, limpia nombres, corrige estados y quita
+imágenes genéricas— en segundos y sin molestar a las webs de las protectoras:
+
+```bash
+python -m scraper.repair --dry-run
+python -m scraper.repair
+```
+
 ### Ejecutar el barrido en local
 
 ```bash
