@@ -464,9 +464,12 @@
 
   function renderFooter() {
     const when = state.generatedAt ? new Date(state.generatedAt) : null;
-    const sources = state.meta?.source_health ? Object.keys(state.meta.source_health).length : 0;
+    // se cuentan las fuentes presentes en los datos, no las del último barrido:
+    // si solo se rebarre una fuente, meta.json únicamente registra esa
+    const n = new Set(state.all.map((d) => d.source)).size;
+    const fuentes = `${n} ${n === 1 ? 'fuente' : 'fuentes'}`;
     $('#footMeta').textContent = when
-      ? `Última actualización: ${when.toLocaleString('es-ES', { dateStyle: 'long', timeStyle: 'short' })} · ${state.all.length} fichas de ${sources} fuentes`
+      ? `Última actualización: ${when.toLocaleString('es-ES', { dateStyle: 'long', timeStyle: 'short' })} · ${state.all.length} fichas de ${fuentes}`
       : `${state.all.length} fichas`;
 
     const link = $('#restoreHidden');
