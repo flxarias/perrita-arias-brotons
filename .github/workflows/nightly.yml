@@ -1,0 +1,128 @@
+name: Barrido nocturno
+
+on:
+  schedule:
+    # GitHub Actions solo entiende UTC. Se programan las dos horas que pueden
+    # ser medianoche en Madrid y el primer paso descarta la que no toca, así
+    # que el barrido cae siempre a las 00:00 hora española, con o sin verano.
+    - cron: "0 22 * * *"   # 00:00 en horario de verano (CEST, UTC+2)
+    - cron: "0 23 * * *"   # 00:00 en horario de invierno (CET, UTC+1)
+  workflow_dispatch:
+    inputs:
+      sources:
+        description: "Fuentes concretas separadas por coma (vacío = todas)"
+        required: false
+        default: ""
+      browser:
+        description: "Usar navegador (Playwright) para las webs con JS"
+        type: boolean
+        default: true
+
+concurrency:
+  group: scrape
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: ¿Es medianoche en Madrid?
+        id: gate
+        run: |
+          HOUR=$(TZ=Europe/Madrid date +%H)
+          if [ "${{ github.event_name }}" != "schedule" ] || [ "$HOUR" = "00" ]; then
+            echo "run=yes" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=no" >> "$GITHUB_OUTPUT"
+            echo "Son las $HOUR:00 en Madrid; este disparo no toca."
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.run == 'yes'
+
+      - uses: actions/setup-python@v5
+        if: steps.gate.outputs.run == 'yes'
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependencias
+        if: steps.gate.outputs.run == 'yes'
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scraper/requirements.txt
+
+      - name: Instalar Chromium
+        if: steps.gate.outputs.run == 'yes' && inputs.browser != false
+        run: python -m playwright install --with-deps chromium
+
+      - name: Barrer las protectoras
+        if: steps.gate.outputs.run == 'yes'
+        env:
+          PAB_MIN_INTERVAL: "0.5"
+          SOURCES: ${{ inputs.sources }}
+          USE_BROWSER: ${{ inputs.browser }}
+        run: |
+          ARGS=""
+          for s in $(echo "$SOURCES" | tr ',' ' '); do
+            [ -n "$s" ] && ARGS="$ARGS --source $s"
+          done
+          [ "$USE_BROWSER" = "false" ] && ARGS="$ARGS --no-browser"
+          python -m scraper.run $ARGS
+
+      - name: Guardar los cambios en la base de datos
+        if: steps.gate.outputs.run == 'yes'
+        id: commit
+        run: |
+          git config user.name  "perrita-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/dogs.json data/meta.json data/exports/
+          if git diff --cached --quiet; then
+            echo "changed=no" >> "$GITHUB_OUTPUT"
+            echo "Sin cambios."
+          else
+            NEW=$(python -c "import json;print(len(json.load(open('data/last_digest.json'))['new']))")
+            git commit -m "Barrido nocturno: $NEW altas ($(TZ=Europe/Madrid date '+%d/%m/%Y'))"
+            git push
+            echo "changed=yes" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Avisar de las novedades
+        if: steps.gate.outputs.run == 'yes' && steps.commit.outputs.changed == 'yes'
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_FROM: ${{ secrets.MAIL_FROM }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          CALLMEBOT_PHONE: ${{ secrets.CALLMEBOT_PHONE }}
+          CALLMEBOT_APIKEY: ${{ secrets.CALLMEBOT_APIKEY }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: python -m scraper.notify
+
+      - name: Resumen
+        if: steps.gate.outputs.run == 'yes'
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json, pathlib
+          d = json.loads(pathlib.Path("data/last_digest.json").read_text(encoding="utf-8"))
+          print(f"## Barrido de las {d['at'][:16].replace('T',' ')} UTC\n")
+          print(f"- **{d['total']}** fichas en la base de datos")
+          print(f"- **{len(d['new'])}** altas · **{len(d['changed'])}** actualizadas")
+          print(f"- **{len(d['notifiable'])}** encajan con lo que buscamos\n")
+          print("| Fuente | Fichas | Errores | Tiempo |")
+          print("|---|---:|---:|---:|")
+          for slug, h in d["source_health"].items():
+              print(f"| {slug} | {h['dogs']} | {len(h.get('errors', []))} | {h.get('seconds', 0)}s |")
+          if d["notifiable"]:
+              print("\n### Novedades\n")
+              for x in d["notifiable"][:15]:
+                  print(f"- **{x['score']}** · [{x['name']}]({x['url']}) — {x.get('province') or '?'} · {x.get('shelter') or ''}")
+          PY

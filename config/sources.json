@@ -1,0 +1,88 @@
+{
+  "_comment": "Fuentes declarativas. Para añadir una protectora basta con un bloque nuevo: 'listings' son las páginas donde salen los animales y 'detail_pattern' la expresión que reconoce el enlace a una ficha. Si la web es JS (Wix, React), poner \"browser\": true.",
+  "sources": [
+    {
+      "slug": "anaa",
+      "label": "ANAA — Asociación Nacional Amigos de los Animales",
+      "home": "https://www.anaaweb.org",
+      "kind": "protectora",
+      "province": "Madrid",
+      "provinces": [
+        "Madrid"
+      ],
+      "listings": [
+        "https://www.anaaweb.org/es/perros-en-adopcion"
+      ],
+      "detail_pattern": "/animales/\\d+/?$",
+      "max_details": 80,
+      "enabled": true
+    },
+    {
+      "slug": "ibi",
+      "label": "Protectora de Ibi",
+      "home": "https://protectoradeibi.com",
+      "province": "Alicante",
+      "provinces": [
+        "Alicante"
+      ],
+      "listings": [
+        "https://protectoradeibi.com/s13-adopta"
+      ],
+      "detail_pattern": "/ficha-\\d+/?$",
+      "max_details": 60,
+      "enabled": true
+    },
+    {
+      "slug": "asoka",
+      "label": "ASOKA el Grande",
+      "home": "https://asokaelgrande.org",
+      "province": "Alicante",
+      "provinces": [
+        "Alicante"
+      ],
+      "listings": [
+        "https://asokaelgrande.org/la-45-perros"
+      ],
+      "detail_pattern": "/ficha-\\d+/?$",
+      "max_details": 60,
+      "enabled": true
+    },
+    {
+      "slug": "apaccampello",
+      "label": "APAC El Campello",
+      "home": "https://es.apaccampello.com",
+      "province": "Alicante",
+      "provinces": [
+        "Alicante"
+      ],
+      "browser": true,
+      "scroll": 3,
+      "listings": [
+        "https://es.apaccampello.com/dogs-for-adoption"
+      ],
+      "detail_pattern": "/(?:dog|perro|adopt)[a-z0-9\\-/]*/[a-z0-9\\-]{3,}/?$",
+      "exclude_pattern": "application-form|procedure|foster|cat",
+      "max_details": 60,
+      "enabled": true
+    },
+    {
+      "slug": "alicanteprotectora",
+      "label": "Alicante Protectora (SPA Alicante)",
+      "home": "https://www.alicanteprotectora.com",
+      "province": "Alicante",
+      "provinces": [
+        "Alicante"
+      ],
+      "browser": true,
+      "scroll": 2,
+      "listings": [
+        "https://www.alicanteprotectora.com/adopta/"
+      ],
+      "detail_pattern": "/(?:nombre-perro|perro|animal)[a-z0-9\\-]*/?$",
+      "exclude_pattern": "cita_previa|calendly",
+      "max_details": 40,
+      "enabled": false,
+      "_nota": "Publica sus casos en Instagram/Facebook, no en la web. Se deja preparado por si activan el listado."
+    }
+  ]
+}

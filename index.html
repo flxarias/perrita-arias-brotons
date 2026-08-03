@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbf8f4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#12100e" media="(prefers-color-scheme: dark)">
+<title>Perrita Arias Brotóns</title>
+<meta name="description" content="Seguimiento diario de las protectoras de Alicante y la mitad este de España, con cada ficha ordenada por su encaje.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+<link rel="manifest" href="assets/manifest.webmanifest">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+
+<a class="skip" href="#resultados">Saltar a los resultados</a>
+
+<header class="hero" id="hero">
+  <div class="hero__inner">
+    <p class="hero__eyebrow">Adopción · Alicante y mitad este de España</p>
+    <h1 class="hero__title">Perrita<br><span>Arias Brotóns</span></h1>
+    <p class="hero__lede">
+      Seguimiento diario de las protectoras de la zona. Cada ficha se puntúa
+      según su encaje —hembra joven, talla pequeña o mediana, cerca de casa— y
+      el listado se rehace cada noche.
+    </p>
+    <dl class="hero__stats" id="heroStats"></dl>
+  </div>
+  <div class="hero__glow" aria-hidden="true"></div>
+</header>
+
+<div class="toolbar" id="toolbar">
+  <div class="toolbar__row">
+    <div class="search">
+      <svg class="search__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+      <input id="q" type="search" placeholder="Buscar por nombre, raza, protectora…" autocomplete="off" aria-label="Buscar">
+      <button class="search__clear" id="qClear" hidden aria-label="Limpiar búsqueda">×</button>
+    </div>
+    <button class="btn btn--icon" id="openFilters" aria-label="Filtros">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M7 12h10M11 18h2"/></svg>
+      <span class="btn__badge" id="filterCount" hidden>0</span>
+    </button>
+  </div>
+  <div class="quickchips" id="quickchips" role="group" aria-label="Filtros rápidos"></div>
+  <div class="toolbar__meta">
+    <span id="resultCount">Cargando…</span>
+    <label class="sort">
+      <span class="sr-only">Ordenar por</span>
+      <select id="sort">
+        <option value="score">Mejor encaje</option>
+        <option value="new">Novedades primero</option>
+        <option value="young">Más jóvenes</option>
+        <option value="near">Más cerca</option>
+        <option value="name">Nombre A-Z</option>
+      </select>
+    </label>
+  </div>
+</div>
+
+<main id="resultados">
+  <div class="grid" id="grid" aria-live="polite"></div>
+  <div class="empty" id="empty" hidden>
+    <p class="empty__emoji">🐾</p>
+    <h2>Sin resultados con estos filtros</h2>
+    <p>Prueba a ampliar la zona o el rango de edad.</p>
+    <button class="btn btn--ghost" id="resetFromEmpty">Quitar los filtros</button>
+  </div>
+  <button class="btn btn--more" id="loadMore" hidden>Ver más</button>
+</main>
+
+<footer class="foot">
+  <p id="footMeta">—</p>
+  <nav>
+    <a href="admin.html">Añadir una ficha</a>
+    <a href="data/exports/dogs.csv" download>Descargar CSV</a>
+    <a href="data/dogs.json">Ver base de datos</a>
+    <a href="#" id="restoreHidden" hidden>Recuperar descartadas (<span id="hiddenN">0</span>)</a>
+  </nav>
+</footer>
+
+<!-- ------------------------------------------------------------------ ficha -->
+<dialog class="sheet sheet--detail" id="detail" aria-label="Ficha">
+  <button class="sheet__close" data-close aria-label="Cerrar">×</button>
+  <div id="detailBody"></div>
+</dialog>
+
+<!-- ---------------------------------------------------------------- filtros -->
+<dialog class="sheet sheet--filters" id="filters" aria-label="Filtros">
+  <header class="sheet__head">
+    <h2>Filtros</h2>
+    <button class="sheet__close" data-close aria-label="Cerrar">×</button>
+  </header>
+  <div class="sheet__body">
+    <fieldset class="f">
+      <legend>Sexo</legend>
+      <div class="opts" data-group="sex">
+        <button data-v="hembra">Hembra</button>
+        <button data-v="macho">Macho</button>
+        <button data-v="?">Sin confirmar</button>
+      </div>
+    </fieldset>
+
+    <fieldset class="f">
+      <legend>Edad</legend>
+      <div class="opts" data-group="age">
+        <button data-v="cachorro">Cachorra · &lt;1 año</button>
+        <button data-v="joven">Joven · 1-3 años</button>
+        <button data-v="adulto">Adulta · 3-8</button>
+        <button data-v="senior">Senior · 8+</button>
+        <button data-v="?">Sin confirmar</button>
+      </div>
+    </fieldset>
+
+    <fieldset class="f">
+      <legend>Tamaño</legend>
+      <div class="opts" data-group="size">
+        <button data-v="mini">Mini</button>
+        <button data-v="pequeno">Pequeño</button>
+        <button data-v="mediano">Mediano</button>
+        <button data-v="grande">Grande</button>
+        <button data-v="gigante">Gigante</button>
+        <button data-v="?">Sin confirmar</button>
+      </div>
+    </fieldset>
+
+    <fieldset class="f">
+      <legend>Zona</legend>
+      <div class="opts" data-group="tier">
+        <button data-v="core">Alicante</button>
+        <button data-v="near">Provincias vecinas</button>
+        <button data-v="east">Mitad este</button>
+        <button data-v="far">Resto</button>
+      </div>
+      <label class="field">
+        <span>Provincia concreta</span>
+        <select id="fProvince"><option value="">Todas</option></select>
+      </label>
+    </fieldset>
+
+    <fieldset class="f">
+      <legend>Raza</legend>
+      <div class="opts" data-group="breedType">
+        <button data-v="raza">De raza</button>
+        <button data-v="mezcla">Mezcla</button>
+        <button data-v="mestizo">Mestiza</button>
+      </div>
+    </fieldset>
+
+    <fieldset class="f">
+      <legend>Protectora</legend>
+      <label class="field">
+        <span class="sr-only">Protectora</span>
+        <select id="fShelter"><option value="">Todas</option></select>
+      </label>
+    </fieldset>
+
+    <fieldset class="f">
+      <legend>Otros</legend>
+      <div class="switches">
+        <label><input type="checkbox" id="fPhoto"> Solo con foto</label>
+        <label><input type="checkbox" id="fKids"> Buena con niños</label>
+        <label><input type="checkbox" id="fAvailable" checked> Solo disponibles</label>
+        <label><input type="checkbox" id="fNoPPP" checked> Excluir razas PPP</label>
+        <label><input type="checkbox" id="fFav"> Solo favoritas</label>
+        <label><input type="checkbox" id="fNew"> Solo novedades</label>
+      </div>
+    </fieldset>
+  </div>
+  <footer class="sheet__foot">
+    <button class="btn btn--ghost" id="resetFilters">Limpiar</button>
+    <button class="btn btn--primary" data-close>Ver <span id="previewCount">0</span> resultados</button>
+  </footer>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

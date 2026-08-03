@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.py[cod]
+.cache/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Ajustes de la máquina de cada uno
+.claude/settings.local.json
+
+# Resumen intermedio entre el barrido y el envío de avisos: se regenera en cada
+# ejecución y no aporta nada al histórico
+data/last_digest.json

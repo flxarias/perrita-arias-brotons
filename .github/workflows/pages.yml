@@ -1,0 +1,41 @@
+name: Publicar en GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "scraper/**"
+      - ".github/**"
+      - "README.md"
+  # Los commits que hace un workflow con el GITHUB_TOKEN no disparan eventos
+  # `push`, así que el barrido nocturno se encadena por `workflow_run`; sin
+  # esto la web se quedaría con los datos de la víspera.
+  workflow_run:
+    workflows: ["Barrido nocturno", "Extraer ficha desde un enlace"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      # El sitio es estático: se sube el repositorio tal cual, incluida data/.
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4

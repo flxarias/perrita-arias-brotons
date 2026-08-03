@@ -1,0 +1,8 @@
+# Los workflows se ejecutan en Linux: un CRLF colado desde Windows rompe los
+# scripts de `run:`. Se normaliza todo a LF dentro del repositorio.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.webp binary
+*.ico binary

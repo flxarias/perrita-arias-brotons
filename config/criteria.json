@@ -1,0 +1,47 @@
+{
+  "project": "Perrita Arias Brotóns",
+  "family": {
+    "children": ["María", "hermana"],
+    "driver": "María"
+  },
+  "target": {
+    "species": "perro",
+    "sex": "hembra",
+    "age_months_ideal_max": 6,
+    "age_months_acceptable_max": 18,
+    "sizes_preferred": ["mini", "pequeno", "mediano"],
+    "breed_preference": ["raza", "mezcla", "mestizo"],
+    "must_be_kid_friendly": true,
+    "exclude_ppp": true
+  },
+  "geo": {
+    "home_province": "Alicante",
+    "tiers": {
+      "core": ["Alicante"],
+      "near": ["Murcia", "Valencia", "Albacete", "Castellón", "Almería"],
+      "east": [
+        "Madrid", "Barcelona", "Tarragona", "Zaragoza", "Teruel", "Cuenca",
+        "Ciudad Real", "Toledo", "Guadalajara", "Jaén", "Granada",
+        "Baleares", "Girona", "Lleida", "Huesca", "Soria", "Segovia", "Cádiz"
+      ]
+    },
+    "max_tier": "east"
+  },
+  "weights": {
+    "sex": 26,
+    "age": 26,
+    "size": 18,
+    "geo": 18,
+    "breed": 6,
+    "kids": 6
+  },
+  "notify": {
+    "min_score": 62,
+    "always_notify_if": {
+      "sex": "hembra",
+      "age_months_max": 12,
+      "sizes": ["mini", "pequeno", "mediano"],
+      "tiers": ["core", "near"]
+    }
+  }
+}
