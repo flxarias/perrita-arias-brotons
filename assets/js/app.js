@@ -291,11 +291,16 @@
     // de la ficha para ir probándolas antes de rendirse
     const alts = (d.photos || []).filter((p) => p && p !== d.photo).join('|');
 
+    // referrerpolicy="no-referrer": el servidor de alguna protectora (Villena)
+    // tiene protección anti-hotlink y, al ver que la petición llega desde otro
+    // dominio, devuelve un cartel de "This image was hotlinked" en vez de la
+    // foto. Sin cabecera Referer sirve la imagen buena.
+
     return `
 <article class="card" data-id="${esc(d.id)}" tabindex="0" role="button" aria-label="Ficha de ${esc(d.name)}">
   <div class="card__img">
     ${d.photo
-      ? `<img src="${esc(d.photo)}" alt="${esc(d.name)}" loading="lazy" decoding="async" data-alts="${esc(alts)}">`
+      ? `<img src="${esc(d.photo)}" alt="${esc(d.name)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-alts="${esc(alts)}">`
       : '<div class="noimg">🐕</div>'}
     <div class="card__ribbons">${ribbons.join('')}</div>
     <button class="card__fav" data-id="${esc(d.id)}" aria-pressed="${fav}" aria-label="Favorita">${fav ? '♥' : '♡'}</button>
@@ -349,7 +354,7 @@
   function detailHTML(d) {
     const photos = d.photos?.length ? d.photos : (d.photo ? [d.photo] : []);
     const gallery = photos.length
-      ? photos.map((p) => `<img src="${esc(p)}" alt="${esc(d.name)}" loading="lazy">`).join('')
+      ? photos.map((p) => `<img src="${esc(p)}" alt="${esc(d.name)}" loading="lazy" referrerpolicy="no-referrer">`).join('')
       : '<div class="noimg">🐕</div>';
 
     const facts = [
