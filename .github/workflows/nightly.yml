@@ -94,12 +94,9 @@ jobs:
       - name: Avisar de las novedades
         if: steps.gate.outputs.run == 'yes' && steps.commit.outputs.changed == 'yes'
         env:
-          SMTP_HOST: ${{ secrets.SMTP_HOST }}
-          SMTP_PORT: ${{ secrets.SMTP_PORT }}
-          SMTP_USER: ${{ secrets.SMTP_USER }}
-          SMTP_PASS: ${{ secrets.SMTP_PASS }}
-          MAIL_FROM: ${{ secrets.MAIL_FROM }}
-          MAIL_TO: ${{ secrets.MAIL_TO }}
+          # El correo lo manda el "Resumen matinal" a las 07:00; aquí solo van
+          # los avisos instantáneos, para no duplicar el mensaje.
+          NOTIFY_EMAIL: "0"
           CALLMEBOT_PHONE: ${{ secrets.CALLMEBOT_PHONE }}
           CALLMEBOT_APIKEY: ${{ secrets.CALLMEBOT_APIKEY }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}

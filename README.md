@@ -20,6 +20,7 @@ es un GitHub Action. No hay servidor que mantener ni base de datos que pagar.
 | Export a Sheets | `data/exports/dogs.csv` | CSV plano listo para `IMPORTDATA`. |
 | Motor de barrido | `scraper/` | Adaptadores por fuente + normalización + afinidad. |
 | Barrido nocturno | `.github/workflows/nightly.yml` | 00:00 hora de Madrid, todos los días. |
+| Resumen matinal | `.github/workflows/digest.yml` | 07:00 hora de Madrid, por correo. |
 | Extracción por enlace | `.github/workflows/extract-link.yml` | Se dispara desde `admin.html`. |
 | Avisos | `scraper/notify.py` | Correo y WhatsApp, además del badge en la web. |
 
@@ -66,19 +67,35 @@ python -m scraper.run                 # ya incluye las fuentes con browser
 
 ---
 
-## Los avisos nocturnos
+## Los avisos
+
+Hay dos momentos, deliberadamente separados:
+
+| Cuándo | Qué | Por dónde |
+|---|---|---|
+| **00:00** | Barre las ocho fuentes y guarda las novedades | Telegram y WhatsApp (aviso instantáneo) |
+| **07:00** | Lee lo que guardó el barrido y manda el resumen | Correo |
+
+Separarlos evita el correo a medianoche, evita duplicar el mensaje y hace que un
+fallo del scraper no deje sin resumen: el de las 07:00 solo lee la base de datos.
+
+El resumen matinal **sale todos los días**, haya novedades o no. Cuando no las
+hay, recuerda las que mejor encajan en ese momento y avisa si alguna fuente
+falló por la noche. Lleva su propia marca (`last_digest_sent` en `data/meta.json`),
+así que no repite fichas ni se salta ninguna aunque un día falle el envío o se
+añada algo a mano por la tarde.
 
 El aviso dentro de la web funciona sin configurar nada: cada ficha guarda cuándo
 se vio por primera vez y el buscador marca como **Novedades** todo lo aparecido
 desde la última visita.
 
-Correo y WhatsApp son opcionales. Se activan añadiendo secretos en
+Correo, Telegram y WhatsApp se activan añadiendo secretos en
 **Settings → Secrets and variables → Actions**:
 
 | Secreto | Para qué |
 |---|---|
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` | Servidor de salida del correo. |
-| `MAIL_FROM`, `MAIL_TO` | Remitente y destinatario del resumen. |
+| `MAIL_FROM`, `MAIL_TO` | Remitente y destinatarios. `MAIL_TO` admite varias direcciones separadas por coma. |
 | `TELEGRAM_TOKEN`, `TELEGRAM_CHAT_ID` | Grupo de Telegram. |
 | `CALLMEBOT_PHONE`, `CALLMEBOT_APIKEY` | WhatsApp individual vía [CallMeBot](https://www.callmebot.com/blog/free-api-whatsapp-messages/). |
 

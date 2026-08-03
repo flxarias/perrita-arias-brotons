@@ -1,0 +1,72 @@
+name: Resumen matinal
+
+# El barrido de las 00:00 recoge; esto solo lee la base de datos y envía el
+# correo. Separarlo evita que un fallo del scraper deje sin resumen, y que un
+# resumen lento retrase el barrido.
+
+on:
+  schedule:
+    - cron: "0 5 * * *"   # 07:00 en horario de verano (CEST, UTC+2)
+    - cron: "0 6 * * *"   # 07:00 en horario de invierno (CET, UTC+1)
+  workflow_dispatch:
+
+concurrency:
+  group: digest
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: ¿Son las 07:00 en Madrid?
+        id: gate
+        run: |
+          HOUR=$(TZ=Europe/Madrid date +%H)
+          if [ "${{ github.event_name }}" != "schedule" ] || [ "$HOUR" = "07" ]; then
+            echo "run=yes" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=no" >> "$GITHUB_OUTPUT"
+            echo "Son las $HOUR:00 en Madrid; este disparo no toca."
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.run == 'yes'
+
+      - uses: actions/setup-python@v5
+        if: steps.gate.outputs.run == 'yes'
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependencias
+        if: steps.gate.outputs.run == 'yes'
+        run: pip install requests
+
+      - name: Enviar el resumen
+        if: steps.gate.outputs.run == 'yes'
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_FROM: ${{ secrets.MAIL_FROM }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: python -m scraper.digest
+
+      - name: Anotar el envío
+        if: steps.gate.outputs.run == 'yes'
+        run: |
+          git config user.name  "perrita-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/meta.json
+          if git diff --cached --quiet; then
+            echo "Sin cambios que anotar."
+          else
+            git commit -m "Resumen matinal enviado ($(TZ=Europe/Madrid date '+%d/%m/%Y'))"
+            git push
+          fi

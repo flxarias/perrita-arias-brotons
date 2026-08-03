@@ -123,37 +123,55 @@ def build_html(digest: dict) -> str:
 
 # --------------------------------------------------------------------------- envíos
 
-def send_email(digest: dict) -> bool:
+def recipients() -> list[str]:
+    """MAIL_TO admite varias direcciones separadas por coma o punto y coma."""
+    raw = os.environ.get("MAIL_TO", "")
+    return [a.strip() for a in raw.replace(";", ",").split(",") if a.strip()]
+
+
+def send_mail(subject: str, text_body: str, html_body: str) -> bool:
+    """Envío genérico; lo usan tanto el aviso nocturno como el resumen matinal."""
     host = os.environ.get("SMTP_HOST")
-    to = os.environ.get("MAIL_TO")
+    to = recipients()
     if not host or not to:
         print("· correo: sin configurar (falta SMTP_HOST o MAIL_TO)")
         return False
 
     msg = EmailMessage()
-    n = len(digest["notifiable"])
-    msg["Subject"] = f"🐾 {n} perrita{'s' if n != 1 else ''} nueva{'s' if n != 1 else ''} que encajan"
-    msg["From"] = os.environ.get("MAIL_FROM") or os.environ.get("SMTP_USER") or to
-    msg["To"] = to
-    msg.set_content(build_text(digest))
-    msg.add_alternative(build_html(digest), subtype="html")
+    msg["Subject"] = subject
+    msg["From"] = os.environ.get("MAIL_FROM") or os.environ.get("SMTP_USER") or to[0]
+    msg["To"] = ", ".join(to)
+    msg.set_content(text_body)
+    msg.add_alternative(html_body, subtype="html")
 
     port = int(os.environ.get("SMTP_PORT", "587"))
     try:
         if port == 465:
             with smtplib.SMTP_SSL(host, port, context=ssl.create_default_context(), timeout=30) as s:
                 _login(s)
-                s.send_message(msg)
+                s.send_message(msg, to_addrs=to)
         else:
             with smtplib.SMTP(host, port, timeout=30) as s:
                 s.starttls(context=ssl.create_default_context())
                 _login(s)
-                s.send_message(msg)
-        print(f"· correo enviado a {to}")
+                s.send_message(msg, to_addrs=to)
+        print(f"· correo enviado a {', '.join(to)}")
         return True
     except Exception as exc:
         print(f"· correo FALLÓ: {exc}", file=sys.stderr)
         return False
+
+
+def send_email(digest: dict) -> bool:
+    if os.environ.get("NOTIFY_EMAIL", "1") == "0":
+        print("· correo: desactivado en este trabajo (lo envía el resumen de las 07:00)")
+        return False
+    n = len(digest["notifiable"])
+    return send_mail(
+        f"🐾 {n} perrita{'s' if n != 1 else ''} nueva{'s' if n != 1 else ''} que encajan",
+        build_text(digest),
+        build_html(digest),
+    )
 
 
 def _login(s: smtplib.SMTP) -> None:
