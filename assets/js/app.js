@@ -466,8 +466,8 @@
     const when = state.generatedAt ? new Date(state.generatedAt) : null;
     // se cuentan las fuentes presentes en los datos, no las del último barrido:
     // si solo se rebarre una fuente, meta.json únicamente registra esa
-    const n = new Set(state.all.map((d) => d.source)).size;
-    const fuentes = `${n} ${n === 1 ? 'fuente' : 'fuentes'}`;
+    const nFuentes = new Set(state.all.map((d) => d.source)).size;
+    const fuentes = `${nFuentes} ${nFuentes === 1 ? 'fuente' : 'fuentes'}`;
     $('#footMeta').textContent = when
       ? `Última actualización: ${when.toLocaleString('es-ES', { dateStyle: 'long', timeStyle: 'short' })} · ${state.all.length} fichas de ${fuentes}`
       : `${state.all.length} fichas`;
