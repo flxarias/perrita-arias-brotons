@@ -2,6 +2,9 @@
 # scripts de `run:`. Se normaliza todo a LF dentro del repositorio.
 * text=auto eol=lf
 
+# el CSV se escribe con CRLF a propósito (RFC 4180 y Excel en español)
+*.csv -text
+
 *.png binary
 *.jpg binary
 *.webp binary

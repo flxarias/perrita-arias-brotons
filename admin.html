@@ -11,11 +11,11 @@
 </head>
 <body>
 
-<header class="hero" style="padding-bottom:24px">
-  <div class="hero__inner">
-    <p class="hero__eyebrow"><a href="index.html" style="text-decoration:none">← Volver al buscador</a></p>
-    <h1 class="hero__title" style="font-size:clamp(2rem,9vw,3.4rem)">Añadir<br><span>una ficha</span></h1>
-    <p class="hero__lede">Incorpora un anuncio a partir de su enlace o introduce los datos manualmente.</p>
+<header class="page">
+  <div class="page__inner">
+    <p class="page__eyebrow">Añadir ficha</p>
+    <h1 class="page__title">Una candidata <span>más</span></h1>
+    <p class="page__lede">Pega el enlace del anuncio y se rellena solo, o escríbela a mano. Se guarda al momento, sin configurar nada.</p>
   </div>
 </header>
 
@@ -24,7 +24,6 @@
   <div class="tabs" role="tablist">
     <button role="tab" id="tabLink" aria-selected="true" aria-controls="paneLink">Desde un enlace</button>
     <button role="tab" id="tabManual" aria-selected="false" aria-controls="paneManual">A mano</button>
-    <button role="tab" id="tabConfig" aria-selected="false" aria-controls="paneConfig">Ajustes</button>
   </div>
 
   <!-- ------------------------------------------------------ desde enlace -->
@@ -33,39 +32,16 @@
       <span>Enlace del anuncio</span>
       <input id="url" type="url" inputmode="url" placeholder="https://petshelter.miwuki.com/c/…">
     </label>
-    <div class="row2" style="margin-top:12px">
-      <button class="btn btn--primary btn--block" id="extract">Extraer datos</button>
-      <button class="btn btn--block" id="extractServer" title="Usa el extractor completo del repositorio (requiere token)">Extraer en el servidor</button>
-    </div>
+    <button class="btn btn--primary btn--block" id="extract" style="margin-top:12px">Extraer datos</button>
     <p class="status" id="extractStatus"></p>
     <p class="hint" style="margin-top:14px">
-      La extracción en el navegador usa un lector público para saltar la restricción CORS
-      del navegador; la del servidor lanza el mismo extractor de Python que el barrido
-      nocturno y hace el commit directamente.
+      Se lee la página del anuncio y se rellena la ficha con lo que se encuentre.
+      Revísala antes de guardar: lo que no venga claro se queda «sin confirmar».
     </p>
   </section>
 
   <!-- ------------------------------------------------------------- a mano -->
   <section class="panel" id="paneManual" role="tabpanel" aria-labelledby="tabManual" hidden></section>
-
-  <!-- ------------------------------------------------------------ ajustes -->
-  <section class="panel" id="paneConfig" role="tabpanel" aria-labelledby="tabConfig" hidden>
-    <h2 style="margin-top:0">Conexión con GitHub</h2>
-    <p class="hint">
-      Necesario solo para guardar directamente en la base de datos. El token se
-      queda en este navegador (localStorage) y únicamente se envía a api.github.com.
-      Crea uno de tipo <em>fine-grained</em> con permisos <strong>Contents: read&nbsp;and&nbsp;write</strong>
-      y <strong>Actions: read&nbsp;and&nbsp;write</strong> sobre este repositorio.
-    </p>
-    <label class="field"><span>Repositorio (usuario/repo)</span><input id="cfgRepo" placeholder="usuario/perrita-arias-brotons"></label>
-    <label class="field"><span>Rama</span><input id="cfgBranch" placeholder="main"></label>
-    <label class="field"><span>Token</span><input id="cfgToken" type="password" placeholder="github_pat_…" autocomplete="off"></label>
-    <div class="row2" style="margin-top:14px">
-      <button class="btn btn--primary btn--block" id="cfgSave">Guardar</button>
-      <button class="btn btn--block" id="cfgTest">Probar conexión</button>
-    </div>
-    <p class="status" id="cfgStatus"></p>
-  </section>
 
   <!-- --------------------------------------------------- ficha en edición -->
   <section id="editor" hidden>
@@ -133,7 +109,7 @@
       </div>
 
       <div class="row2" style="margin-top:18px">
-        <button class="btn btn--primary btn--block" id="saveGithub">Guardar en la base de datos</button>
+        <button class="btn btn--primary btn--block" id="guardar">Guardar la ficha</button>
         <button class="btn btn--block" id="saveDownload">Descargar JSON</button>
       </div>
       <p class="status" id="saveStatus"></p>
@@ -144,17 +120,21 @@
       </details>
     </div>
   </section>
+
+  <!-- ------------------------------------------------------ ya guardadas -->
+  <section id="propias" hidden></section>
 </main>
 
 <footer class="foot">
-  <p>Las fichas añadidas a mano tienen prioridad sobre el barrido automático: el scraper no las sobrescribe.</p>
-  <nav><a href="index.html">Buscador</a><a href="data/dogs.json">Base de datos</a></nav>
+  <p id="pieFichas">Tus fichas se guardan en este navegador y aparecen al momento en el buscador, en la base de datos y en el CSV.</p>
+  <nav><a href="index.html">Buscador</a><a href="datos.html">Base de datos</a><a href="comparar.html">Comparativa</a></nav>
 </footer>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="assets/js/data.js"></script>
-<script src="assets/js/github.js"></script>
+<script src="assets/js/csv.js"></script>
+<script src="assets/js/nav.js"></script>
 <script src="assets/js/admin.js"></script>
 </body>
 </html>

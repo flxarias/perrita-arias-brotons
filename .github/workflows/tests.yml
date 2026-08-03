@@ -34,7 +34,7 @@ jobs:
           python - <<'PY'
           import pathlib, re, sys
           fallos = []
-          for page in ("index.html", "admin.html"):
+          for page in ("index.html", "admin.html", "datos.html", "comparar.html"):
               html = pathlib.Path(page).read_text(encoding="utf-8")
               for ref in re.findall(r'(?:src|href)="((?!https?:|data:|#|mailto:)[^"]+)"', html):
                   ref = ref.split("?")[0].split("#")[0]

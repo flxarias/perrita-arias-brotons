@@ -11,7 +11,7 @@ on:
   # `push`, así que el barrido nocturno se encadena por `workflow_run`; sin
   # esto la web se quedaría con los datos de la víspera.
   workflow_run:
-    workflows: ["Barrido nocturno", "Extraer ficha desde un enlace"]
+    workflows: ["Barrido nocturno"]
     types: [completed]
   workflow_dispatch:
 

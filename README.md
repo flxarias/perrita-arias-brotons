@@ -15,14 +15,15 @@ es un GitHub Action. No hay servidor que mantener ni base de datos que pagar.
 | Pieza | Dónde | Qué hace |
 |---|---|---|
 | Buscador | `index.html` | Filtros, orden por afinidad, ficha, favoritas. Mobile-first. |
+| Comparativa | `comparar.html` | Hasta cuatro candidatas cara a cara, empezando por las favoritas. |
+| Base de datos | `datos.html` | Cuadro de mando y tabla completa, ordenable y filtrable. |
 | Alta de fichas | `admin.html` | Formulario manual y extracción automática desde un enlace. |
-| Base de datos | `data/dogs.json` | Una ficha por perro, con histórico en el log de git. |
+| Fichero de datos | `data/dogs.json` | Una ficha por perro, con histórico en el log de git. |
 | Export a Sheets | `data/exports/dogs.csv` | CSV plano listo para `IMPORTDATA`. |
 | Motor de barrido | `scraper/` | Adaptadores por fuente + normalización + afinidad. |
 | Barrido nocturno | `.github/workflows/nightly.yml` | 00:00 hora de Madrid, todos los días. |
 | Resumen matinal | `.github/workflows/digest.yml` | 07:00 hora de Madrid, por correo. |
-| Extracción por enlace | `.github/workflows/extract-link.yml` | Se dispara desde `admin.html`. |
-| Avisos | `scraper/notify.py` | Correo y WhatsApp, además del badge en la web. |
+| Avisos | `scraper/notify.py` | Correo, Telegram y WhatsApp, además del badge en la web. |
 
 ---
 
@@ -35,8 +36,8 @@ gh repo create perrita-arias-brotons --public --source=. --push
 
 > GitHub Pages en repositorios **privados** requiere plan de pago. Con cuenta
 > gratuita el repositorio tiene que ser público para que la web se publique.
-> Aquí no hay nada sensible: los tokens viven en el navegador y los secretos en
-> la configuración del repositorio, nunca en el código.
+> Aquí no hay nada sensible: los secretos viven en la configuración del
+> repositorio, nunca en el código.
 
 Después, en el repositorio:
 
@@ -238,24 +239,22 @@ adaptador en `scraper/sources/` y se registra con `@register`.
 
 ## Añadir fichas a mano
 
-`admin.html` tiene tres pestañas:
+`admin.html` no necesita configurar nada: se abre y funciona.
 
-- **Desde un enlace** — pega la URL. El navegador no puede leer otro dominio por
-  la política CORS, así que la lectura pasa por un lector público (solo se le
-  manda la URL del anuncio, que ya es pública). El botón *Extraer en el servidor*
-  lanza el workflow `extract-link.yml`, que usa el mismo extractor de Python del
-  barrido y commitea el resultado; da mejores datos pero tarda un minuto.
+- **Desde un enlace** — pega la URL del anuncio. El navegador no puede leer otro
+  dominio por la política CORS, así que la lectura pasa por un lector público
+  (solo se le manda la URL del anuncio, que ya es pública). Rellena lo que
+  encuentra y tú revisas antes de guardar.
 - **A mano** — formulario en blanco con el encaje calculándose en vivo.
-- **Ajustes** — repositorio y token de GitHub.
 
-El token debe ser *fine-grained*, limitado a este repositorio, con
-**Contents: read and write** y **Actions: read and write**. Se guarda solo en el
-`localStorage` del navegador y únicamente se envía a `api.github.com`. Si
-prefieres no usar token, *Descargar JSON* genera el fichero para pegarlo a mano
-en `data/dogs.json`.
+Al guardar, la ficha queda en el `localStorage` de ese navegador y **aparece al
+instante** en el buscador, en la base de datos y en el CSV descargable, mezclada
+con las del barrido y puntuada con los mismos criterios.
 
-Las fichas con `entry: manual` o `entry: link` tienen prioridad: el barrido
-nocturno actualiza su estado pero no pisa lo que hayas escrito.
+Vive en ese navegador, no en el repositorio: es lo que permite que funcione sin
+tokens ni servidor. Desde el propio panel puedes exportarlas en JSON o en CSV
+para guardarlas o pasarlas a otro dispositivo. El barrido nocturno nunca las
+toca.
 
 ---
 

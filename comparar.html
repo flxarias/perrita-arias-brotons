@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbf8f4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#12100e" media="(prefers-color-scheme: dark)">
+<title>Comparativa · Perrita Arias Brotóns</title>
+<meta name="description" content="Compara candidatas cara a cara: encaje, edad, tamaño, carácter y distancia.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+
+<header class="page">
+  <div class="page__inner">
+    <p class="page__eyebrow">Análisis y comparativa</p>
+    <h1 class="page__title">¿Cuál encaja <span>mejor?</span></h1>
+    <p class="page__lede">Elige hasta cuatro y míralas una al lado de otra. Empieza por vuestras favoritas.</p>
+  </div>
+</header>
+
+<main class="wide">
+
+  <!-- ------------------------------------------------------- selección -->
+  <section class="d-section">
+    <div class="picker">
+      <div class="picker__tabs" role="tablist">
+        <button role="tab" id="tabFav" aria-selected="true">♥ Favoritas <span class="pill-n" id="nFav">0</span></button>
+        <button role="tab" id="tabTodas" aria-selected="false">Todas</button>
+      </div>
+
+      <div class="search search--sm" id="buscador" hidden>
+        <svg class="search__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+        <input id="q" type="search" placeholder="Buscar por nombre, raza, protectora…" aria-label="Buscar">
+      </div>
+
+      <p class="picker__hint" id="hint"></p>
+      <div class="picker__grid" id="opciones"></div>
+      <button class="btn btn--more" id="masOpciones" hidden>Ver más</button>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------------ comparativa -->
+  <section class="d-section" id="zonaTabla" hidden>
+    <h3>Cara a cara</h3>
+    <div class="tabla-wrap">
+      <table class="comp" id="comp"></table>
+    </div>
+    <div class="row2" style="margin-top:16px;max-width:520px">
+      <button class="btn" id="limpiar">Quitar todas</button>
+      <button class="btn" id="descargar">Descargar comparativa</button>
+    </div>
+  </section>
+
+  <div class="empty" id="vacio">
+    <p class="empty__emoji">⚖️</p>
+    <h2>Todavía no has elegido ninguna</h2>
+    <p>Marca dos o más arriba para verlas comparadas.</p>
+  </div>
+</main>
+
+<footer class="foot">
+  <p>El encaje se calcula con los criterios de <code>config/criteria.json</code>.</p>
+  <nav><a href="index.html">Buscador</a><a href="datos.html">Base de datos</a><a href="admin.html">Añadir ficha</a></nav>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/csv.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/comparar.js"></script>
+</body>
+</html>

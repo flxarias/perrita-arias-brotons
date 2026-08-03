@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbf8f4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#12100e" media="(prefers-color-scheme: dark)">
+<title>Base de datos · Perrita Arias Brotóns</title>
+<meta name="description" content="Resumen y tabla completa de las fichas en seguimiento.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+
+<header class="page">
+  <div class="page__inner">
+    <p class="page__eyebrow">Base de datos</p>
+    <h1 class="page__title">Todo lo que <span>hay en seguimiento</span></h1>
+    <p class="page__lede" id="lede">Cargando…</p>
+  </div>
+</header>
+
+<main class="wide">
+
+  <!-- ------------------------------------------------------------ resumen -->
+  <section class="dash" id="dash" aria-label="Resumen"></section>
+
+  <section class="d-section">
+    <h3>Reparto</h3>
+    <div class="bars" id="bars"></div>
+  </section>
+
+  <!-- -------------------------------------------------------------- tabla -->
+  <section class="d-section">
+    <h3>Tabla completa</h3>
+
+    <div class="tbar">
+      <div class="search search--sm">
+        <svg class="search__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+        <input id="q" type="search" placeholder="Filtrar la tabla…" aria-label="Filtrar">
+      </div>
+      <label class="field field--inline">
+        <span class="sr-only">Estado</span>
+        <select id="fEstado">
+          <option value="vivas">Solo disponibles</option>
+          <option value="todas">Todas</option>
+          <option value="propias">Solo mis fichas</option>
+        </select>
+      </label>
+      <button class="btn" id="descargar">Descargar CSV</button>
+    </div>
+
+    <p class="tcount" id="tcount"></p>
+
+    <div class="tabla-wrap">
+      <table class="tabla" id="tabla">
+        <thead><tr id="thead"></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <button class="btn btn--more" id="masFilas" hidden>Ver más filas</button>
+  </section>
+
+  <section class="d-section">
+    <h3>Fuentes</h3>
+    <div class="tabla-wrap">
+      <table class="tabla"><thead><tr><th>Fuente</th><th class="num">Fichas</th><th class="num">Encaje medio</th><th>Última revisión</th></tr></thead>
+      <tbody id="tfuentes"></tbody></table>
+    </div>
+  </section>
+
+  <p class="nota" id="nota"></p>
+</main>
+
+<footer class="foot">
+  <p>La base de datos vive en el repositorio y se rehace cada noche. Tus fichas propias se guardan en este navegador.</p>
+  <nav><a href="index.html">Buscador</a><a href="comparar.html">Comparativa</a><a href="admin.html">Añadir ficha</a></nav>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/csv.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/datos.js"></script>
+</body>
+</html>

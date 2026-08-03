@@ -98,6 +98,13 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); }
     });
+
+    // el CSV se genera aquí para que incluya también las fichas propias
+    $('#descargarCsv').addEventListener('click', (e) => {
+      e.preventDefault();
+      CSV.download(state.all);
+      toast(`CSV con ${state.all.length} fichas`);
+    });
     window.addEventListener('hashchange', openFromHash);
   }
 

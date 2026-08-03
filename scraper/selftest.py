@@ -146,6 +146,20 @@ def run() -> int:
     eq(d.health.get("vaccinated"), True, "vacunada desde el texto")
     eq(d.age_band, "cachorro", "banda de edad")
 
+    # --- el CSV se genera en dos sitios: aquí y en el navegador
+    import re as _re
+    from pathlib import Path as _Path
+
+    from .core.store import CSV_COLUMNS
+
+    js = (_Path(__file__).resolve().parents[1] / "assets" / "js" / "csv.js").read_text(encoding="utf-8")
+    bloque = _re.search(r"const COLUMNAS = \[(.*?)\];", js, _re.S)
+    if not bloque:
+        FAILS.append("csv.js: no se encuentra la lista COLUMNAS")
+    else:
+        del_js = _re.findall(r"'([^']+)'", bloque.group(1))
+        eq(del_js, CSV_COLUMNS, "las columnas del CSV coinciden en Python y en el navegador")
+
     print(f"{'FALLOS' if FAILS else 'OK'} — {len(FAILS)} problemas")
     for f in FAILS:
         print("  ✗", f)

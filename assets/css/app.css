@@ -34,6 +34,7 @@
           Roboto, "Helvetica Neue", Arial, sans-serif;
 
   --pad: clamp(16px, 4.5vw, 28px);
+  --topbar-h: 61px;
   --ease: cubic-bezier(.22,.61,.36,1);
 }
 
@@ -222,7 +223,8 @@ a { color: inherit; }
 /* ---------------------------------------------------------------- toolbar */
 
 .toolbar {
-  position: sticky; top: 0; z-index: 40;
+  /* la cabecera común ya ocupa la franja superior: esta se pega justo debajo */
+  position: sticky; top: var(--topbar-h); z-index: 40;
   padding: 12px var(--pad) 10px;
   background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: saturate(150%) blur(14px);
@@ -670,3 +672,207 @@ dialog.sheet {
 .status.err { color: var(--accent); }
 .spin { display: inline-block; width: 14px; height: 14px; border: 2px solid var(--line-2); border-top-color: var(--accent); border-radius: 50%; animation: spin .7s linear infinite; vertical-align: -2px; }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* ==========================================================================
+   Cabecera común con el menú tras las tres rayitas
+   ========================================================================== */
+
+.topbar {
+  position: sticky; top: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px var(--pad);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: saturate(150%) blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar__brand {
+  display: inline-flex; align-items: center; gap: 9px;
+  text-decoration: none; font-size: .95rem; color: var(--ink-2);
+}
+.topbar__brand b { color: var(--ink); font-weight: 600; }
+.topbar__paw { font-size: 1.15rem; }
+
+.topbar__burger {
+  width: 44px; height: 40px; flex: 0 0 auto;
+  display: grid; align-content: center; gap: 5px; justify-items: stretch;
+  padding: 0 11px;
+  border: 1px solid var(--line-2); border-radius: 12px;
+  background: var(--surface); box-shadow: var(--shadow-1);
+}
+.topbar__burger span {
+  height: 2px; border-radius: 2px; background: var(--ink);
+  transition: transform .22s var(--ease), opacity .18s;
+}
+.topbar.is-open .topbar__burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.topbar.is-open .topbar__burger span:nth-child(2) { opacity: 0; }
+.topbar.is-open .topbar__burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.topbar__panel {
+  position: absolute; top: calc(100% + 8px); right: var(--pad); left: var(--pad);
+  max-width: 420px; margin-left: auto;
+  display: grid; gap: 2px; padding: 8px;
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r-lg); box-shadow: var(--shadow-2);
+  animation: menuIn .18s var(--ease);
+}
+@keyframes menuIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+.topbar__panel a {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 12px; border-radius: var(--r-md);
+  text-decoration: none; color: var(--ink);
+}
+.topbar__panel a:hover { background: var(--bg-2); }
+.topbar__panel a[aria-current] { background: var(--accent-soft); }
+.topbar__icon { font-size: 1.15rem; width: 26px; text-align: center; }
+.topbar__text { display: grid; }
+.topbar__text small { color: var(--muted); font-size: .78rem; }
+
+/* ==========================================================================
+   Cabecera de las páginas interiores
+   ========================================================================== */
+
+.page {
+  padding: clamp(28px, 7vw, 56px) var(--pad) clamp(20px, 4vw, 32px);
+  background: linear-gradient(180deg, var(--bg-2), var(--bg));
+  border-bottom: 1px solid var(--line);
+}
+.page__inner { max-width: 1180px; margin: 0 auto; }
+.page__eyebrow {
+  margin: 0 0 10px; font-size: .7rem; letter-spacing: .14em;
+  text-transform: uppercase; font-weight: 700; color: var(--accent);
+}
+.page__title {
+  margin: 0; font-family: var(--serif); font-weight: 400;
+  font-size: clamp(1.9rem, 7vw, 3rem); line-height: 1.05; letter-spacing: -.02em;
+}
+.page__title span { font-style: italic; color: var(--accent); }
+.page__lede { margin: 12px 0 0; max-width: 60ch; color: var(--ink-2); }
+
+main.wide { max-width: 1180px; margin: 0 auto; padding: 22px var(--pad) 64px; }
+
+/* ==========================================================================
+   Cuadro de mando
+   ========================================================================== */
+
+.dash {
+  display: grid; gap: 10px; margin: 4px 0 8px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+.dash__card {
+  padding: 13px 15px; background: var(--surface);
+  border: 1px solid var(--line); border-radius: var(--r-md);
+}
+.dash__card dt { font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.dash__card dd {
+  margin: 3px 0 0; font-family: var(--serif); font-size: 1.7rem; line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+}
+.dash__card dd.is-accent { color: var(--accent); }
+
+.bars { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.bars__group h4 {
+  margin: 0 0 8px; font-size: .78rem; font-weight: 700;
+  letter-spacing: .05em; text-transform: uppercase; color: var(--ink-2);
+}
+.bars__row { display: grid; grid-template-columns: 8.5em 1fr 2.6em; align-items: center; gap: 8px; margin-bottom: 5px; font-size: .82rem; }
+.bars__label { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bars__track { height: 8px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.bars__track i { display: block; height: 100%; border-radius: 999px; background: var(--accent); }
+.bars__n { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+
+/* ==========================================================================
+   Tablas
+   ========================================================================== */
+
+.tbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px; }
+.search--sm { flex: 1 1 220px; }
+.search--sm input { padding: 10px 14px 10px 40px; }
+.field--inline { margin: 0; flex: 0 0 auto; }
+.field--inline select { padding: 10px 12px; }
+.tcount { margin: 0 0 8px; font-size: .82rem; color: var(--muted); }
+
+.tabla-wrap {
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface);
+}
+.tabla { width: 100%; border-collapse: collapse; font-size: .86rem; }
+.tabla th, .tabla td { padding: 9px 12px; text-align: left; white-space: nowrap; border-bottom: 1px solid var(--line); }
+.tabla thead th {
+  position: sticky; top: 0; z-index: 1;
+  background: var(--bg-2); font-size: .74rem; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--muted); cursor: pointer; user-select: none;
+}
+.tabla thead th:hover { color: var(--ink); }
+.tabla tbody tr:hover { background: var(--bg-2); }
+.tabla tbody tr:last-child td { border-bottom: 0; }
+.tabla .num { text-align: right; font-variant-numeric: tabular-nums; }
+.tabla a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.tabla tr.propia td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
+.sort-ind { color: var(--accent); }
+
+/* ==========================================================================
+   Selector y tabla de la comparativa
+   ========================================================================== */
+
+.picker__tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+.picker__tabs button {
+  padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line-2);
+  background: var(--surface); font-weight: 600; font-size: .88rem;
+}
+.picker__tabs button[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.pill-n {
+  display: inline-block; min-width: 20px; padding: 1px 7px; margin-left: 4px;
+  border-radius: 999px; background: var(--accent-soft); color: var(--accent);
+  font-size: .72rem; font-weight: 700;
+}
+.picker__hint { margin: 12px 0; font-size: .84rem; color: var(--muted); }
+.picker__hint a { color: var(--accent); }
+
+.picker__grid { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); }
+.opt {
+  display: flex; align-items: center; gap: 10px; text-align: left;
+  padding: 8px; border: 1px solid var(--line-2); border-radius: var(--r-md);
+  background: var(--surface); transition: all .15s var(--ease);
+}
+.opt:disabled { opacity: .4; cursor: not-allowed; }
+.opt.is-on { border-color: var(--accent); background: var(--accent-soft); }
+.opt__img { flex: 0 0 auto; width: 48px; height: 48px; border-radius: 12px; overflow: hidden; background: var(--bg-2); display: grid; place-items: center; }
+.opt__img img { width: 100%; height: 100%; object-fit: cover; }
+.opt__body { display: grid; min-width: 0; flex: 1; }
+.opt__body strong { font-size: .92rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.opt__body small { color: var(--muted); font-size: .75rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.opt__score { flex: 0 0 auto; font-weight: 800; font-size: .82rem; color: var(--accent); }
+
+.comp { width: 100%; border-collapse: collapse; font-size: .86rem; }
+.comp th, .comp td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; }
+.comp__lab { width: 8.5em; color: var(--muted); font-size: .76rem; text-transform: uppercase; letter-spacing: .04em; font-weight: 700; }
+.comp__lab--sub { text-transform: none; letter-spacing: 0; font-size: .8rem; color: var(--ink-2); }
+.comp__head { text-align: center; background: var(--bg-2); min-width: 130px; }
+.comp__photo { display: block; width: 62px; height: 62px; margin: 0 auto 6px; border-radius: 14px; overflow: hidden; background: var(--surface); }
+.comp__photo img { width: 100%; height: 100%; object-fit: cover; }
+.comp__head a { color: var(--accent); text-decoration: none; font-weight: 700; }
+.comp__score { font-family: var(--serif); font-size: 1.5rem; }
+.comp td.is-top { background: color-mix(in srgb, var(--green) 10%, transparent); }
+.comp__sep th { padding-top: 20px; color: var(--accent); }
+.comp__bar { display: block; height: 6px; border-radius: 999px; background: var(--line); overflow: hidden; margin-bottom: 4px; }
+.comp__bar i { display: block; height: 100%; background: var(--accent); }
+.comp small { color: var(--muted); font-size: .74rem; }
+.bien { color: var(--green); font-weight: 600; }
+.mal { color: var(--accent); font-weight: 600; }
+.muted { color: var(--muted); }
+
+/* ==========================================================================
+   Fichas propias en el panel de alta
+   ========================================================================== */
+
+.propias { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.propias li { display: flex; align-items: center; gap: 11px; padding: 8px; border: 1px solid var(--line); border-radius: var(--r-md); }
+.propias__foto { width: 46px; height: 46px; border-radius: 11px; overflow: hidden; background: var(--bg-2); display: grid; place-items: center; flex: 0 0 auto; }
+.propias__foto img { width: 100%; height: 100%; object-fit: cover; }
+.propias__txt { display: grid; flex: 1; min-width: 0; }
+.propias__txt small { color: var(--muted); font-size: .76rem; }
+.propias__score { font-weight: 800; color: var(--accent); font-size: .85rem; }
+.propias__x { width: 30px; height: 30px; border-radius: 50%; font-size: 1.2rem; color: var(--muted); }
+.propias__x:hover { background: var(--bg-2); color: var(--accent); }
+
+.nota { margin: 20px 0 0; font-size: .82rem; color: var(--muted); }

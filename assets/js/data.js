@@ -13,6 +13,7 @@ const PAB = (() => {
     hidden: 'pab.descartadas',
     seen: 'pab.ultimaVisita',
     filters: 'pab.filtros',
+    propias: 'pab.fichasPropias',
   };
 
   /* ---------------------------------------------------------- vocabulario */
@@ -104,7 +105,37 @@ const PAB = (() => {
     return t > lastVisit;
   };
 
+  /* ------------------------------------------------- fichas propias (local) */
+
+  // Las fichas dadas de alta a mano viven en este navegador y se funden con la
+  // base publicada al cargar. Así aparecen al instante en el buscador, en la
+  // base de datos y en el CSV, sin depender de ningún token ni de un servidor.
+
+  const readOwn = () => {
+    try { return JSON.parse(localStorage.getItem(LS.propias) || '[]'); }
+    catch { return []; }
+  };
+  const writeOwn = (arr) => localStorage.setItem(LS.propias, JSON.stringify(arr));
+
+  const ownDogs = () => readOwn();
+  const ownCount = () => readOwn().length;
+
+  function saveOwn(rec) {
+    const arr = readOwn();
+    const i = arr.findIndex((d) => d.id === rec.id || (d.url && rec.url && d.url === rec.url));
+    if (i >= 0) { rec.first_seen = arr[i].first_seen || rec.first_seen; arr[i] = rec; }
+    else arr.unshift(rec);
+    writeOwn(arr);
+    return arr.length;
+  }
+
+  function removeOwn(id) {
+    writeOwn(readOwn().filter((d) => d.id !== id));
+  }
+
   /* ----------------------------------------------------------------- carga */
+
+  const decorate = (d) => ({ ...d, _tier: tierOf(d.province), _new: isNew(d) });
 
   async function load() {
     const [dogsRes, metaRes] = await Promise.all([
@@ -113,10 +144,17 @@ const PAB = (() => {
     ]);
     if (!dogsRes.ok) throw new Error(`No se pudo cargar ${DATA_URL} (${dogsRes.status})`);
     const raw = await dogsRes.json();
-    const dogs = (raw.dogs || raw).map((d) => ({ ...d, _tier: tierOf(d.province), _new: isNew(d) }));
+
+    const propias = readOwn();
+    const mias = new Set(propias.map((d) => d.id));
+    const dogs = [
+      ...propias.map(decorate),
+      ...(raw.dogs || raw).filter((d) => !mias.has(d.id)).map(decorate),
+    ];
+
     let meta = null;
     try { meta = metaRes && metaRes.ok ? await metaRes.json() : null; } catch { /* opcional */ }
-    return { dogs, meta, generatedAt: raw.generated_at };
+    return { dogs, meta, generatedAt: raw.generated_at, propias: propias.length };
   }
 
   /* --------------------------------------------------------------- filtros */
@@ -186,6 +224,7 @@ const PAB = (() => {
   return {
     load, apply, matches, emptyFilters, loadFilters, saveFilters,
     isFav, toggleFav, isHidden, toggleHidden, hiddenCount, clearHidden, markVisited, isNew,
+    ownDogs, ownCount, saveOwn, removeOwn,
     ageText, sizeText, sexText, placeText, tierOf, daysAgo, fold,
     SIZE_LABEL, SIZE_ORDER, BAND_LABEL, STATUS_LABEL, TRAIT_LABEL, HEALTH_LABEL, TIER_LABEL,
   };

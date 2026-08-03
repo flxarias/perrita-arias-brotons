@@ -117,7 +117,7 @@
         if (body && body.length > 200) return { body, direct: a.direct };
       } catch { /* siguiente intento */ }
     }
-    throw new Error('No se ha podido leer la página. Prueba con «Extraer en el servidor» o rellena a mano.');
+    throw new Error('No se ha podido leer la página. Rellena la ficha a mano con lo que veas en el anuncio.');
   }
 
   function extractFrom(text, url) {
@@ -312,22 +312,59 @@
 
   /* --------------------------------------------------------------- guardado */
 
-  async function saveToGithub() {
+  function guardar() {
     const rec = toRecord(readForm());
-    if (!GH.configured()) { status('#saveStatus', 'Configura primero el repositorio y el token en «Ajustes».', 'err'); showTab('Config'); return; }
-    status('#saveStatus', '<span class="spin"></span> Guardando en GitHub…');
-    try {
-      const n = await GH.updateDogs((dogs) => {
-        const i = dogs.findIndex((d) => d.id === rec.id || (d.url && rec.url && d.url === rec.url));
-        if (i >= 0) { rec.first_seen = dogs[i].first_seen || rec.first_seen; dogs[i] = rec; }
-        else dogs.unshift(rec);
-        return dogs;
-      }, `Ficha manual: ${rec.name}`);
-      status('#saveStatus', `Guardada. La base de datos tiene ahora ${n} fichas. GitHub Pages tarda un par de minutos en publicarlo.`, 'ok');
-      toast('Ficha guardada');
-    } catch (e) {
-      status('#saveStatus', 'Error: ' + e.message, 'err');
+    if (!rec.name || rec.name === 'Sin nombre') {
+      return status('#saveStatus', 'Ponle un nombre antes de guardar.', 'err');
     }
+    const total = PAB.saveOwn(rec);
+    current = rec;
+    status('#saveStatus',
+      `Guardada. Ya está en el <a href="index.html#${encodeURIComponent(rec.id)}">buscador</a>, ` +
+      `en la <a href="datos.html">base de datos</a> y en el CSV descargable. ` +
+      `Llevas ${total} ficha${total === 1 ? '' : 's'} propia${total === 1 ? '' : 's'}.`, 'ok');
+    toast('Ficha guardada');
+    pintarPropias();
+  }
+
+  /** Lista de lo ya guardado, para poder revisarlo o quitarlo. */
+  function pintarPropias() {
+    const caja = $('#propias');
+    if (!caja) return;
+    const arr = PAB.ownDogs();
+    if (!arr.length) { caja.hidden = true; return; }
+    caja.hidden = false;
+    caja.innerHTML = `<h2>Tus fichas <span class="pill-n">${arr.length}</span></h2>
+      <p class="hint">Guardadas en este navegador. Ya cuentan en el buscador, en la base de datos y en el CSV.</p>
+      <div class="panel">
+        <ul class="propias">${arr.map((d) => `
+          <li>
+            <span class="propias__foto">${d.photo
+              ? `<img src="${d.photo.replace(/"/g, '&quot;')}" alt="" loading="lazy" referrerpolicy="no-referrer">`
+              : '<span class="noimg">🐕</span>'}</span>
+            <span class="propias__txt"><strong>${d.name}</strong><small>${PAB.ageText(d)} · ${PAB.sizeText(d)} · ${d.province || 'sin zona'}</small></span>
+            <span class="propias__score">${d.score}</span>
+            <button class="propias__x" data-id="${d.id}" aria-label="Quitar ${d.name}">×</button>
+          </li>`).join('')}</ul>
+        <div class="row2" style="margin-top:14px">
+          <button class="btn btn--block" id="expJson">Exportar JSON</button>
+          <button class="btn btn--block" id="expCsv">Exportar CSV</button>
+        </div>
+      </div>`;
+
+    $$('.propias__x').forEach((b) => b.addEventListener('click', () => {
+      PAB.removeOwn(b.dataset.id);
+      pintarPropias();
+      toast('Ficha eliminada');
+    }));
+    $('#expJson').addEventListener('click', () => {
+      const blob = new Blob([JSON.stringify(PAB.ownDogs(), null, 1)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob); a.download = 'fichas-propias.json'; a.click();
+      URL.revokeObjectURL(a.href);
+    });
+    $('#expCsv').addEventListener('click', () => CSV.download(
+      PAB.ownDogs().map((d) => ({ ...d, _tier: PAB.tierOf(d.province) })), 'fichas-propias.csv'));
   }
 
   function download() {
@@ -357,7 +394,7 @@
   }
 
   function showTab(which) {
-    const map = { Link: 'paneLink', Manual: 'paneManual', Config: 'paneConfig' };
+    const map = { Link: 'paneLink', Manual: 'paneManual' };
     Object.entries(map).forEach(([k, pane]) => {
       $('#tab' + k).setAttribute('aria-selected', k === which);
       $('#' + pane).hidden = k !== which;
@@ -376,11 +413,11 @@
     $('#provinces').innerHTML = PROVINCES.map((p) => `<option value="${p}">`).join('');
     $('#paneManual').innerHTML = '<p class="hint" style="margin:0">Rellena la ficha de abajo. Solo el nombre es obligatorio.</p>';
 
-    ['Link', 'Manual', 'Config'].forEach((k) => $('#tab' + k).addEventListener('click', () => showTab(k)));
+    ['Link', 'Manual'].forEach((k) => $('#tab' + k).addEventListener('click', () => showTab(k)));
 
     $('#form').addEventListener('input', syncPreview);
     $('#form').addEventListener('change', syncPreview);
-    $('#saveGithub').addEventListener('click', saveToGithub);
+    $('#guardar').addEventListener('click', guardar);
     $('#saveDownload').addEventListener('click', download);
 
     $('#extract').addEventListener('click', async () => {
@@ -396,43 +433,7 @@
       }
     });
 
-    $('#extractServer').addEventListener('click', async () => {
-      const url = $('#url').value.trim();
-      if (!url) return status('#extractStatus', 'Pega primero un enlace.', 'err');
-      if (!GH.configured()) { status('#extractStatus', 'Necesita el token de GitHub (pestaña «Ajustes»).', 'err'); return showTab('Config'); }
-      status('#extractStatus', '<span class="spin"></span> Lanzando el extractor en GitHub Actions…');
-      try {
-        await GH.dispatch('extract-link.yml', { url });
-        const repo = GH.cfg().repo;
-        status('#extractStatus',
-          `Extractor lanzado. En un minuto la ficha estará en la base de datos. ` +
-          `<a href="https://github.com/${repo}/actions/workflows/extract-link.yml" target="_blank" rel="noopener">Ver la ejecución ↗</a>`, 'ok');
-      } catch (e) {
-        status('#extractStatus', 'Error: ' + e.message, 'err');
-      }
-    });
-
-    // ajustes
-    const c = GH.cfg();
-    $('#cfgRepo').value = c.repo;
-    $('#cfgBranch').value = c.branch;
-    $('#cfgToken').value = c.token;
-    $('#cfgSave').addEventListener('click', () => {
-      GH.save({ repo: $('#cfgRepo').value, branch: $('#cfgBranch').value, token: $('#cfgToken').value });
-      status('#cfgStatus', 'Guardado en este navegador.', 'ok');
-    });
-    $('#cfgTest').addEventListener('click', async () => {
-      GH.save({ repo: $('#cfgRepo').value, branch: $('#cfgBranch').value, token: $('#cfgToken').value });
-      status('#cfgStatus', '<span class="spin"></span> Probando…');
-      try {
-        const who = await GH.whoami();
-        const f = await GH.getFile('data/dogs.json');
-        const n = (JSON.parse(f.text).dogs || []).length;
-        status('#cfgStatus', `Conectado como ${who}. Lee la base de datos (${n} fichas) correctamente.`, 'ok');
-      } catch (e) {
-        status('#cfgStatus', 'Error: ' + e.message, 'err');
-      }
-    });
+    pintarPropias();
 
     // ?url=… permite compartir un anuncio directamente al panel
     const pre = new URLSearchParams(location.search).get('url');

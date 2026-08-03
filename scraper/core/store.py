@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import csv
 import json
+import re
 from pathlib import Path
 
 from .models import Dog, dedupe_key
@@ -22,12 +23,56 @@ CSV_PATH = DATA / "exports" / "dogs.csv"
 
 SOURCE_PRIORITY = ["manual", "link", "kerubi", "miwuki", "reinasbiberon", "villena", "apadac", "anaa"]
 
+# Cabeceras en castellano y valores legibles: esta hoja la abre la familia en
+# Google Sheets, no un programa. Cualquier cambio aquí hay que replicarlo en
+# assets/js/csv.js, que genera el mismo fichero desde el navegador.
 CSV_COLUMNS = [
-    "id", "score", "name", "sex", "age_months", "age_band", "birth_date", "size",
-    "weight_kg", "breed", "breed_type", "ppp", "province", "location", "shelter",
-    "status", "urgent", "good_with_kids", "sterilized", "vaccinated", "chipped",
-    "source", "url", "photo", "first_seen", "last_seen", "description",
+    "Encaje", "Nombre", "Sexo", "Edad", "Edad (meses)", "Etapa", "Nacimiento",
+    "Tamaño", "Peso (kg)", "Raza", "Tipo de raza", "PPP",
+    "Provincia", "Zona", "Localidad", "Protectora", "Tipo de protectora",
+    "Estado", "Urgente", "Buena con niños", "Esterilizada", "Vacunada", "Con chip",
+    "Duplicada", "Origen", "Alta", "Última revisión", "Ficha", "Foto", "Descripción", "Id",
 ]
+
+_SI_NO = {True: "Sí", False: "No", None: ""}
+_SEXO = {"hembra": "Hembra", "macho": "Macho"}
+_TAMANO = {"mini": "Mini", "pequeno": "Pequeño", "mediano": "Mediano",
+           "grande": "Grande", "gigante": "Gigante"}
+_ETAPA = {"cachorro": "Cachorra", "joven": "Joven", "adulto": "Adulta", "senior": "Senior"}
+_TIPO_RAZA = {"raza": "De raza", "mezcla": "Mezcla", "mestizo": "Mestiza",
+              "desconocido": ""}
+_ESTADO = {"disponible": "Disponible", "urgente": "Urgente", "reservado": "Reservada",
+           "adoptado": "Adoptada", "acogida": "En acogida", "no-disponible": "Ya no aparece"}
+_ZONA = {"core": "Alicante", "near": "Provincia vecina", "east": "Mitad este",
+         "far": "Fuera de zona", "desconocido": ""}
+
+
+def _edad_texto(meses: int | None, estimada: bool) -> str:
+    if meses is None:
+        return ""
+    aprox = "~" if estimada else ""
+    if meses < 1:
+        return f"{aprox}Recién nacida"
+    if meses < 24:
+        return f"{aprox}{meses} {'mes' if meses == 1 else 'meses'}"
+    años, resto = divmod(meses, 12)
+    return f"{aprox}{años} años" + (f" y {resto} m" if resto else "")
+
+
+def _limpio(texto: str | None) -> str:
+    """Una sola línea, sin caracteres de control y sin espacios dobles."""
+    if not texto:
+        return ""
+    t = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f]", " ", str(texto))
+    return re.sub(r"\s+", " ", t).strip()
+
+
+def _numero(v) -> str:
+    """Sin decimales inútiles: 15.0 → 15, 19.5 → 19.5."""
+    if v in (None, ""):
+        return ""
+    f = float(v)
+    return str(int(f)) if f.is_integer() else str(f)
 
 
 def load_criteria() -> dict:
@@ -182,17 +227,58 @@ def save(dogs: dict[str, Dog], meta_update: dict) -> None:
     export_csv(ordered)
 
 
+def fila_csv(d: Dog, criteria: dict | None = None) -> dict:
+    """Una ficha convertida a valores legibles por una persona."""
+    from .normalize import geo_tier
+
+    criteria = criteria or load_criteria()
+    return {
+        "Encaje": d.score,
+        "Nombre": _limpio(d.name),
+        "Sexo": _SEXO.get(d.sex or "", ""),
+        "Edad": _edad_texto(d.age_months, d.age_estimated),
+        "Edad (meses)": "" if d.age_months is None else d.age_months,
+        "Etapa": _ETAPA.get(d.age_band or "", ""),
+        "Nacimiento": d.birth_date or "",
+        "Tamaño": _TAMANO.get(d.size or "", ""),
+        "Peso (kg)": _numero(d.weight_kg),
+        "Raza": _limpio(d.breed),
+        "Tipo de raza": _TIPO_RAZA.get(d.breed_type, ""),
+        "PPP": _SI_NO[bool(d.ppp)],
+        "Provincia": d.province or "",
+        "Zona": _ZONA.get(geo_tier(d.province, criteria), ""),
+        "Localidad": _limpio(d.location),
+        "Protectora": _limpio(d.shelter or d.source_label),
+        "Tipo de protectora": _limpio(d.shelter_kind),
+        "Estado": _ESTADO.get(d.status, d.status),
+        "Urgente": _SI_NO[bool(d.urgent)],
+        "Buena con niños": _SI_NO[d.traits.get("good_with_kids")],
+        "Esterilizada": _SI_NO[d.health.get("sterilized")],
+        "Vacunada": _SI_NO[d.health.get("vaccinated")],
+        "Con chip": _SI_NO[d.health.get("chipped")],
+        "Duplicada": _SI_NO["duplicada" in d.flags],
+        "Origen": d.source_label or d.source,
+        "Alta": (d.first_seen or "")[:10],
+        "Última revisión": (d.last_seen or "")[:10],
+        "Ficha": d.url,
+        "Foto": d.photo,
+        "Descripción": _limpio(d.description),
+        "Id": d.id,
+    }
+
+
 def export_csv(dogs: list[Dog]) -> Path:
-    """CSV plano para Google Sheets (=IMPORTDATA sobre la URL raw de GitHub)."""
+    """CSV para Google Sheets (=IMPORTDATA sobre la URL raw de GitHub).
+
+    Se escribe con BOM y saltos CRLF para que Excel lo abra bien en español, y
+    con todos los valores ya traducidos: nada de True/False ni de 'pequeno'.
+    """
+    criteria = load_criteria()
     CSV_PATH.parent.mkdir(parents=True, exist_ok=True)
     with CSV_PATH.open("w", encoding="utf-8-sig", newline="") as fh:
-        wr = csv.DictWriter(fh, fieldnames=CSV_COLUMNS, extrasaction="ignore")
+        wr = csv.DictWriter(fh, fieldnames=CSV_COLUMNS, extrasaction="ignore",
+                            quoting=csv.QUOTE_MINIMAL, lineterminator="\r\n")
         wr.writeheader()
-        for d in dogs:
-            row = d.to_dict()
-            row["good_with_kids"] = d.traits.get("good_with_kids", "")
-            for k in ("sterilized", "vaccinated", "chipped"):
-                row[k] = d.health.get(k, "")
-            row["description"] = (d.description or "").replace("\n", " ")[:500]
-            wr.writerow(row)
+        for d in sorted(dogs, key=lambda x: (-x.score, x.name.lower())):
+            wr.writerow(fila_csv(d, criteria))
     return CSV_PATH
