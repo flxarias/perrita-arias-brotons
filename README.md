@@ -4,6 +4,11 @@ Buscador de perritas en adopción para la familia Arias Brotóns: una hembra jov
 de tamaño pequeño o mediano, preferiblemente recogible en la provincia de
 Alicante y, si no, en la mitad este de España.
 
+> **¿Retomas el proyecto sin haberlo construido?** Lee primero
+> **[CONTEXTO.md](CONTEXTO.md)**: recoge las decisiones y su porqué, los errores
+> ya cometidos y las trampas del entorno. Este README explica *cómo se usa*;
+> aquel explica *por qué es así*.
+
 Todo funciona sobre GitHub y nada más: la web es estática (GitHub Pages), la base
 de datos son ficheros versionados en el propio repositorio y el barrido nocturno
 es un GitHub Action. No hay servidor que mantener ni base de datos que pagar.
