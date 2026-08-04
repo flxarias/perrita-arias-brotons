@@ -79,8 +79,10 @@ def run(selected: list[str] | None, limit: int | None, dry_run: bool, use_browse
         log.info("%s fichas tenían una imagen genérica (logo o 'sin foto') y se ha quitado", limpiadas)
     store.annotate_duplicates(list(merged.values()))
 
-    notifiable = [d for d in new if is_notifiable(d, criteria)]
-    notifiable.sort(key=lambda d: -d.score)
+    # Se avisa de TODAS las altas del día, no solo de las que encajan: la
+    # criba servía para no saturar, pero se perdían fichas que a lo mejor
+    # interesaban. Las que encajan van marcadas y primero.
+    novedades = sorted(new, key=lambda d: -d.score)
 
     digest = {
         "at": now_iso(),
@@ -90,14 +92,15 @@ def run(selected: list[str] | None, limit: int | None, dry_run: bool, use_browse
         "changed": [d.id for d in changed],
         "removed": [{"id": d.id, "name": d.name, "source": d.source} for d in borradas],
         "purge_warnings": avisos,
-        "notifiable": [
+        "novedades": [
             {
                 "id": d.id, "name": d.name, "score": d.score, "url": d.url,
                 "sex": d.sex, "age_months": d.age_months, "size": d.size,
                 "province": d.province, "shelter": d.shelter or d.source_label,
                 "photo": d.photo, "breed": d.breed,
+                "encaja": is_notifiable(d, criteria),
             }
-            for d in notifiable
+            for d in novedades
         ],
         "source_health": health,
     }
@@ -127,9 +130,10 @@ def run(selected: list[str] | None, limit: int | None, dry_run: bool, use_browse
         DIGEST_PATH.write_text(json.dumps(digest, ensure_ascii=False, indent=1), encoding="utf-8")
         log.info("escrito %s (%s fichas) y %s", store.DOGS_JSON, len(merged), store.CSV_PATH)
 
-    log.info("nuevas: %s · modificadas: %s · retiradas: %s · notificables: %s",
-             len(new), len(changed), len(borradas), len(notifiable))
-    for d in notifiable[:10]:
+    encajan = sum(1 for d in novedades if is_notifiable(d, criteria))
+    log.info("nuevas: %s (encajan %s) · modificadas: %s · retiradas: %s",
+             len(novedades), encajan, len(changed), len(borradas))
+    for d in novedades[:10]:
         log.info("   ★ %s (%s) %s · %s · %s", d.score, d.name, d.sex, d.province, d.url)
     return digest
 

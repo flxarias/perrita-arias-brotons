@@ -72,18 +72,28 @@ def _link(d: dict) -> str:
     return f"{SITE}/#{urllib.parse.quote(d['id'])}" if SITE else d.get("url", "")
 
 
+SIN_NOVEDADES = "Hoy no hay novedades: ninguna protectora ha publicado nada nuevo."
+
+
 def build_text(digest: dict) -> str:
-    items = digest["notifiable"]
-    head = f"{len(items)} novedad{'es' if len(items) != 1 else ''} para la Perrita Arias Brotóns"
-    body = "\n".join(f"{_line(d)}\n{_link(d)}" for d in items[:12])
-    tail = f"\n\n(+{len(items) - 12} más)" if len(items) > 12 else ""
-    return f"{head}\n\n{body}{tail}"
+    """Solo las altas del día. Sin ninguna, un aviso de una línea."""
+    items = digest.get("novedades", [])
+    if not items:
+        return "Perrita Arias Brotons" + "\n\n" + SIN_NOVEDADES
+
+    partes = [f"{len(items)} novedad{'es' if len(items) != 1 else ''} de hoy"]
+    for d in items:
+        partes.append(f"{_line(d)}\n{_link(d)}")
+    return "\n\n".join(partes)
 
 
 def build_html(digest: dict) -> str:
-    items = digest["notifiable"]
+    items = digest.get("novedades", [])
+    if not items:
+        return _html_vacio(digest)
+
     rows = []
-    for d in items[:20]:
+    for d in items:
         photo = d.get("photo") or ""
         img = (
             f'<img src="{photo}" width="86" height="86" alt="" '
@@ -93,31 +103,55 @@ def build_html(digest: dict) -> str:
         meta = " · ".join(
             x for x in (SEX_LABEL.get(d.get("sex") or "", "Sexo sin confirmar"), _meta(d)) if x
         )
+        marca = (
+            '<span style="background:#e7f0e9;color:#3f7d52;border-radius:999px;'
+            'padding:2px 8px;font-size:11px;font-weight:700;margin-left:6px">ENCAJA</span>'
+            if d.get("encaja") else ""
+        )
         rows.append(f"""
 <tr>
   <td style="padding:12px 0;vertical-align:top;width:98px">{img}</td>
   <td style="padding:12px 0;vertical-align:top;font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#1c1815">
     <a href="{_link(d)}" style="color:#c4562f;text-decoration:none;font-size:18px;font-weight:600">{d['name']}</a>
-    <span style="background:#fbeae2;color:#c4562f;border-radius:999px;padding:2px 8px;font-size:12px;font-weight:700;margin-left:6px">{d['score']}</span>
+    <span style="background:#fbeae2;color:#c4562f;border-radius:999px;padding:2px 8px;font-size:12px;font-weight:700;margin-left:6px">{d['score']}</span>{marca}
     <div style="color:#8b8076;font-size:13px;margin-top:2px">{meta}</div>
-    <div style="color:#4b423a;font-size:13px;margin-top:2px">{d.get('shelter') or ''}</div>
+    <div style="color:#4b423a;font-size:13px">{d.get('shelter') or ''}</div>
   </td>
 </tr>""")
 
-    more = f'<p style="color:#8b8076;font:13px sans-serif">Y {len(items) - 20} más en la web.</p>' if len(items) > 20 else ""
-    cta = f'<p><a href="{SITE}" style="background:#c4562f;color:#fff;padding:12px 22px;border-radius:999px;text-decoration:none;font:600 15px sans-serif;display:inline-block">Abrir el buscador</a></p>' if SITE else ""
+    encajan = sum(1 for d in items if d.get("encaja"))
+    cta = (
+        f'<p><a href="{SITE}" style="background:#c4562f;color:#fff;padding:12px 22px;border-radius:999px;'
+        f'text-decoration:none;font:600 15px sans-serif;display:inline-block">Abrir el buscador</a></p>'
+    ) if SITE else ""
 
     return f"""<!doctype html><html><body style="margin:0;background:#fbf8f4;padding:24px">
 <div style="max-width:560px;margin:0 auto;background:#fff;border-radius:24px;padding:28px;border:1px solid #e8e0d5">
   <p style="margin:0;color:#c4562f;font:600 11px/1 sans-serif;letter-spacing:.14em;text-transform:uppercase">Perrita Arias Brotóns</p>
   <h1 style="margin:10px 0 4px;font:400 28px/1.1 Georgia,serif;color:#1c1815">
-    {len(items)} novedad{'es' if len(items) != 1 else ''} esta noche
+    {len(items)} novedad{'es' if len(items) != 1 else ''} publicada{'s' if len(items) != 1 else ''} hoy
   </h1>
   <p style="margin:0 0 8px;color:#8b8076;font:14px sans-serif">
-    De {digest['total']} fichas en seguimiento. Ordenadas por encaje con lo que buscáis.
+    {encajan} encaja{'n' if encajan != 1 else ''} con lo que buscáis. De {digest['total']} fichas en seguimiento.
   </p>
   <table style="width:100%;border-collapse:collapse">{''.join(rows)}</table>
-  {more}{cta}
+  {cta}
+</div></body></html>"""
+
+
+def _html_vacio(digest: dict) -> str:
+    cta = (
+        f'<p><a href="{SITE}" style="background:#c4562f;color:#fff;padding:12px 22px;border-radius:999px;'
+        f'text-decoration:none;font:600 15px sans-serif;display:inline-block">Abrir el buscador</a></p>'
+    ) if SITE else ""
+    return f"""<!doctype html><html><body style="margin:0;background:#fbf8f4;padding:24px">
+<div style="max-width:560px;margin:0 auto;background:#fff;border-radius:24px;padding:28px;border:1px solid #e8e0d5">
+  <p style="margin:0;color:#c4562f;font:600 11px/1 sans-serif;letter-spacing:.14em;text-transform:uppercase">Perrita Arias Brotóns</p>
+  <h1 style="margin:10px 0 6px;font:400 28px/1.1 Georgia,serif;color:#1c1815">Hoy no hay novedades</h1>
+  <p style="margin:0;color:#4b423a;font:15px/1.6 sans-serif">
+    Ninguna protectora ha publicado nada nuevo. Seguimos con {digest['total']} fichas en seguimiento.
+  </p>
+  {cta}
 </div></body></html>"""
 
 
@@ -166,9 +200,9 @@ def send_email(digest: dict) -> bool:
     if os.environ.get("NOTIFY_EMAIL", "1") == "0":
         print("· correo: desactivado en este trabajo (lo envía el resumen de las 07:00)")
         return False
-    n = len(digest["notifiable"])
+    n = len(digest.get("novedades", []))
     return send_mail(
-        f"🐾 {n} perrita{'s' if n != 1 else ''} nueva{'s' if n != 1 else ''} que encajan",
+        f"🐾 {n} novedad{'es' if n != 1 else ''} de hoy" if n else "🐾 Sin novedades hoy",
         build_text(digest),
         build_html(digest),
     )
@@ -188,10 +222,18 @@ def send_whatsapp(digest: dict) -> bool:
         print("· whatsapp: sin configurar (falta CALLMEBOT_PHONE o CALLMEBOT_APIKEY)")
         return False
 
-    items = digest["notifiable"][:6]
-    text = "🐾 *Perrita Arias Brotóns*\n" + "\n".join(f"{_line(d)}\n{_link(d)}" for d in items)
-    if len(digest["notifiable"]) > 6:
-        text += f"\n\n+{len(digest['notifiable']) - 6} más"
+    items = digest.get("novedades", [])
+    if not items:
+        text = "🐾 *Perrita Arias Brotons*\n" + SIN_NOVEDADES
+    else:
+        # CallMeBot viaja por URL y no admite mensajes largos: este canal sí se
+        # resume, es un aviso para ir al correo o a la web.
+        partes = [f"🐾 *{len(items)} novedad{'es' if len(items) != 1 else ''} de hoy*"]
+        for d in items[:6]:
+            partes.append(f"{_line(d)}\n{_link(d)}")
+        if len(items) > 6:
+            partes.append(f"+{len(items) - 6} mas en el correo")
+        text = "\n\n".join(partes)
 
     try:
         r = requests.get(
@@ -215,31 +257,64 @@ def send_telegram(digest: dict) -> bool:
         print("· telegram: sin configurar (falta TELEGRAM_TOKEN o TELEGRAM_CHAT_ID)")
         return False
 
-    items = digest["notifiable"]
-    lines = [f"<b>🐾 {len(items)} novedad{'es' if len(items) != 1 else ''} esta noche</b>", ""]
-    for d in items[:10]:
-        lines.append(f'<b>{d["score"]}</b> · <a href="{_link(d)}">{d["name"]}</a> — {_meta(d)}')
+    items = digest.get("novedades", [])
+
+    if not items:
+        return _telegram_post(token, chat, f"🐾 <b>Perrita Arias Brotóns</b>\n\n{SIN_NOVEDADES}")
+
+    encajan = sum(1 for d in items if d.get("encaja"))
+    lines = [
+        f"🐾 <b>{len(items)} novedad{'es' if len(items) != 1 else ''} de hoy</b>",
+        f"<i>{encajan} encaja{'n' if encajan != 1 else ''} con lo que buscamos</i>",
+        "",
+    ]
+    for d in items:
+        marca = " ✅" if d.get("encaja") else ""
+        lines.append(f'<b>{d["score"]}</b> · <a href="{_link(d)}">{d["name"]}</a>{marca} — {_meta(d)}')
         if d.get("shelter"):
             lines.append(f'<i>{d["shelter"]}</i>')
         lines.append("")
-    if len(items) > 10:
-        lines.append(f"…y {len(items) - 10} más")
     if SITE:
         lines.append(f'<a href="{SITE}">Abrir el buscador</a>')
 
+    # Telegram corta a 4096 caracteres: con muchas altas hay que trocear, y el
+    # corte se hace entre fichas para no partir ninguna por la mitad.
+    ok = True
+    for i, trozo in enumerate(_trocear(lines), start=1):
+        ok = _telegram_post(token, chat, trozo) and ok
+    return ok
+
+
+LIMITE_TELEGRAM = 3800
+
+
+def _trocear(lines: list[str]) -> list[str]:
+    trozos: list[str] = []
+    actual: list[str] = []
+    for ln in lines:
+        if sum(len(x) + 1 for x in actual) + len(ln) > LIMITE_TELEGRAM and actual:
+            trozos.append("\n".join(actual))
+            actual = []
+        actual.append(ln)
+    if actual:
+        trozos.append("\n".join(actual))
+    return trozos
+
+
+def _telegram_post(token: str, chat: str, texto: str) -> bool:
     try:
         r = requests.post(
             f"https://api.telegram.org/bot{token}/sendMessage",
             json={
                 "chat_id": chat,
-                "text": "\n".join(lines)[:4000],
+                "text": texto,
                 "parse_mode": "HTML",
-                "disable_web_page_preview": False,
+                "disable_web_page_preview": True,
             },
             timeout=30,
         )
         ok = r.ok and r.json().get("ok")
-        print(f"· telegram: {'enviado al grupo' if ok else 'error ' + r.text[:120]}")
+        print(f"· telegram: {'enviado al grupo' if ok else 'error ' + r.text[:150]}")
         return bool(ok)
     except Exception as exc:
         print(f"· telegram FALLÓ: {exc}", file=sys.stderr)
@@ -251,12 +326,9 @@ def main() -> int:
         print("no hay resumen del barrido; nada que notificar")
         return 0
     digest = json.loads(DIGEST.read_text(encoding="utf-8"))
-    items = digest.get("notifiable", [])
-    if not items:
-        print("sin novedades relevantes esta noche")
-        return 0
-
-    print(f"{len(items)} novedades notificables")
+    items = digest.get("novedades", [])
+    # Se avisa siempre, aunque no haya nada: así se sabe que el barrido corrió.
+    print(f"{len(items)} novedades" if items else "sin novedades hoy")
     sent = [send_email(digest), send_telegram(digest), send_whatsapp(digest)]
     if not any(sent):
         print("ningún canal configurado; el aviso queda solo en la web")

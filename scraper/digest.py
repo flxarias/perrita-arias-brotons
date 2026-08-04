@@ -23,7 +23,6 @@ from .core.scoring import is_notifiable
 from .notify import SITE, SIZE_LABEL, _link, _meta, recipients, send_mail
 
 DISPONIBLES = ("disponible", "urgente", "acogida")
-TOP_N = 6
 
 
 # --------------------------------------------------------------------------- datos
@@ -55,16 +54,18 @@ def collect() -> dict:
 
     from .core.models import Dog
 
+    # Todas las altas desde el último envío. La criba por afinidad solo se usa
+    # ya para marcar cuáles encajan, no para esconder ninguna.
     nuevas = []
     for d in dogs:
         first = _parse(d.get("first_seen"))
         if first and first > since and d.get("status") in DISPONIBLES:
-            if is_notifiable(Dog.from_dict(d), criteria):
-                nuevas.append(d)
-    nuevas.sort(key=lambda d: -d["score"])
+            item = as_item(d)
+            item["encaja"] = is_notifiable(Dog.from_dict(d), criteria)
+            nuevas.append(item)
+    nuevas.sort(key=lambda d: (-int(d["encaja"]), -d["score"]))
 
     vivas = [d for d in dogs if d.get("status") in DISPONIBLES and not d.get("ppp")]
-    top = sorted(vivas, key=lambda d: -d["score"])[:TOP_N]
 
     return {
         "at": now_iso(),
@@ -74,8 +75,7 @@ def collect() -> dict:
         "vivas": len(vivas),
         "alicante": sum(1 for d in vivas if d.get("province") == "Alicante"),
         "cachorras": sum(1 for d in vivas if d.get("sex") == "hembra" and (d.get("age_months") or 999) <= 12),
-        "nuevas": [as_item(d) for d in nuevas],
-        "top": [as_item(d) for d in top],
+        "nuevas": nuevas,
         "salud": meta.get("source_health", {}),
     }
 
@@ -84,6 +84,11 @@ def collect() -> dict:
 
 def _card(d: dict) -> str:
     photo = d.get("photo") or ""
+    marca = (
+        '<span style="background:#e7f0e9;color:#3f7d52;border-radius:999px;'
+        'padding:2px 8px;font-size:11px;font-weight:700;margin-left:6px">ENCAJA</span>'
+        if d.get("encaja") else ""
+    )
     img = (
         f'<img src="{photo}" width="92" height="92" alt="" '
         f'style="border-radius:16px;object-fit:cover;display:block">'
@@ -94,7 +99,7 @@ def _card(d: dict) -> str:
   <td style="padding:10px 0;vertical-align:top;width:106px">{img}</td>
   <td style="padding:10px 0;vertical-align:top;font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#1c1815">
     <a href="{_link(d)}" style="color:#c4562f;text-decoration:none;font-size:18px;font-weight:600">{d['name']}</a>
-    <span style="background:#fbeae2;color:#c4562f;border-radius:999px;padding:2px 9px;font-size:12px;font-weight:700;margin-left:6px">{d['score']}</span>
+    <span style="background:#fbeae2;color:#c4562f;border-radius:999px;padding:2px 9px;font-size:12px;font-weight:700;margin-left:6px">{d['score']}</span>{marca}
     <div style="color:#8b8076;font-size:13px;margin-top:3px">{_meta(d)}</div>
     <div style="color:#4b423a;font-size:13px">{d.get('breed') or ''}{' · ' if d.get('breed') and d.get('shelter') else ''}{d.get('shelter') or ''}</div>
   </td>
@@ -115,20 +120,23 @@ def build_html(data: dict) -> str:
     hoy = fecha_larga(datetime.now(timezone.utc) + timedelta(hours=2))
     n = len(data["nuevas"])
 
+    # Solo las altas del día: todas, sin recortar y sin bloques de relleno.
     if n:
-        titulo = f"{n} novedad{'es' if n != 1 else ''} esta noche"
-        bloque = f'<table style="width:100%;border-collapse:collapse">{"".join(_card(d) for d in data["nuevas"][:15])}</table>'
-        if n > 15:
-            bloque += f'<p style="color:#8b8076;font:13px sans-serif">Y {n - 15} más en la web.</p>'
+        encajan = sum(1 for d in data["nuevas"] if d.get("encaja"))
+        titulo = f"{n} novedad{'es' if n != 1 else ''} publicada{'s' if n != 1 else ''}"
+        bloque = (
+            f'<p style="margin:0 0 14px;color:#8b8076;font:14px sans-serif">'
+            f'{encajan} encaja{"n" if encajan != 1 else ""} con lo que buscáis.</p>'
+            f'<table style="width:100%;border-collapse:collapse">'
+            f'{"".join(_card(d) for d in data["nuevas"])}</table>'
+        )
     else:
-        titulo = "Sin novedades esta noche"
+        titulo = "Hoy no hay novedades"
         bloque = (
             '<p style="color:#4b423a;font:15px/1.6 sans-serif;margin:0">'
-            "Ninguna protectora ha publicado nada que encaje desde ayer. "
-            "Estas siguen siendo las que mejor encajan:</p>"
+            "Ninguna protectora ha publicado nada nuevo desde el último aviso.</p>"
         )
 
-    top = f'<table style="width:100%;border-collapse:collapse">{"".join(_card(d) for d in data["top"])}</table>'
     caidas = [k for k, v in (data.get("salud") or {}).items() if not v.get("ok")]
     aviso = (
         f'<p style="color:#b98b2f;font:13px sans-serif;margin-top:20px">'
@@ -151,7 +159,6 @@ def build_html(data: dict) -> str:
     {data['vivas']} fichas en seguimiento · {data['alicante']} en Alicante · {data['cachorras']} cachorras
   </p>
   {bloque}
-  {'<h2 style="margin:30px 0 4px;font:400 20px Georgia,serif;color:#1c1815">Las que mejor encajan</h2>' + top if n else top}
   {aviso}{cta}
   <p style="margin:26px 0 0;color:#b3a89c;font:12px sans-serif;border-top:1px solid #e8e0d5;padding-top:14px">
     Barrido de las {(data.get('generated_at') or '')[:16].replace('T', ' ')} UTC.
@@ -162,13 +169,17 @@ def build_html(data: dict) -> str:
 
 def build_text(data: dict) -> str:
     n = len(data["nuevas"])
-    head = f"{n} novedades esta noche" if n else "Sin novedades esta noche"
-    cuerpo = "\n\n".join(f"★{d['score']} {d['name']} · {_meta(d)}\n{_link(d)}" for d in (data["nuevas"] or data["top"]))
-    return (
-        f"Perrita Arias Brotóns — {head}\n"
-        f"{data['vivas']} fichas en seguimiento · {data['alicante']} en Alicante\n\n"
-        f"{cuerpo}\n\n{SITE}"
-    )
+    if not n:
+        return (
+            "Perrita Arias Brotóns\n\n"
+            "Hoy no hay novedades: ninguna protectora ha publicado nada nuevo.\n\n"
+            f"{data['vivas']} fichas siguen en seguimiento.\n{SITE}"
+        )
+    partes = [f"Perrita Arias Brotóns — {n} novedad{'es' if n != 1 else ''} de hoy"]
+    for d in data["nuevas"]:
+        partes.append(f"★{d['score']} {d['name']}{' ✔' if d.get('encaja') else ''} · {_meta(d)}\n{_link(d)}")
+    partes.append(SITE)
+    return "\n\n".join(partes)
 
 
 # --------------------------------------------------------------------------- cli

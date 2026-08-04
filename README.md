@@ -142,9 +142,15 @@ Y **WhatsApp** se queda para el aviso personal: manda una vez
 `I allow callmebot to send me messages` al +34 644 51 95 23 y te devuelve la
 API key. Ese mensaje se puede reenviar al grupo con un toque.
 
-Solo se avisa de fichas que encajan: hembra, hasta 12 meses, tamaño pequeño o
-mediano y en Alicante o provincias vecinas; o cualquier otra que pase de 62
-puntos de afinidad. Ese umbral está en `config/criteria.json`.
+Los avisos llevan **todas las altas del día, sin recortar**, ordenadas por
+encaje y con un distintivo en las que cumplen lo que buscáis (hembra, hasta 12
+meses, talla pequeña o mediana y en Alicante o provincias vecinas; o cualquiera
+que pase de 62 puntos). Si un día no hay ninguna, el mensaje lo dice y nada más.
+
+Telegram parte el aviso en varios mensajes cuando hace falta: su API corta a
+4096 caracteres y el corte se hace entre fichas, nunca por la mitad de una.
+WhatsApp es la excepción —viaja por URL y no admite mensajes largos—, así que
+ahí van las seis primeras y un «+N más en el correo».
 
 ---
 

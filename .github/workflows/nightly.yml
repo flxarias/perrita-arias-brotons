@@ -122,8 +122,9 @@ jobs:
             exit 1
           fi
 
+      # Se avisa siempre, haya novedades o no: si no hay, el mensaje lo dice.
       - name: Avisar de las novedades
-        if: steps.gate.outputs.run == 'yes' && steps.commit.outputs.changed == 'yes'
+        if: steps.gate.outputs.run == 'yes'
         env:
           # El correo lo manda el "Resumen matinal" a las 07:00; aquí solo van
           # los avisos instantáneos, para no duplicar el mensaje.
