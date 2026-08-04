@@ -140,15 +140,14 @@ jobs:
           for slug, h in d["source_health"].items():
               print(f"| {slug} | {h['dogs']} | {len(h.get('errors', []))} | {h.get('seconds', 0)}s |")
           if d.get("purge_warnings"):
-              print("
-> ⚠ Retirada cancelada en alguna fuente:
-")
+              print("")
+              print("> Retirada cancelada en alguna fuente:")
               for w in d["purge_warnings"]:
                   print(f"> - {w}")
           if d.get("removed"):
-              print("
-### Retiradas (dos noches sin aparecer)
-")
+              print("")
+              print("### Retiradas (dos noches sin aparecer)")
+              print("")
               for x in d["removed"][:20]:
                   print(f"- {x['name']} ({x['source']})")
           if d["notifiable"]:
