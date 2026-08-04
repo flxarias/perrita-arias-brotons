@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: ¿Es medianoche en Madrid?
         id: gate
@@ -54,7 +54,7 @@ jobs:
             echo "run=no" >> "$GITHUB_OUTPUT"
           fi
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         if: steps.gate.outputs.run == 'yes'
         with:
           python-version: "3.12"
@@ -66,8 +66,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r scraper/requirements.txt
 
-      - name: Instalar Chromium
+      # Chromium tarda medio minuto en instalarse: solo se trae si alguna fuente
+      # activa lo necesita de verdad.
+      - name: ¿Hace falta navegador?
         if: steps.gate.outputs.run == 'yes' && github.event.inputs.browser != 'false'
+        id: browser
+        run: |
+          NECESARIO=$(python -c "from scraper.sources import build_sources; print('si' if any(s.needs_browser for s in build_sources(None)) else 'no')")
+          echo "necesario=$NECESARIO" >> "$GITHUB_OUTPUT"
+          echo "Fuentes que requieren navegador: $NECESARIO"
+
+      - name: Instalar Chromium
+        if: steps.browser.outputs.necesario == 'si'
         run: python -m playwright install --with-deps chromium
 
       - name: Barrer las protectoras

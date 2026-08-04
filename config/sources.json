@@ -55,15 +55,15 @@
       "provinces": [
         "Alicante"
       ],
-      "browser": true,
-      "scroll": 3,
+      "browser": false,
       "listings": [
         "https://es.apaccampello.com/dogs-for-adoption"
       ],
       "detail_pattern": "/(?:dog|perro|adopt)[a-z0-9\\-/]*/[a-z0-9\\-]{3,}/?$",
       "exclude_pattern": "application-form|procedure|foster|cat",
       "max_details": 60,
-      "enabled": true
+      "enabled": true,
+      "_nota": "Wix, pero el HTML llega completo sin JavaScript: no hace falta navegador. Hoy la página solo explica el procedimiento y no lista perros; se deja activa para cuando vuelvan a publicarlos."
     },
     {
       "slug": "alicanteprotectora",

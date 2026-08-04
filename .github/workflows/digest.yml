@@ -33,10 +33,10 @@ jobs:
             echo "Son las $HOUR:00 en Madrid; este disparo no toca."
           fi
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         if: steps.gate.outputs.run == 'yes'
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         if: steps.gate.outputs.run == 'yes'
         with:
           python-version: "3.12"
