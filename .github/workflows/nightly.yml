@@ -133,12 +133,24 @@ jobs:
           d = json.loads(pathlib.Path("data/last_digest.json").read_text(encoding="utf-8"))
           print(f"## Barrido de las {d['at'][:16].replace('T',' ')} UTC\n")
           print(f"- **{d['total']}** fichas en la base de datos")
-          print(f"- **{len(d['new'])}** altas · **{len(d['changed'])}** actualizadas")
+          print(f"- **{len(d['new'])}** altas · **{len(d['changed'])}** actualizadas · **{len(d.get('removed', []))}** retiradas")
           print(f"- **{len(d['notifiable'])}** encajan con lo que buscamos\n")
           print("| Fuente | Fichas | Errores | Tiempo |")
           print("|---|---:|---:|---:|")
           for slug, h in d["source_health"].items():
               print(f"| {slug} | {h['dogs']} | {len(h.get('errors', []))} | {h.get('seconds', 0)}s |")
+          if d.get("purge_warnings"):
+              print("
+> ⚠ Retirada cancelada en alguna fuente:
+")
+              for w in d["purge_warnings"]:
+                  print(f"> - {w}")
+          if d.get("removed"):
+              print("
+### Retiradas (dos noches sin aparecer)
+")
+              for x in d["removed"][:20]:
+                  print(f"- {x['name']} ({x['source']})")
           if d["notifiable"]:
               print("\n### Novedades\n")
               for x in d["notifiable"][:15]:
