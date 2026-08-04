@@ -146,6 +146,42 @@ def run() -> int:
     eq(d.health.get("vaccinated"), True, "vacunada desde el texto")
     eq(d.age_band, "cachorro", "banda de edad")
 
+    # --- retirada de las que ya no están en su web
+    from datetime import datetime, timedelta, timezone
+
+    from .core import store as _store
+
+    ayer = (datetime.now(timezone.utc) - timedelta(days=1)).replace(microsecond=0, tzinfo=None).isoformat() + "Z"
+    perro = lambda i: Dog(id=f"t:{i}", source="t", name=f"P{i}", entry="scraper").finalize()
+
+    base = {d.id: d for d in (perro(i) for i in range(10))}
+    presentes = [perro(i) for i in range(8)]
+
+    m1, _, _, v1 = _store.merge(base, presentes)
+    b1, _ = _store.purge_gone(m1, {"t"}, v1)
+    eq(len(b1), 0, "la primera noche que falta, no se borra")
+    eq(sorted(d.id for d in m1.values() if d.gone_since), ["t:8", "t:9"], "se marca la ausencia")
+
+    for d in m1.values():
+        if d.gone_since:
+            d.gone_since = ayer
+    m2, _, _, v2 = _store.merge(m1, presentes)
+    b2, _ = _store.purge_gone(m2, {"t"}, v2)
+    eq(sorted(d.id for d in b2), ["t:8", "t:9"], "la segunda noche sí se borra")
+    eq(len(m2), 8, "quedan las que siguen estando")
+
+    # una fuente que se cae a medias no debe vaciar la base
+    base3 = {d.id: d for d in (perro(i) for i in range(8))}
+    pocas = [perro(i) for i in range(3)]
+    m3, _, _, v3 = _store.merge(base3, pocas)
+    for d in m3.values():
+        if d.gone_since:
+            d.gone_since = ayer
+    m4, _, _, v4 = _store.merge(m3, pocas)
+    b4, avisos = _store.purge_gone(m4, {"t"}, v4)
+    eq(len(b4), 0, "con demasiadas ausencias no se borra nada")
+    eq(len(avisos), 1, "y queda constancia del motivo")
+
     # --- el CSV se genera en dos sitios: aquí y en el navegador
     import re as _re
     from pathlib import Path as _Path

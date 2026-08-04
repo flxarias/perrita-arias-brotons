@@ -260,8 +260,11 @@ toca.
 
 ## Cómo se comporta la base de datos
 
-- **Nunca borra.** Si una perrita desaparece de la web de origen, se le pone
-  `gone_since` y el estado pasa a `no-disponible`, pero la ficha se queda.
+- **Retira lo que ya no existe, con red de seguridad.** Una ficha que
+  desaparece de su web se marca la primera noche y se borra la segunda: hacen
+  falta dos ausencias seguidas. Si reaparece por el camino, se rescata. Y si una
+  fuente se cae y «pierde» más del 40 % de sus fichas de golpe, se cancela la
+  retirada y se anota el motivo: un tropiezo de una web no vacía la base.
 - **Diff legible.** El JSON se escribe ordenado y con sangría fija, así que cada
   commit nocturno enseña exactamente qué cambió.
 - **Duplicados marcados, no eliminados.** La misma perrita publicada en Miwuki y

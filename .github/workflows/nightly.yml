@@ -30,19 +30,29 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
+      - uses: actions/checkout@v4
+
       - name: ¿Es medianoche en Madrid?
         id: gate
         run: |
+          HOY=$(TZ=Europe/Madrid date +%Y-%m-%d)
           HOUR=$(TZ=Europe/Madrid date +%H)
-          if [ "${{ github.event_name }}" != "schedule" ] || [ "$HOUR" = "00" ]; then
+          ULTIMO=$(python -c "import json; print(json.load(open('data/meta.json')).get('last_run','')[:10])" 2>/dev/null || echo "")
+
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "Lanzado a mano: adelante."
+            echo "run=yes" >> "$GITHUB_OUTPUT"
+          elif [ "$ULTIMO" = "$HOY" ]; then
+            echo "Ya se barrió hoy ($ULTIMO); no se repite."
+            echo "run=no" >> "$GITHUB_OUTPUT"
+          elif [ "$HOUR" = "00" ] || [ "$HOUR" = "01" ] || [ "$HOUR" = "02" ]; then
+            # margen de dos horas: los cron de GitHub se retrasan con frecuencia
+            echo "Son las $HOUR:xx en Madrid y hoy no se ha barrido: adelante."
             echo "run=yes" >> "$GITHUB_OUTPUT"
           else
+            echo "Son las $HOUR:xx en Madrid; este disparo no toca."
             echo "run=no" >> "$GITHUB_OUTPUT"
-            echo "Son las $HOUR:00 en Madrid; este disparo no toca."
           fi
-
-      - uses: actions/checkout@v4
-        if: steps.gate.outputs.run == 'yes'
 
       - uses: actions/setup-python@v5
         if: steps.gate.outputs.run == 'yes'
@@ -57,15 +67,15 @@ jobs:
           pip install -r scraper/requirements.txt
 
       - name: Instalar Chromium
-        if: steps.gate.outputs.run == 'yes' && inputs.browser != false
+        if: steps.gate.outputs.run == 'yes' && github.event.inputs.browser != 'false'
         run: python -m playwright install --with-deps chromium
 
       - name: Barrer las protectoras
         if: steps.gate.outputs.run == 'yes'
         env:
           PAB_MIN_INTERVAL: "0.5"
-          SOURCES: ${{ inputs.sources }}
-          USE_BROWSER: ${{ inputs.browser }}
+          SOURCES: ${{ github.event.inputs.sources }}
+          USE_BROWSER: ${{ github.event.inputs.browser }}
         run: |
           ARGS=""
           for s in $(echo "$SOURCES" | tr ',' ' '); do
@@ -87,8 +97,19 @@ jobs:
           else
             NEW=$(python -c "import json;print(len(json.load(open('data/last_digest.json'))['new']))")
             git commit -m "Barrido nocturno: $NEW altas ($(TZ=Europe/Madrid date '+%d/%m/%Y'))"
-            git push
-            echo "changed=yes" >> "$GITHUB_OUTPUT"
+            # Si alguien ha empujado mientras corría el barrido, el push se
+            # rechaza. Se reintenta rebasando sobre lo que haya llegado.
+            for intento in 1 2 3; do
+              if git push; then
+                echo "changed=yes" >> "$GITHUB_OUTPUT"
+                exit 0
+              fi
+              echo "push rechazado (intento $intento); rebasando sobre origin/main"
+              git pull --rebase --autostash origin main
+              sleep 5
+            done
+            echo "::error::no se ha podido empujar la base de datos tras 3 intentos"
+            exit 1
           fi
 
       - name: Avisar de las novedades

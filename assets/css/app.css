@@ -876,3 +876,24 @@ main.wide { max-width: 1180px; margin: 0 auto; padding: 22px var(--pad) 64px; }
 .propias__x:hover { background: var(--bg-2); color: var(--accent); }
 
 .nota { margin: 20px 0 0; font-size: .82rem; color: var(--muted); }
+
+/* --- letrero discreto con la fecha de alta -------------------------------- */
+
+.card__since {
+  margin-top: 2px;
+  font-size: .68rem;
+  color: var(--muted);
+  letter-spacing: .01em;
+}
+
+.d-since {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin: 8px 0 0;
+  font-size: .78rem; color: var(--muted);
+}
+.d-since__new {
+  padding: 2px 9px; border-radius: 999px;
+  background: color-mix(in srgb, var(--green) 15%, transparent);
+  color: var(--green); font-size: .68rem; font-weight: 700;
+  letter-spacing: .05em; text-transform: uppercase;
+}

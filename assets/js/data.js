@@ -68,6 +68,25 @@ const PAB = (() => {
 
   const fold = (s) => (s || '').normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
 
+  const MESES_CORTOS = ['ene', 'feb', 'mar', 'abr', 'may', 'jun',
+                        'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+
+  /** "3 ago" o "3 ago 2025" si fue otro año. Para el letrero de la tarjeta. */
+  const fechaCorta = (iso) => {
+    if (!iso) return '';
+    const d = new Date(iso);
+    if (isNaN(d)) return '';
+    const mismoAno = d.getFullYear() === new Date().getFullYear();
+    return `${d.getDate()} ${MESES_CORTOS[d.getMonth()]}${mismoAno ? '' : ' ' + d.getFullYear()}`;
+  };
+
+  /** "3 de agosto de 2026". Para la ficha completa. */
+  const fechaLarga = (iso) => {
+    if (!iso) return '';
+    const d = new Date(iso);
+    return isNaN(d) ? '' : d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+  };
+
   const daysAgo = (iso) => {
     if (!iso) return Infinity;
     return (Date.now() - Date.parse(iso)) / 86400000;
@@ -225,7 +244,7 @@ const PAB = (() => {
     load, apply, matches, emptyFilters, loadFilters, saveFilters,
     isFav, toggleFav, isHidden, toggleHidden, hiddenCount, clearHidden, markVisited, isNew,
     ownDogs, ownCount, saveOwn, removeOwn,
-    ageText, sizeText, sexText, placeText, tierOf, daysAgo, fold,
+    ageText, sizeText, sexText, placeText, tierOf, daysAgo, fold, fechaCorta, fechaLarga,
     SIZE_LABEL, SIZE_ORDER, BAND_LABEL, STATUS_LABEL, TRAIT_LABEL, HEALTH_LABEL, TIER_LABEL,
   };
 })();

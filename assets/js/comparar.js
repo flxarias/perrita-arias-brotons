@@ -143,6 +143,7 @@
     ['Vacunada', (d) => marca(d.health?.vaccinated)],
     ['Con chip', (d) => marca(d.health?.chipped)],
     ['PPP', (d) => (d.ppp ? '<span class="mal">Sí</span>' : 'No')],
+    ['En la base desde', (d) => PAB.fechaCorta(d.first_seen) || '—'],
   ];
 
   const marca = (v) => (v === true ? '<span class="bien">Sí</span>'

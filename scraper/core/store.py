@@ -101,11 +101,14 @@ def _write_json(path: Path, payload) -> None:
     )
 
 
-def merge(existing: dict[str, Dog], scraped: list[Dog]) -> tuple[dict[str, Dog], list[Dog], list[Dog]]:
+def merge(
+    existing: dict[str, Dog], scraped: list[Dog]
+) -> tuple[dict[str, Dog], list[Dog], list[Dog], set[str]]:
     """Funde el barrido con lo ya guardado.
 
-    Devuelve (base actualizada, altas nuevas, fichas modificadas).
-    Nunca borra: lo que desaparece de la fuente se marca con `gone_since`.
+    Devuelve (base actualizada, altas, modificadas, ids vistos en este barrido).
+    Aquí no se borra nada: lo que desaparece se marca con `gone_since` y de
+    eliminarlo se encarga `purge_gone` en el siguiente barrido.
     """
     now = now_iso()
     merged = dict(existing)
@@ -148,7 +151,60 @@ def merge(existing: dict[str, Dog], scraped: list[Dog]) -> tuple[dict[str, Dog],
                 dog.gone_since = now
                 dog.status = "no-disponible" if dog.status == "disponible" else dog.status
 
-    return merged, new, changed
+    return merged, new, changed, seen_ids
+
+
+# Si una fuente falla a medias (una página de listado que no carga, un cambio de
+# maquetación), de golpe "desaparecen" muchas fichas que en realidad siguen ahí.
+# Por encima de este porcentaje se da por hecho que el fallo es nuestro y no se
+# borra nada de esa fuente.
+PURGA_MAX_PORCENTAJE = 0.4
+
+
+def purge_gone(
+    dogs: dict[str, Dog], scraped_sources: set[str], vistas: set[str]
+) -> tuple[list[Dog], list[str]]:
+    """Borra las fichas que ya no están en su web de origen.
+
+    Se exige verlas ausentes **dos barridos seguidos**: en el primero `merge`
+    les pone `gone_since` y en el segundo se eliminan. Un tropiezo puntual de
+    una web no se lleva por delante una ficha buena, y a cambio se tarda un día
+    más en limpiar lo ya adoptado.
+
+    `vistas` son los ids que el barrido en curso sí ha encontrado.
+    """
+    borradas: list[Dog] = []
+    avisos: list[str] = []
+    # `merge` acaba de poner gone_since a las que faltan hoy: esas todavía no se
+    # tocan. Solo se borra lo que ya venía marcado de un barrido anterior.
+    hoy = now_iso()[:10]
+
+    for source in scraped_sources:
+        de_esta = [d for d in dogs.values() if d.source == source and d.entry == "scraper"]
+        if not de_esta:
+            continue
+        candidatas = [
+            d for d in de_esta
+            if d.gone_since and d.gone_since[:10] < hoy and d.id not in vistas
+        ]
+        if not candidatas:
+            continue
+
+        proporcion = len(candidatas) / len(de_esta)
+        if proporcion > PURGA_MAX_PORCENTAJE:
+            avisos.append(
+                f"{source}: {len(candidatas)} de {len(de_esta)} fichas ausentes "
+                f"({proporcion:.0%}); parece un fallo de la fuente, no se borra nada"
+            )
+            for d in candidatas:
+                d.gone_since = None  # se le da otra oportunidad
+            continue
+
+        for d in candidatas:
+            dogs.pop(d.id, None)
+            borradas.append(d)
+
+    return borradas, avisos
 
 
 # Una misma imagen repartida entre muchas fichas no es la foto de ninguna: es

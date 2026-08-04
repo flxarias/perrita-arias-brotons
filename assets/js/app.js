@@ -281,7 +281,8 @@
   function card(d) {
     const fav = PAB.isFav(d.id);
     const ribbons = [];
-    if (d._new) ribbons.push('<span class="ribbon ribbon--new">Nueva</span>');
+    // el letrero de novedad lleva la fecha en la que entró en la base
+    if (d._new) ribbons.push(`<span class="ribbon ribbon--new">Nueva · ${esc(PAB.fechaCorta(d.first_seen))}</span>`);
     if (d.urgent) ribbons.push('<span class="ribbon ribbon--urgent">Urgente</span>');
     if (d.status === 'reservado') ribbons.push('<span class="ribbon">Reservada</span>');
     if (d.status === 'no-disponible') ribbons.push('<span class="ribbon ribbon--gone">Retirada</span>');
@@ -322,6 +323,7 @@
       <span>${esc(PAB.placeText(d))}</span><span class="dot">·</span>
       <span>${esc(d.shelter || d.source_label)}</span>
     </div>
+    <div class="card__since" title="Fecha en que entró en la base de datos">Añadida el ${esc(PAB.fechaCorta(d.first_seen))}</div>
   </div>
 </article>`;
   }
@@ -414,6 +416,7 @@
     <div>
       <h2 class="d-name">${esc(d.name)}</h2>
       <p class="d-sub">${esc(d.shelter || d.source_label)}${d.shelter_kind ? ' · ' + esc(d.shelter_kind) : ''} · ${esc(PAB.placeText(d))}</p>
+      <p class="d-since">${d._new ? '<span class="d-since__new">Novedad</span>' : ''}En la base desde el ${esc(PAB.fechaLarga(d.first_seen))}</p>
     </div>
     <div class="ring d-ring" style="${ringStyle(d.score)}" title="Encaje ${d.score}/100"><span>${d.score}</span></div>
   </div>

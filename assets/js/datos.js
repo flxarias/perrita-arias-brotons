@@ -23,7 +23,7 @@
     { k: 'province', t: 'Provincia',  val: (d) => d.province || '—' },
     { k: 'shelter',  t: 'Protectora', val: (d) => d.shelter || d.source_label },
     { k: 'status',   t: 'Estado',     val: (d) => PAB.STATUS_LABEL[d.status] || d.status },
-    { k: 'first',    t: 'Alta',       val: (d) => (d.first_seen || '').slice(0, 10), ord: (d) => d.first_seen || '' },
+    { k: 'first',    t: 'Fecha de alta', val: (d) => PAB.fechaCorta(d.first_seen), ord: (d) => d.first_seen || '' },
   ];
 
   const state = { all: [], vista: [], orden: 'score', asc: false, mostradas: PAGINA, meta: null, propias: 0 };

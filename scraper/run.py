@@ -62,7 +62,14 @@ def run(selected: list[str] | None, limit: int | None, dry_run: bool, use_browse
         log.info("   %s fichas en %.1fs (%s errores)", len(res.dogs), time.time() - t0, len(res.errors))
 
     existing = store.load_dogs()
-    merged, new, changed = store.merge(existing, scraped)
+    merged, new, changed, vistas = store.merge(existing, scraped)
+
+    # Se borran las que llevan dos barridos sin aparecer en su web de origen.
+    borradas, avisos = store.purge_gone(merged, {d.source for d in scraped}, vistas)
+    for aviso in avisos:
+        log.warning("purga cancelada · %s", aviso)
+    for d in borradas:
+        log.info("   ✕ retirada %s (%s) — ya no está en %s", d.name, d.id, d.source)
 
     # rescorear todo: los criterios pueden haber cambiado desde el último barrido
     for dog in merged.values():
@@ -81,6 +88,8 @@ def run(selected: list[str] | None, limit: int | None, dry_run: bool, use_browse
         "scraped": len(scraped),
         "new": [d.id for d in new],
         "changed": [d.id for d in changed],
+        "removed": [{"id": d.id, "name": d.name, "source": d.source} for d in borradas],
+        "purge_warnings": avisos,
         "notifiable": [
             {
                 "id": d.id, "name": d.name, "score": d.score, "url": d.url,
@@ -102,6 +111,7 @@ def run(selected: list[str] | None, limit: int | None, dry_run: bool, use_browse
                 "last_run": digest["at"],
                 "new_ids": digest["new"],
                 "changed_ids": digest["changed"],
+                "removed_ids": [d.id for d in borradas],
                 "source_health": health,
                 "counts": {
                     "total": len(merged),
@@ -117,7 +127,8 @@ def run(selected: list[str] | None, limit: int | None, dry_run: bool, use_browse
         DIGEST_PATH.write_text(json.dumps(digest, ensure_ascii=False, indent=1), encoding="utf-8")
         log.info("escrito %s (%s fichas) y %s", store.DOGS_JSON, len(merged), store.CSV_PATH)
 
-    log.info("nuevas: %s · modificadas: %s · notificables: %s", len(new), len(changed), len(notifiable))
+    log.info("nuevas: %s · modificadas: %s · retiradas: %s · notificables: %s",
+             len(new), len(changed), len(borradas), len(notifiable))
     for d in notifiable[:10]:
         log.info("   ★ %s (%s) %s · %s · %s", d.score, d.name, d.sex, d.province, d.url)
     return digest
