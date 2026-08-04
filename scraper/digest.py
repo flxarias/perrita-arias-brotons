@@ -184,6 +184,38 @@ def build_text(data: dict) -> str:
 
 # --------------------------------------------------------------------------- cli
 
+def diagnostico_correo() -> list[str]:
+    """Dice qué secretos hay y cuáles faltan, sin revelar ningún valor.
+
+    Los registros de Actions de un repositorio público los ve cualquiera, así
+    que aquí solo se informa de si cada secreto está definido; nunca de su
+    contenido. Sin esto, un correo mal configurado se queda en una línea
+    discreta dentro de un paso en verde y no hay manera de saber qué pasa.
+    """
+    obligatorios = ("SMTP_HOST", "SMTP_USER", "SMTP_PASS", "MAIL_TO")
+    faltan = [k for k in obligatorios if not os.environ.get(k)]
+
+    print("Configuración del correo:")
+    for clave in ("SMTP_HOST", "SMTP_PORT", "SMTP_USER", "SMTP_PASS", "MAIL_FROM", "MAIL_TO"):
+        valor = os.environ.get(clave)
+        if not valor:
+            estado = "AUSENTE" if clave in obligatorios else "sin definir (opcional)"
+        elif clave == "MAIL_TO":
+            n = len(recipients())
+            estado = f"definido · {n} destinatario{'s' if n != 1 else ''}"
+        elif clave in ("SMTP_HOST", "SMTP_PORT"):
+            estado = f"definido · {valor}"
+        else:
+            estado = f"definido · {len(valor)} caracteres"
+        print(f"  {clave:10} {estado}")
+
+    if faltan:
+        print(f"::warning title=El correo no está configurado::"
+              f"Faltan estos secretos en Settings → Secrets and variables → Actions: "
+              f"{', '.join(faltan)}. Sin ellos el resumen no se envía.")
+    return faltan
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="Resumen matinal por correo")
     ap.add_argument("--preview", action="store_true", help="escribe el HTML y no envía nada")
@@ -200,12 +232,15 @@ def main() -> int:
         print("escrito", args.out)
         return 0
 
-    if not recipients():
-        print("MAIL_TO vacío: no hay a quién enviar", file=sys.stderr)
-        return 0
+    if diagnostico_correo():
+        # Falla a propósito: un resumen que no se envía tiene que verse en rojo,
+        # no esconderse en una línea dentro de un paso en verde.
+        print("::error title=Resumen no enviado::"
+              "El correo no está configurado; revisa los secretos que se listan arriba.")
+        return 1
 
     asunto = (
-        f"🐾 {n} perrita{'s' if n != 1 else ''} nueva{'s' if n != 1 else ''} para hoy"
+        f"🐾 {n} novedad{'es' if n != 1 else ''} de hoy · Perrita Arias Brotóns"
         if n else "🐾 Sin novedades hoy · Perrita Arias Brotóns"
     )
     ok = send_mail(asunto, build_text(data), html)
@@ -215,7 +250,12 @@ def main() -> int:
         meta["last_digest_sent"] = data["at"]
         store._write_json(store.META_JSON, meta)
         print("marca de envío guardada en meta.json")
-    return 0 if ok else 1
+        return 0
+
+    print("::error title=El correo ha fallado::"
+          "Los secretos están puestos pero el envío no ha salido; el motivo exacto "
+          "aparece en la línea '· correo FALLÓ' de arriba.")
+    return 1
 
 
 if __name__ == "__main__":
