@@ -186,28 +186,284 @@
      "seconds": 127.1
     }
    }
+  },
+  {
+   "at": "2026-08-04T00:35:24Z",
+   "new": 0,
+   "changed": 122,
+   "total": 723,
+   "sources": {
+    "apadac": {
+     "ok": true,
+     "dogs": 20,
+     "pages": 2,
+     "errors": [],
+     "seconds": 14.2
+    },
+    "kerubi": {
+     "ok": true,
+     "dogs": 192,
+     "pages": 5,
+     "errors": [
+      "ficha https://kerubi.es/animales/perros-en-adopcion/ludco/: 404 Client Error: Not Found for url: https://kerubi.es/animales/perros-en-adopcion/ludco/",
+      "ficha https://kerubi.es/animales/perros-en-adopcion/troya-2/: 404 Client Error: Not Found for url: https://kerubi.es/animales/perros-en-adopcion/troya-2/",
+      "ficha https://kerubi.es/animales/perros-en-adopcion/nasla/: 404 Client Error: Not Found for url: https://kerubi.es/animales/perros-en-adopcion/nasla/"
+     ],
+     "seconds": 128.9
+    },
+    "miwuki": {
+     "ok": true,
+     "dogs": 354,
+     "pages": 17,
+     "errors": [],
+     "seconds": 338.3
+    },
+    "reinasbiberon": {
+     "ok": true,
+     "dogs": 20,
+     "pages": 1,
+     "errors": [],
+     "seconds": 6.4
+    },
+    "villena": {
+     "ok": true,
+     "dogs": 56,
+     "pages": 2,
+     "errors": [],
+     "seconds": 7.7
+    },
+    "anaa": {
+     "ok": true,
+     "dogs": 64,
+     "pages": 1,
+     "errors": [],
+     "seconds": 49.5
+    },
+    "ibi": {
+     "ok": true,
+     "dogs": 4,
+     "pages": 1,
+     "errors": [],
+     "seconds": 3.6
+    },
+    "asoka": {
+     "ok": true,
+     "dogs": 11,
+     "pages": 1,
+     "errors": [],
+     "seconds": 7.1
+    },
+    "apaccampello": {
+     "ok": true,
+     "dogs": 0,
+     "pages": 1,
+     "errors": [],
+     "seconds": 6.0
+    }
+   }
   }
  ],
- "last_run": "2026-08-03T14:18:44Z",
+ "last_run": "2026-08-04T00:35:24Z",
  "new_ids": [],
  "counts": {
-  "total": 731,
-  "disponibles": 712,
-  "hembras": 497,
+  "total": 723,
+  "disponibles": 710,
+  "hembras": 495,
   "cachorras": 50
  },
- "changed_ids": [],
+ "changed_ids": [
+  "miwuki:bbtojtk1x9",
+  "miwuki:5qkvuxvumw",
+  "miwuki:sngvjjzcnr",
+  "miwuki:min220nocr",
+  "miwuki:5zixobquz6",
+  "miwuki:xejz1jqi5d",
+  "miwuki:98o0qgkuhc",
+  "miwuki:iw6t1c1aoj",
+  "miwuki:b6aqk1rv1v",
+  "miwuki:honrs6pnim",
+  "miwuki:vnpf15jpkc",
+  "miwuki:vo1cwvppkt",
+  "miwuki:ifygp9u4d4",
+  "miwuki:2n1eexcr3t",
+  "miwuki:qhn9vyn4il",
+  "miwuki:rlbmjgytyw",
+  "miwuki:fxotwfhsju",
+  "miwuki:orqaxrnlzx",
+  "miwuki:t3zhi3brj6",
+  "miwuki:zmnjbasnvv",
+  "miwuki:gt83htkipa",
+  "miwuki:wgnlp1rro4",
+  "miwuki:b1wsu0hebv",
+  "miwuki:ltcs1bvwxk",
+  "miwuki:kx0s7sb9yf",
+  "miwuki:r2ixde5u7u",
+  "miwuki:lii3abnj41",
+  "miwuki:5jamzyz7gu",
+  "miwuki:mhrpcnmkss",
+  "miwuki:rhdj6kz0my",
+  "miwuki:jqdugtqc8p",
+  "miwuki:touelj9qdm",
+  "miwuki:ukasx0rpuq",
+  "miwuki:1qwcwofhov",
+  "miwuki:gg8f7gwetn",
+  "miwuki:xzpeqf6eoh",
+  "miwuki:toqthfcnym",
+  "miwuki:69wciyzwce",
+  "miwuki:1pwtzvdzjp",
+  "miwuki:vojenpbrwc",
+  "miwuki:ag9o758hag",
+  "miwuki:6f427i6km8",
+  "miwuki:rrhvgpshlo",
+  "miwuki:zeotdyyey5",
+  "miwuki:nl5s3ad2sr",
+  "miwuki:danpmhqd27",
+  "miwuki:5alcxixqwn",
+  "miwuki:vjw9rlnbl8",
+  "miwuki:tauvqrh5eo",
+  "miwuki:r28nritaby",
+  "miwuki:btdpzvodmc",
+  "miwuki:p50wid7iwp",
+  "miwuki:nqlgbd4ids",
+  "miwuki:iho1ifteuh",
+  "miwuki:xuxj5mgmkm",
+  "miwuki:jsmeb04nc8",
+  "miwuki:wabiqhwcai",
+  "miwuki:l2mj7ac1px",
+  "miwuki:iangtnb8s9",
+  "miwuki:iowuwgxtjt",
+  "miwuki:hnirsa7rhg",
+  "miwuki:h4cm0elcre",
+  "miwuki:sp3cbrfviy",
+  "miwuki:uzdoez0esl",
+  "miwuki:yhuxbfn1b9",
+  "miwuki:w1brltjowz",
+  "miwuki:vqfmenuduk",
+  "miwuki:vez7nks0rg",
+  "miwuki:6rffs86jp1",
+  "miwuki:cfv5og0nec",
+  "miwuki:l6l5qrjba9",
+  "miwuki:shzhf3f5eq",
+  "miwuki:niwhggk3bu",
+  "miwuki:fw8ji8nlr3",
+  "miwuki:yuvfkmxmlg",
+  "miwuki:f95q3ngepi",
+  "miwuki:ownbgayn8t",
+  "miwuki:duhbay3cks",
+  "miwuki:5jmexjmuzs",
+  "miwuki:rnemtrhlxa",
+  "miwuki:mfytynujgl",
+  "miwuki:dlrz1yqqhy",
+  "miwuki:zpcpgahtd4",
+  "miwuki:4ykejf56ce",
+  "miwuki:nxlr8bsjzr",
+  "miwuki:oje9c3alqi",
+  "miwuki:et9ydwaeln",
+  "miwuki:8dn3mh6id4",
+  "miwuki:wyw1ufsnls",
+  "miwuki:ulfdzk4lai",
+  "miwuki:xhcvjoiexc",
+  "miwuki:xxpi7689ko",
+  "miwuki:sdje0xzpbr",
+  "miwuki:atadu4eoho",
+  "miwuki:ph5xgvu9hj",
+  "miwuki:7xmguy2ngu",
+  "miwuki:5dy6nftac1",
+  "miwuki:qmxeewyrgf",
+  "miwuki:ozgohgkzft",
+  "miwuki:4wtjvzxqol",
+  "miwuki:qpyaski7wy",
+  "miwuki:ypfuggddvb",
+  "miwuki:jli49g4kce",
+  "miwuki:vbtyygmk63",
+  "miwuki:vu4dpbxw1a",
+  "miwuki:2lsdrbul67",
+  "miwuki:sknume8tmi",
+  "miwuki:hgwnavwhrr",
+  "miwuki:o5o3hmmyjx",
+  "miwuki:stnrgm9mmc",
+  "miwuki:v9mjwx32go",
+  "miwuki:4dbzor5xhq",
+  "miwuki:dylmgmxc4j",
+  "miwuki:rh8ljtvvqc",
+  "miwuki:fnmp01tlxv",
+  "miwuki:2dhydr0gih",
+  "miwuki:hffhuxry9n",
+  "miwuki:xrrgpvuvpq",
+  "reinasbiberon:15746",
+  "reinasbiberon:15743",
+  "reinasbiberon:15722",
+  "reinasbiberon:15348"
+ ],
  "source_health": {
+  "apadac": {
+   "ok": true,
+   "dogs": 20,
+   "pages": 2,
+   "errors": [],
+   "seconds": 14.2
+  },
   "kerubi": {
    "ok": true,
    "dogs": 192,
    "pages": 5,
    "errors": [
+    "ficha https://kerubi.es/animales/perros-en-adopcion/ludco/: 404 Client Error: Not Found for url: https://kerubi.es/animales/perros-en-adopcion/ludco/",
     "ficha https://kerubi.es/animales/perros-en-adopcion/troya-2/: 404 Client Error: Not Found for url: https://kerubi.es/animales/perros-en-adopcion/troya-2/",
     "ficha https://kerubi.es/animales/perros-en-adopcion/nasla/: 404 Client Error: Not Found for url: https://kerubi.es/animales/perros-en-adopcion/nasla/"
    ],
-   "seconds": 127.1
+   "seconds": 128.9
+  },
+  "miwuki": {
+   "ok": true,
+   "dogs": 354,
+   "pages": 17,
+   "errors": [],
+   "seconds": 338.3
+  },
+  "reinasbiberon": {
+   "ok": true,
+   "dogs": 20,
+   "pages": 1,
+   "errors": [],
+   "seconds": 6.4
+  },
+  "villena": {
+   "ok": true,
+   "dogs": 56,
+   "pages": 2,
+   "errors": [],
+   "seconds": 7.7
+  },
+  "anaa": {
+   "ok": true,
+   "dogs": 64,
+   "pages": 1,
+   "errors": [],
+   "seconds": 49.5
+  },
+  "ibi": {
+   "ok": true,
+   "dogs": 4,
+   "pages": 1,
+   "errors": [],
+   "seconds": 3.6
+  },
+  "asoka": {
+   "ok": true,
+   "dogs": 11,
+   "pages": 1,
+   "errors": [],
+   "seconds": 7.1
+  },
+  "apaccampello": {
+   "ok": true,
+   "dogs": 0,
+   "pages": 1,
+   "errors": [],
+   "seconds": 6.0
   }
  },
- "last_digest_sent": "2026-08-03T11:08:55Z"
+ "last_digest_sent": "2026-08-03T11:08:55Z",
+ "removed_ids": []
 }
