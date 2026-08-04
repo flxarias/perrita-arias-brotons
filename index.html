@@ -17,14 +17,37 @@
 
 <header class="hero" id="hero">
   <div class="hero__inner">
-    <p class="hero__eyebrow">Adopción · Alicante y mitad este de España</p>
-    <h1 class="hero__title">Perrita<br><span>Arias Brotóns</span></h1>
-    <p class="hero__lede">
-      Seguimiento diario de las protectoras de la zona. Cada ficha se puntúa
-      según su encaje —hembra joven, talla mediana, cerca de casa— y el
-      listado se rehace cada noche.
-    </p>
-    <dl class="hero__stats" id="heroStats"></dl>
+    <div class="hero__text">
+      <p class="hero__eyebrow">Adopción · Alicante y mitad este de España</p>
+      <h1 class="hero__title">Perrita<br><span>Arias Brotóns</span></h1>
+      <p class="hero__lede">
+        Un regalo de la Comunión de María; una responsabilidad para toda la familia.
+      </p>
+      <p class="hero__sub">
+        Seguimiento diario de las protectoras de la zona. Cada ficha se puntúa
+        según su encaje —hembra joven, talla mediana, cerca de casa— y el
+        listado se rehace cada noche.
+      </p>
+      <dl class="hero__stats" id="heroStats"></dl>
+    </div>
+
+    <nav class="hero__acciones" aria-label="Secciones">
+      <a class="bigbtn" href="comparar.html">
+        <span class="bigbtn__icon" aria-hidden="true">⚖️</span>
+        <span class="bigbtn__txt"><strong>Comparativa</strong><small>Enfrenta candidatas cara a cara</small></span>
+        <span class="bigbtn__arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="bigbtn" href="datos.html">
+        <span class="bigbtn__icon" aria-hidden="true">📊</span>
+        <span class="bigbtn__txt"><strong>Base de datos</strong><small>Resumen y tabla completa</small></span>
+        <span class="bigbtn__arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="bigbtn" href="admin.html">
+        <span class="bigbtn__icon" aria-hidden="true">✚</span>
+        <span class="bigbtn__txt"><strong>Añadir ficha</strong><small>Desde un enlace o a mano</small></span>
+        <span class="bigbtn__arrow" aria-hidden="true">→</span>
+      </a>
+    </nav>
   </div>
   <div class="hero__glow" aria-hidden="true"></div>
 
@@ -153,9 +176,6 @@
 <footer class="foot">
   <p id="footMeta">—</p>
   <nav>
-    <a href="comparar.html">Comparativa</a>
-    <a href="datos.html">Base de datos</a>
-    <a href="admin.html">Añadir una ficha</a>
     <a href="#" id="descargarCsv">Descargar CSV</a>
     <a href="#" id="restoreHidden" hidden>Recuperar descartadas (<span id="hiddenN">0</span>)</a>
   </nav>

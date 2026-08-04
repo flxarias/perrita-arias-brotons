@@ -897,3 +897,77 @@ main.wide { max-width: 1180px; margin: 0 auto; padding: 22px var(--pad) 64px; }
   color: var(--green); font-size: .68rem; font-weight: 700;
   letter-spacing: .05em; text-transform: uppercase;
 }
+
+/* --- portada: texto a la izquierda y accesos a la derecha --------------- */
+
+.hero__inner {
+  display: grid;
+  gap: clamp(24px, 4vw, 44px);
+}
+@media (min-width: 900px) {
+  .hero__inner {
+    grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr);
+    align-items: start;
+  }
+}
+
+.hero__sub {
+  margin: 12px 0 0;
+  max-width: 48ch;
+  color: var(--muted);
+  font-size: .93rem;
+  text-wrap: pretty;
+}
+
+.hero__acciones {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+@media (min-width: 900px) {
+  .hero__acciones { padding-top: 6px; }
+}
+
+.bigbtn {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 18px;
+  text-decoration: none;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1);
+  backdrop-filter: blur(6px);
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s;
+}
+@media (hover: hover) {
+  .bigbtn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-2);
+    border-color: var(--accent);
+  }
+  .bigbtn:hover .bigbtn__arrow { transform: translateX(3px); color: var(--accent); }
+}
+.bigbtn:active { transform: scale(.985); }
+
+.bigbtn__icon {
+  flex: 0 0 auto;
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border-radius: 14px;
+  background: var(--accent-soft);
+  font-size: 1.25rem;
+}
+.bigbtn__txt { display: grid; min-width: 0; flex: 1; }
+.bigbtn__txt strong {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.2rem;
+  letter-spacing: -.01em;
+}
+.bigbtn__txt small { color: var(--muted); font-size: .8rem; }
+.bigbtn__arrow {
+  flex: 0 0 auto;
+  color: var(--line-2);
+  font-size: 1.1rem;
+  transition: transform .18s var(--ease), color .18s;
+}
