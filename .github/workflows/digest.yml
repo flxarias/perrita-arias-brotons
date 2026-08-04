@@ -22,19 +22,30 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: ¿Son las 07:00 en Madrid?
+      - uses: actions/checkout@v7
+
+      - name: ¿Toca el resumen de la mañana?
         id: gate
         run: |
+          HOY=$(TZ=Europe/Madrid date +%Y-%m-%d)
           HOUR=$(TZ=Europe/Madrid date +%H)
-          if [ "${{ github.event_name }}" != "schedule" ] || [ "$HOUR" = "07" ]; then
+          ENVIADO=$(python -c "import json; print(json.load(open('data/meta.json')).get('last_digest_sent','')[:10])" 2>/dev/null || echo "")
+
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "Lanzado a mano: adelante."
+            echo "run=yes" >> "$GITHUB_OUTPUT"
+          elif [ "$ENVIADO" = "$HOY" ]; then
+            echo "El resumen de hoy ya salió ($ENVIADO); no se repite."
+            echo "run=no" >> "$GITHUB_OUTPUT"
+          elif [ "$HOUR" = "07" ] || [ "$HOUR" = "08" ] || [ "$HOUR" = "09" ] || [ "$HOUR" = "10" ]; then
+            # los cron de GitHub llegan tarde con frecuencia: hoy se retrasaron
+            # casi dos horas y con la comprobación estricta no salió el resumen
+            echo "Son las $HOUR:xx en Madrid y hoy no se ha enviado: adelante."
             echo "run=yes" >> "$GITHUB_OUTPUT"
           else
+            echo "Son las $HOUR:xx en Madrid; este disparo no toca."
             echo "run=no" >> "$GITHUB_OUTPUT"
-            echo "Son las $HOUR:00 en Madrid; este disparo no toca."
           fi
-
-      - uses: actions/checkout@v7
-        if: steps.gate.outputs.run == 'yes'
 
       - uses: actions/setup-python@v7
         if: steps.gate.outputs.run == 'yes'

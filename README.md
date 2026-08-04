@@ -89,6 +89,11 @@ Hay dos momentos, deliberadamente separados:
 | **00:00** | Barre las ocho fuentes y guarda las novedades | Telegram y WhatsApp (aviso instantáneo) |
 | **07:00** | Lee lo que guardó el barrido y manda el resumen | Correo |
 
+Los cron de GitHub se retrasan con frecuencia —se han visto casi dos horas—, así
+que ninguno de los dos exige la hora exacta: aceptan una ventana de varias horas
+y comprueban en `data/meta.json` que el trabajo no se haya hecho ya hoy. Ni se
+saltan la cita ni la repiten.
+
 Separarlos evita el correo a medianoche, evita duplicar el mensaje y hace que un
 fallo del scraper no deje sin resumen: el de las 07:00 solo lee la base de datos.
 
