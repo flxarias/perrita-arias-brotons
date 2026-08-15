@@ -1768,55 +1768,120 @@
      "seconds": 1.3
     }
    }
+  },
+  {
+   "at": "2026-08-15T23:23:27Z",
+   "new": 3,
+   "changed": 0,
+   "total": 756,
+   "sources": {
+    "apadac": {
+     "ok": true,
+     "dogs": 22,
+     "pages": 2,
+     "errors": [],
+     "seconds": 18.9
+    },
+    "kerubi": {
+     "ok": true,
+     "dogs": 135,
+     "pages": 5,
+     "errors": [],
+     "seconds": 111.9
+    },
+    "miwuki": {
+     "ok": true,
+     "dogs": 358,
+     "pages": 17,
+     "errors": [],
+     "seconds": 362.3
+    },
+    "reinasbiberon": {
+     "ok": true,
+     "dogs": 23,
+     "pages": 1,
+     "errors": [],
+     "seconds": 5.8
+    },
+    "villena": {
+     "ok": true,
+     "dogs": 68,
+     "pages": 2,
+     "errors": [],
+     "seconds": 7.4
+    },
+    "anaa": {
+     "ok": true,
+     "dogs": 61,
+     "pages": 1,
+     "errors": [],
+     "seconds": 51.0
+    },
+    "ibi": {
+     "ok": true,
+     "dogs": 4,
+     "pages": 1,
+     "errors": [],
+     "seconds": 3.4
+    },
+    "asoka": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 1,
+     "errors": [],
+     "seconds": 7.8
+    },
+    "apaccampello": {
+     "ok": true,
+     "dogs": 0,
+     "pages": 1,
+     "errors": [],
+     "seconds": 0.4
+    }
+   }
   }
  ],
- "last_run": "2026-08-15T22:31:57Z",
- "new_ids": [],
+ "last_run": "2026-08-15T23:23:27Z",
+ "new_ids": [
+  "kerubi:kiara",
+  "kerubi:frank-2",
+  "kerubi:brad"
+ ],
  "counts": {
-  "total": 753,
-  "disponibles": 680,
-  "hembras": 507,
+  "total": 756,
+  "disponibles": 675,
+  "hembras": 508,
   "cachorras": 50
  },
- "changed_ids": [
-  "miwuki:j290hyvued",
-  "miwuki:0fka1i81l3",
-  "miwuki:ue7vrq8ado",
-  "miwuki:oduayqy3h5",
-  "miwuki:xrrgpvuvpq",
-  "asoka:asokaelgrande-org-buda",
-  "asoka:asokaelgrande-org-milo"
- ],
+ "changed_ids": [],
  "source_health": {
   "apadac": {
    "ok": true,
    "dogs": 22,
    "pages": 2,
    "errors": [],
-   "seconds": 19.4
+   "seconds": 18.9
   },
   "kerubi": {
    "ok": true,
-   "dogs": 140,
+   "dogs": 135,
    "pages": 5,
-   "errors": [
-    "ficha https://kerubi.es/animales/perros-en-adopcion/sky-2/: 404 Client Error: Not Found for url: https://kerubi.es/animales/perros-en-adopcion/sky-2/"
-   ],
-   "seconds": 107.6
+   "errors": [],
+   "seconds": 111.9
   },
   "miwuki": {
    "ok": true,
    "dogs": 358,
    "pages": 17,
    "errors": [],
-   "seconds": 369.2
+   "seconds": 362.3
   },
   "reinasbiberon": {
    "ok": true,
    "dogs": 23,
-   "pages": 6,
+   "pages": 1,
    "errors": [],
-   "seconds": 211.8
+   "seconds": 5.8
   },
   "villena": {
    "ok": true,
@@ -1830,32 +1895,30 @@
    "dogs": 61,
    "pages": 1,
    "errors": [],
-   "seconds": 51.1
+   "seconds": 51.0
   },
   "ibi": {
    "ok": true,
    "dogs": 4,
    "pages": 1,
    "errors": [],
-   "seconds": 3.6
+   "seconds": 3.4
   },
   "asoka": {
    "ok": true,
    "dogs": 12,
    "pages": 1,
    "errors": [],
-   "seconds": 8.9
+   "seconds": 7.8
   },
   "apaccampello": {
    "ok": true,
    "dogs": 0,
    "pages": 1,
    "errors": [],
-   "seconds": 1.3
+   "seconds": 0.4
   }
  },
  "last_digest_sent": "2026-08-15T05:31:17Z",
- "removed_ids": [
-  "reinasbiberon:15790"
- ]
+ "removed_ids": []
 }
