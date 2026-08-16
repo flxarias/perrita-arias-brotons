@@ -1839,86 +1839,224 @@
      "seconds": 0.4
     }
    }
+  },
+  {
+   "at": "2026-08-16T22:27:36Z",
+   "new": 7,
+   "changed": 16,
+   "total": 718,
+   "sources": {
+    "apadac": {
+     "ok": true,
+     "dogs": 22,
+     "pages": 2,
+     "errors": [],
+     "seconds": 18.7
+    },
+    "kerubi": {
+     "ok": true,
+     "dogs": 162,
+     "pages": 5,
+     "errors": [],
+     "seconds": 110.6
+    },
+    "miwuki": {
+     "ok": true,
+     "dogs": 357,
+     "pages": 17,
+     "errors": [],
+     "seconds": 345.5
+    },
+    "reinasbiberon": {
+     "ok": true,
+     "dogs": 27,
+     "pages": 1,
+     "errors": [],
+     "seconds": 5.2
+    },
+    "villena": {
+     "ok": true,
+     "dogs": 68,
+     "pages": 2,
+     "errors": [],
+     "seconds": 6.1
+    },
+    "anaa": {
+     "ok": true,
+     "dogs": 61,
+     "pages": 1,
+     "errors": [],
+     "seconds": 50.0
+    },
+    "ibi": {
+     "ok": true,
+     "dogs": 4,
+     "pages": 1,
+     "errors": [],
+     "seconds": 3.3
+    },
+    "asoka": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 1,
+     "errors": [],
+     "seconds": 7.7
+    },
+    "apaccampello": {
+     "ok": true,
+     "dogs": 0,
+     "pages": 1,
+     "errors": [],
+     "seconds": 0.2
+    }
+   }
   }
  ],
- "last_run": "2026-08-15T23:23:27Z",
+ "last_run": "2026-08-16T22:27:36Z",
  "new_ids": [
-  "kerubi:kiara",
-  "kerubi:frank-2",
-  "kerubi:brad"
+  "kerubi:enzo-2",
+  "reinasbiberon:15933",
+  "reinasbiberon:15930",
+  "reinasbiberon:15924",
+  "reinasbiberon:15921",
+  "reinasbiberon:15918",
+  "asoka:asokaelgrande-org-shira"
  ],
  "counts": {
-  "total": 756,
-  "disponibles": 675,
-  "hembras": 508,
-  "cachorras": 50
+  "total": 718,
+  "disponibles": 704,
+  "hembras": 493,
+  "cachorras": 48
  },
- "changed_ids": [],
+ "changed_ids": [
+  "miwuki:djqgxrygah",
+  "miwuki:59uxsmfxur",
+  "miwuki:gd8gppdbr5",
+  "miwuki:cfv5og0nec",
+  "miwuki:s0yvmoduea",
+  "miwuki:2dhydr0gih",
+  "anaa:anaaweb-org-anxelu",
+  "anaa:anaaweb-org-caslista-zaorejas",
+  "anaa:anaaweb-org-clementino",
+  "anaa:anaaweb-org-fortuna",
+  "anaa:anaaweb-org-lia",
+  "anaa:anaaweb-org-mike",
+  "asoka:asokaelgrande-org-nica",
+  "asoka:asokaelgrande-org-gomi",
+  "asoka:asokaelgrande-org-kiko",
+  "asoka:asokaelgrande-org-pinda"
+ ],
  "source_health": {
   "apadac": {
    "ok": true,
    "dogs": 22,
    "pages": 2,
    "errors": [],
-   "seconds": 18.9
+   "seconds": 18.7
   },
   "kerubi": {
    "ok": true,
-   "dogs": 135,
+   "dogs": 162,
    "pages": 5,
    "errors": [],
-   "seconds": 111.9
+   "seconds": 110.6
   },
   "miwuki": {
    "ok": true,
-   "dogs": 358,
+   "dogs": 357,
    "pages": 17,
    "errors": [],
-   "seconds": 362.3
+   "seconds": 345.5
   },
   "reinasbiberon": {
    "ok": true,
-   "dogs": 23,
+   "dogs": 27,
    "pages": 1,
    "errors": [],
-   "seconds": 5.8
+   "seconds": 5.2
   },
   "villena": {
    "ok": true,
    "dogs": 68,
    "pages": 2,
    "errors": [],
-   "seconds": 7.4
+   "seconds": 6.1
   },
   "anaa": {
    "ok": true,
    "dogs": 61,
    "pages": 1,
    "errors": [],
-   "seconds": 51.0
+   "seconds": 50.0
   },
   "ibi": {
    "ok": true,
    "dogs": 4,
    "pages": 1,
    "errors": [],
-   "seconds": 3.4
+   "seconds": 3.3
   },
   "asoka": {
    "ok": true,
    "dogs": 12,
    "pages": 1,
    "errors": [],
-   "seconds": 7.8
+   "seconds": 7.7
   },
   "apaccampello": {
    "ok": true,
    "dogs": 0,
    "pages": 1,
    "errors": [],
-   "seconds": 0.4
+   "seconds": 0.2
   }
  },
  "last_digest_sent": "2026-08-16T05:34:11Z",
- "removed_ids": []
+ "removed_ids": [
+  "kerubi:kira-5",
+  "kerubi:sarabi",
+  "kerubi:kalma-3",
+  "kerubi:p1538-roser",
+  "kerubi:p1729-cuqui",
+  "kerubi:p1743-xena",
+  "kerubi:p1774-lexi",
+  "kerubi:p1688-yuki",
+  "kerubi:dolca",
+  "kerubi:ladronceta",
+  "kerubi:p1441-agatha",
+  "kerubi:stacey",
+  "kerubi:p1816-jade",
+  "kerubi:ona-2",
+  "kerubi:p1821-curra",
+  "kerubi:p1835-cora",
+  "kerubi:p1080-spike",
+  "kerubi:p1274-tango",
+  "kerubi:p1474-leo",
+  "kerubi:p1477-chico",
+  "kerubi:p1478-tom",
+  "kerubi:p1619-drake",
+  "kerubi:p1795-martin",
+  "kerubi:p1814-ragnar",
+  "kerubi:p1846-gus",
+  "kerubi:p1896-oriol",
+  "kerubi:p1897-iseul",
+  "kerubi:p1899-saem",
+  "kerubi:p1901-miso",
+  "kerubi:p1903-hae",
+  "kerubi:p589-buda",
+  "kerubi:romeo",
+  "kerubi:tyson-y-sena-adopcion-conjunta",
+  "kerubi:oso",
+  "kerubi:p1598-tuso",
+  "kerubi:p1772-pedro",
+  "kerubi:p1793-mayo",
+  "kerubi:p1829-mino",
+  "kerubi:p1831-milo",
+  "kerubi:p1591-hachiko",
+  "kerubi:sam-2",
+  "kerubi:p1354-iker",
+  "kerubi:p1382-trebol",
+  "kerubi:p1741-spencer",
+  "kerubi:p1483-tolby"
+ ]
 }
