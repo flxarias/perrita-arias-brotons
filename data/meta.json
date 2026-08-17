@@ -1981,82 +1981,212 @@
      "seconds": 1.6
     }
    }
+  },
+  {
+   "at": "2026-08-17T22:31:01Z",
+   "new": 44,
+   "changed": 9,
+   "total": 759,
+   "sources": {
+    "apadac": {
+     "ok": true,
+     "dogs": 22,
+     "pages": 2,
+     "errors": [],
+     "seconds": 19.3
+    },
+    "kerubi": {
+     "ok": true,
+     "dogs": 189,
+     "pages": 5,
+     "errors": [],
+     "seconds": 129.2
+    },
+    "miwuki": {
+     "ok": true,
+     "dogs": 357,
+     "pages": 17,
+     "errors": [],
+     "seconds": 345.1
+    },
+    "reinasbiberon": {
+     "ok": true,
+     "dogs": 27,
+     "pages": 1,
+     "errors": [],
+     "seconds": 5.4
+    },
+    "villena": {
+     "ok": true,
+     "dogs": 68,
+     "pages": 2,
+     "errors": [],
+     "seconds": 5.4
+    },
+    "anaa": {
+     "ok": true,
+     "dogs": 61,
+     "pages": 1,
+     "errors": [],
+     "seconds": 51.9
+    },
+    "ibi": {
+     "ok": true,
+     "dogs": 4,
+     "pages": 1,
+     "errors": [],
+     "seconds": 3.4
+    },
+    "asoka": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 1,
+     "errors": [],
+     "seconds": 7.7
+    },
+    "apaccampello": {
+     "ok": true,
+     "dogs": 0,
+     "pages": 1,
+     "errors": [],
+     "seconds": 0.3
+    }
+   }
   }
  ],
- "last_run": "2026-08-16T23:23:15Z",
- "new_ids": [],
+ "last_run": "2026-08-17T22:31:01Z",
+ "new_ids": [
+  "kerubi:stacey",
+  "kerubi:sarabi",
+  "kerubi:sam-2",
+  "kerubi:oso",
+  "kerubi:kira-5",
+  "kerubi:ona-2",
+  "kerubi:dolca",
+  "kerubi:ladronceta",
+  "kerubi:kalma-3",
+  "kerubi:p1896-oriol",
+  "kerubi:p1774-lexi",
+  "kerubi:p1474-leo",
+  "kerubi:p1903-hae",
+  "kerubi:p1741-spencer",
+  "kerubi:p1382-trebol",
+  "kerubi:p1901-miso",
+  "kerubi:p1835-cora",
+  "kerubi:p1354-iker",
+  "kerubi:p1795-martin",
+  "kerubi:p1821-curra",
+  "kerubi:p1274-tango",
+  "kerubi:p1729-cuqui",
+  "kerubi:p1793-mayo",
+  "kerubi:p1080-spike",
+  "kerubi:p1816-jade",
+  "kerubi:p589-buda",
+  "kerubi:p1846-gus",
+  "kerubi:p1772-pedro",
+  "kerubi:p1743-xena",
+  "kerubi:p1619-drake",
+  "kerubi:p1829-mino",
+  "kerubi:p1477-chico",
+  "kerubi:p1897-iseul",
+  "kerubi:p1831-milo",
+  "kerubi:p1478-tom",
+  "kerubi:p1899-saem",
+  "kerubi:p1538-roser",
+  "kerubi:p1483-tolby",
+  "kerubi:p1688-yuki",
+  "kerubi:p1591-hachiko",
+  "kerubi:p1441-agatha",
+  "kerubi:p1598-tuso",
+  "kerubi:romeo",
+  "kerubi:tyson-y-sena-adopcion-conjunta"
+ ],
  "counts": {
-  "total": 718,
-  "disponibles": 705,
-  "hembras": 493,
-  "cachorras": 48
+  "total": 759,
+  "disponibles": 731,
+  "hembras": 508,
+  "cachorras": 50
  },
- "changed_ids": [],
+ "changed_ids": [
+  "miwuki:wmahbvlvge",
+  "miwuki:93eipvi7rq",
+  "miwuki:j1bpoubrvk",
+  "miwuki:fcr0bomjrp",
+  "miwuki:c5zoclitnw",
+  "miwuki:iljny7m9y2",
+  "miwuki:o3zevil8ig",
+  "anaa:anaaweb-org-cleo",
+  "anaa:anaaweb-org-fortuna"
+ ],
  "source_health": {
   "apadac": {
    "ok": true,
    "dogs": 22,
    "pages": 2,
    "errors": [],
-   "seconds": 19.1
+   "seconds": 19.3
   },
   "kerubi": {
    "ok": true,
-   "dogs": 163,
+   "dogs": 189,
    "pages": 5,
    "errors": [],
-   "seconds": 110.2
+   "seconds": 129.2
   },
   "miwuki": {
    "ok": true,
    "dogs": 357,
    "pages": 17,
    "errors": [],
-   "seconds": 371.0
+   "seconds": 345.1
   },
   "reinasbiberon": {
    "ok": true,
    "dogs": 27,
    "pages": 1,
    "errors": [],
-   "seconds": 4.8
+   "seconds": 5.4
   },
   "villena": {
    "ok": true,
    "dogs": 68,
    "pages": 2,
    "errors": [],
-   "seconds": 7.8
+   "seconds": 5.4
   },
   "anaa": {
    "ok": true,
    "dogs": 61,
    "pages": 1,
    "errors": [],
-   "seconds": 52.1
+   "seconds": 51.9
   },
   "ibi": {
    "ok": true,
    "dogs": 4,
    "pages": 1,
    "errors": [],
-   "seconds": 3.6
+   "seconds": 3.4
   },
   "asoka": {
    "ok": true,
    "dogs": 12,
    "pages": 1,
    "errors": [],
-   "seconds": 7.6
+   "seconds": 7.7
   },
   "apaccampello": {
    "ok": true,
    "dogs": 0,
    "pages": 1,
    "errors": [],
-   "seconds": 1.6
+   "seconds": 0.3
   }
  },
  "last_digest_sent": "2026-08-17T05:40:28Z",
- "removed_ids": []
+ "removed_ids": [
+  "reinasbiberon:15345",
+  "miwuki:exojimfhrr",
+  "asoka:asokaelgrande-org-milo"
+ ]
 }
