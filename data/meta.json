@@ -3125,73 +3125,159 @@
      "seconds": 0.2
     }
    }
+  },
+  {
+   "at": "2026-08-25T22:38:16Z",
+   "new": 1,
+   "changed": 8,
+   "total": 753,
+   "sources": {
+    "apadac": {
+     "ok": true,
+     "dogs": 10,
+     "pages": 2,
+     "errors": [],
+     "seconds": 18.4
+    },
+    "kerubi": {
+     "ok": true,
+     "dogs": 210,
+     "pages": 5,
+     "errors": [],
+     "seconds": 140.8
+    },
+    "miwuki": {
+     "ok": true,
+     "dogs": 362,
+     "pages": 17,
+     "errors": [],
+     "seconds": 353.3
+    },
+    "reinasbiberon": {
+     "ok": false,
+     "dogs": 0,
+     "pages": 0,
+     "errors": [
+      "página 1: HTTPSConnectionPool(host='www.lasreinasdelbiberon.org', port=443): Max retries exceeded with url: /wp-json/wc/store/v1/products?per_page=50&page=1 (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host='www.lasreinasdelbiberon.org', port=443): Read timed out. (read timeout=30)\"))"
+     ],
+     "seconds": 258.9
+    },
+    "villena": {
+     "ok": true,
+     "dogs": 68,
+     "pages": 2,
+     "errors": [],
+     "seconds": 7.3
+    },
+    "anaa": {
+     "ok": true,
+     "dogs": 61,
+     "pages": 1,
+     "errors": [],
+     "seconds": 50.3
+    },
+    "ibi": {
+     "ok": true,
+     "dogs": 5,
+     "pages": 1,
+     "errors": [],
+     "seconds": 3.3
+    },
+    "asoka": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 1,
+     "errors": [],
+     "seconds": 7.7
+    },
+    "apaccampello": {
+     "ok": true,
+     "dogs": 0,
+     "pages": 1,
+     "errors": [],
+     "seconds": 0.2
+    }
+   }
   }
  ],
- "last_run": "2026-08-24T23:26:53Z",
- "new_ids": [],
+ "last_run": "2026-08-25T22:38:16Z",
+ "new_ids": [
+  "miwuki:2ullclkmgm"
+ ],
  "counts": {
-  "total": 755,
-  "disponibles": 739,
+  "total": 753,
+  "disponibles": 737,
   "hembras": 510,
   "cachorras": 52
  },
- "changed_ids": [],
+ "changed_ids": [
+  "miwuki:z3utjnm3ag",
+  "miwuki:iangtnb8s9",
+  "miwuki:tvvyhxjvr5",
+  "miwuki:oesa7pnugh",
+  "miwuki:kguqn6abg0",
+  "anaa:anaaweb-org-kleine",
+  "anaa:anaaweb-org-lebrel",
+  "asoka:asokaelgrande-org-nox"
+ ],
  "source_health": {
   "apadac": {
    "ok": true,
    "dogs": 10,
    "pages": 2,
    "errors": [],
-   "seconds": 19.1
+   "seconds": 18.4
   },
   "kerubi": {
    "ok": true,
-   "dogs": 213,
+   "dogs": 210,
    "pages": 5,
    "errors": [],
-   "seconds": 139.5
+   "seconds": 140.8
   },
   "miwuki": {
    "ok": true,
-   "dogs": 361,
+   "dogs": 362,
    "pages": 17,
    "errors": [],
-   "seconds": 370.0
+   "seconds": 353.3
   },
   "reinasbiberon": {
-   "ok": true,
-   "dogs": 19,
-   "pages": 1,
-   "errors": [],
-   "seconds": 5.1
+   "ok": false,
+   "dogs": 0,
+   "pages": 0,
+   "errors": [
+    "página 1: HTTPSConnectionPool(host='www.lasreinasdelbiberon.org', port=443): Max retries exceeded with url: /wp-json/wc/store/v1/products?per_page=50&page=1 (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host='www.lasreinasdelbiberon.org', port=443): Read timed out. (read timeout=30)\"))"
+   ],
+   "seconds": 258.9
   },
   "villena": {
    "ok": true,
    "dogs": 68,
    "pages": 2,
    "errors": [],
-   "seconds": 6.6
+   "seconds": 7.3
   },
   "anaa": {
    "ok": true,
    "dogs": 61,
    "pages": 1,
    "errors": [],
-   "seconds": 50.6
+   "seconds": 50.3
   },
   "ibi": {
    "ok": true,
    "dogs": 5,
    "pages": 1,
    "errors": [],
-   "seconds": 3.6
+   "seconds": 3.3
   },
   "asoka": {
    "ok": true,
    "dogs": 12,
    "pages": 1,
    "errors": [],
-   "seconds": 8.0
+   "seconds": 7.7
   },
   "apaccampello": {
    "ok": true,
@@ -3202,5 +3288,9 @@
   }
  },
  "last_digest_sent": "2026-08-25T05:37:29Z",
- "removed_ids": []
+ "removed_ids": [
+  "apadac:bluelita",
+  "apadac:kaelito",
+  "asoka:asokaelgrande-org-buda"
+ ]
 }
