@@ -3198,99 +3198,156 @@
      "seconds": 0.2
     }
    }
+  },
+  {
+   "at": "2026-08-25T23:29:45Z",
+   "new": 0,
+   "changed": 0,
+   "total": 751,
+   "sources": {
+    "apadac": {
+     "ok": true,
+     "dogs": 10,
+     "pages": 2,
+     "errors": [],
+     "seconds": 18.7
+    },
+    "kerubi": {
+     "ok": true,
+     "dogs": 214,
+     "pages": 5,
+     "errors": [],
+     "seconds": 141.3
+    },
+    "miwuki": {
+     "ok": true,
+     "dogs": 362,
+     "pages": 17,
+     "errors": [],
+     "seconds": 378.5
+    },
+    "reinasbiberon": {
+     "ok": true,
+     "dogs": 19,
+     "pages": 1,
+     "errors": [],
+     "seconds": 5.9
+    },
+    "villena": {
+     "ok": true,
+     "dogs": 68,
+     "pages": 2,
+     "errors": [],
+     "seconds": 9.3
+    },
+    "anaa": {
+     "ok": true,
+     "dogs": 61,
+     "pages": 1,
+     "errors": [],
+     "seconds": 50.8
+    },
+    "ibi": {
+     "ok": true,
+     "dogs": 5,
+     "pages": 1,
+     "errors": [],
+     "seconds": 3.5
+    },
+    "asoka": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 1,
+     "errors": [],
+     "seconds": 7.3
+    },
+    "apaccampello": {
+     "ok": true,
+     "dogs": 0,
+     "pages": 1,
+     "errors": [],
+     "seconds": 0.4
+    }
+   }
   }
  ],
- "last_run": "2026-08-25T22:38:16Z",
- "new_ids": [
-  "miwuki:2ullclkmgm"
- ],
+ "last_run": "2026-08-25T23:29:45Z",
+ "new_ids": [],
  "counts": {
-  "total": 753,
-  "disponibles": 737,
+  "total": 751,
+  "disponibles": 741,
   "hembras": 510,
   "cachorras": 52
  },
- "changed_ids": [
-  "miwuki:z3utjnm3ag",
-  "miwuki:iangtnb8s9",
-  "miwuki:tvvyhxjvr5",
-  "miwuki:oesa7pnugh",
-  "miwuki:kguqn6abg0",
-  "anaa:anaaweb-org-kleine",
-  "anaa:anaaweb-org-lebrel",
-  "asoka:asokaelgrande-org-nox"
- ],
+ "changed_ids": [],
  "source_health": {
   "apadac": {
    "ok": true,
    "dogs": 10,
    "pages": 2,
    "errors": [],
-   "seconds": 18.4
+   "seconds": 18.7
   },
   "kerubi": {
    "ok": true,
-   "dogs": 210,
+   "dogs": 214,
    "pages": 5,
    "errors": [],
-   "seconds": 140.8
+   "seconds": 141.3
   },
   "miwuki": {
    "ok": true,
    "dogs": 362,
    "pages": 17,
    "errors": [],
-   "seconds": 353.3
+   "seconds": 378.5
   },
   "reinasbiberon": {
-   "ok": false,
-   "dogs": 0,
-   "pages": 0,
-   "errors": [
-    "página 1: HTTPSConnectionPool(host='www.lasreinasdelbiberon.org', port=443): Max retries exceeded with url: /wp-json/wc/store/v1/products?per_page=50&page=1 (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host='www.lasreinasdelbiberon.org', port=443): Read timed out. (read timeout=30)\"))"
-   ],
-   "seconds": 258.9
+   "ok": true,
+   "dogs": 19,
+   "pages": 1,
+   "errors": [],
+   "seconds": 5.9
   },
   "villena": {
    "ok": true,
    "dogs": 68,
    "pages": 2,
    "errors": [],
-   "seconds": 7.3
+   "seconds": 9.3
   },
   "anaa": {
    "ok": true,
    "dogs": 61,
    "pages": 1,
    "errors": [],
-   "seconds": 50.3
+   "seconds": 50.8
   },
   "ibi": {
    "ok": true,
    "dogs": 5,
    "pages": 1,
    "errors": [],
-   "seconds": 3.3
+   "seconds": 3.5
   },
   "asoka": {
    "ok": true,
    "dogs": 12,
    "pages": 1,
    "errors": [],
-   "seconds": 7.7
+   "seconds": 7.3
   },
   "apaccampello": {
    "ok": true,
    "dogs": 0,
    "pages": 1,
    "errors": [],
-   "seconds": 0.2
+   "seconds": 0.4
   }
  },
  "last_digest_sent": "2026-08-25T05:37:29Z",
  "removed_ids": [
-  "apadac:bluelita",
-  "apadac:kaelito",
-  "asoka:asokaelgrande-org-buda"
+  "reinasbiberon:13169",
+  "reinasbiberon:14059"
  ]
 }
