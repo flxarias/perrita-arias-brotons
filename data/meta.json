@@ -3553,107 +3553,160 @@
      "seconds": 0.4
     }
    }
+  },
+  {
+   "at": "2026-09-02T00:57:02Z",
+   "new": 0,
+   "changed": 0,
+   "total": 756,
+   "sources": {
+    "apadac": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 2,
+     "errors": [],
+     "seconds": 19.6
+    },
+    "kerubi": {
+     "ok": true,
+     "dogs": 178,
+     "pages": 5,
+     "errors": [],
+     "seconds": 129.9
+    },
+    "miwuki": {
+     "ok": true,
+     "dogs": 362,
+     "pages": 17,
+     "errors": [],
+     "seconds": 374.3
+    },
+    "reinasbiberon": {
+     "ok": true,
+     "dogs": 23,
+     "pages": 1,
+     "errors": [],
+     "seconds": 5.8
+    },
+    "villena": {
+     "ok": true,
+     "dogs": 68,
+     "pages": 2,
+     "errors": [],
+     "seconds": 10.5
+    },
+    "anaa": {
+     "ok": true,
+     "dogs": 60,
+     "pages": 1,
+     "errors": [],
+     "seconds": 50.0
+    },
+    "ibi": {
+     "ok": true,
+     "dogs": 5,
+     "pages": 1,
+     "errors": [],
+     "seconds": 3.6
+    },
+    "asoka": {
+     "ok": false,
+     "dogs": 0,
+     "pages": 0,
+     "errors": [
+      "listado https://asokaelgrande.org/la-45-perros: HTTPSConnectionPool(host='asokaelgrande.org', port=443): Max retries exceeded with url: /la-45-perros (Caused by ConnectTimeoutError(<HTTPSConnection(host='asokaelgrande.org', port=443) at 0x7fa45b335820>, 'Connection to asokaelgrande.org timed out. (connect timeout=30)'))"
+     ],
+     "seconds": 127.9
+    },
+    "apaccampello": {
+     "ok": true,
+     "dogs": 0,
+     "pages": 1,
+     "errors": [],
+     "seconds": 1.4
+    }
+   }
   }
  ],
- "last_run": "2026-09-01T23:57:37Z",
- "new_ids": [
-  "apadac:thor",
-  "apadac:bubba",
-  "miwuki:lfglqpptxu",
-  "reinasbiberon:16222",
-  "reinasbiberon:16219",
-  "reinasbiberon:16216",
-  "reinasbiberon:16213",
-  "reinasbiberon:16210"
- ],
+ "last_run": "2026-09-02T00:57:02Z",
+ "new_ids": [],
  "counts": {
-  "total": 758,
-  "disponibles": 742,
-  "hembras": 511,
+  "total": 756,
+  "disponibles": 710,
+  "hembras": 510,
   "cachorras": 52
  },
- "changed_ids": [
-  "miwuki:f1l3c5wjxj",
-  "miwuki:wabiqhwcai",
-  "miwuki:zvc0u3m8sf",
-  "miwuki:btkyx4iyns",
-  "miwuki:9jqvfdrhxv",
-  "miwuki:5op3g6kwkm",
-  "miwuki:pjfbw36ygo",
-  "miwuki:vwcrpauvyf",
-  "miwuki:xhcvjoiexc",
-  "anaa:anaaweb-org-anxelu",
-  "anaa:anaaweb-org-evora",
-  "anaa:anaaweb-org-gonzo",
-  "anaa:anaaweb-org-merle",
-  "anaa:anaaweb-org-mochuelo",
-  "asoka:asokaelgrande-org-nox"
- ],
+ "changed_ids": [],
  "source_health": {
   "apadac": {
    "ok": true,
    "dogs": 12,
    "pages": 2,
    "errors": [],
-   "seconds": 18.5
+   "seconds": 19.6
   },
   "kerubi": {
    "ok": true,
-   "dogs": 213,
+   "dogs": 178,
    "pages": 5,
    "errors": [],
-   "seconds": 139.7
+   "seconds": 129.9
   },
   "miwuki": {
    "ok": true,
    "dogs": 362,
    "pages": 17,
    "errors": [],
-   "seconds": 371.8
+   "seconds": 374.3
   },
   "reinasbiberon": {
    "ok": true,
    "dogs": 23,
    "pages": 1,
    "errors": [],
-   "seconds": 6.9
+   "seconds": 5.8
   },
   "villena": {
    "ok": true,
    "dogs": 68,
    "pages": 2,
    "errors": [],
-   "seconds": 7.0
+   "seconds": 10.5
   },
   "anaa": {
    "ok": true,
    "dogs": 60,
    "pages": 1,
    "errors": [],
-   "seconds": 50.5
+   "seconds": 50.0
   },
   "ibi": {
    "ok": true,
    "dogs": 5,
    "pages": 1,
    "errors": [],
-   "seconds": 3.5
+   "seconds": 3.6
   },
   "asoka": {
-   "ok": true,
-   "dogs": 12,
-   "pages": 1,
-   "errors": [],
-   "seconds": 7.5
+   "ok": false,
+   "dogs": 0,
+   "pages": 0,
+   "errors": [
+    "listado https://asokaelgrande.org/la-45-perros: HTTPSConnectionPool(host='asokaelgrande.org', port=443): Max retries exceeded with url: /la-45-perros (Caused by ConnectTimeoutError(<HTTPSConnection(host='asokaelgrande.org', port=443) at 0x7fa45b335820>, 'Connection to asokaelgrande.org timed out. (connect timeout=30)'))"
+   ],
+   "seconds": 127.9
   },
   "apaccampello": {
    "ok": true,
    "dogs": 0,
    "pages": 1,
    "errors": [],
-   "seconds": 0.4
+   "seconds": 1.4
   }
  },
  "last_digest_sent": "2026-08-26T05:40:02Z",
- "removed_ids": []
+ "removed_ids": [
+  "miwuki:2ullclkmgm",
+  "kerubi:dune"
+ ]
 }
