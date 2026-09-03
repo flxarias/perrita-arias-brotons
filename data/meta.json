@@ -3701,44 +3701,105 @@
      "seconds": 0.3
     }
    }
+  },
+  {
+   "at": "2026-09-03T23:57:02Z",
+   "new": 9,
+   "changed": 7,
+   "total": 761,
+   "sources": {
+    "apadac": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 2,
+     "errors": [],
+     "seconds": 18.9
+    },
+    "kerubi": {
+     "ok": true,
+     "dogs": 211,
+     "pages": 5,
+     "errors": [],
+     "seconds": 139.1
+    },
+    "miwuki": {
+     "ok": true,
+     "dogs": 364,
+     "pages": 17,
+     "errors": [],
+     "seconds": 369.8
+    },
+    "reinasbiberon": {
+     "ok": true,
+     "dogs": 23,
+     "pages": 1,
+     "errors": [],
+     "seconds": 23.4
+    },
+    "villena": {
+     "ok": true,
+     "dogs": 68,
+     "pages": 2,
+     "errors": [],
+     "seconds": 8.4
+    },
+    "anaa": {
+     "ok": true,
+     "dogs": 56,
+     "pages": 1,
+     "errors": [],
+     "seconds": 50.2
+    },
+    "ibi": {
+     "ok": true,
+     "dogs": 5,
+     "pages": 1,
+     "errors": [],
+     "seconds": 3.2
+    },
+    "asoka": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 1,
+     "errors": [],
+     "seconds": 8.0
+    },
+    "apaccampello": {
+     "ok": true,
+     "dogs": 0,
+     "pages": 1,
+     "errors": [],
+     "seconds": 0.3
+    }
+   }
   }
  ],
- "last_run": "2026-09-03T00:01:27Z",
+ "last_run": "2026-09-03T23:57:02Z",
  "new_ids": [
-  "kerubi:dune",
-  "miwuki:eyqfrhkxap",
-  "miwuki:xann2ochrv"
+  "kerubi:reno",
+  "kerubi:indie",
+  "kerubi:zipi-y-zape",
+  "kerubi:brownie-3",
+  "kerubi:coco-4",
+  "kerubi:laia",
+  "kerubi:georgi",
+  "kerubi:luna-10",
+  "asoka:asokaelgrande-org-paquito"
  ],
  "counts": {
-  "total": 752,
-  "disponibles": 733,
-  "hembras": 510,
+  "total": 761,
+  "disponibles": 739,
+  "hembras": 512,
   "cachorras": 53
  },
  "changed_ids": [
-  "miwuki:ihezwzpxnz",
-  "miwuki:iuawneovkh",
-  "miwuki:tg5ywglzg3",
-  "miwuki:k6laierqjo",
-  "miwuki:gfu8l9ck8y",
-  "miwuki:w0tx4iqx6s",
-  "miwuki:anhp2zijmz",
-  "miwuki:xzpeqf6eoh",
-  "miwuki:gg8f7gwetn",
-  "miwuki:xxpi7689ko",
-  "miwuki:5dy6nftac1",
-  "miwuki:shzhf3f5eq",
-  "miwuki:bpewwja6u8",
-  "anaa:anaaweb-org-almagreira-dina",
-  "anaa:anaaweb-org-amazon",
-  "anaa:anaaweb-org-caslista-zaorejas",
-  "anaa:anaaweb-org-casper",
-  "anaa:anaaweb-org-ferrol",
-  "anaa:anaaweb-org-fler",
-  "anaa:anaaweb-org-gonzo",
-  "anaa:anaaweb-org-perla",
-  "asoka:asokaelgrande-org-nox",
-  "asoka:asokaelgrande-org-kiko"
+  "miwuki:t3zhi3brj6",
+  "miwuki:qhn9vyn4il",
+  "miwuki:l2mj7ac1px",
+  "miwuki:vqfmenuduk",
+  "miwuki:vu4dpbxw1a",
+  "miwuki:stnrgm9mmc",
+  "asoka:asokaelgrande-org-nox"
  ],
  "source_health": {
   "apadac": {
@@ -3746,60 +3807,56 @@
    "dogs": 12,
    "pages": 2,
    "errors": [],
-   "seconds": 19.0
+   "seconds": 18.9
   },
   "kerubi": {
    "ok": true,
-   "dogs": 202,
+   "dogs": 211,
    "pages": 5,
-   "errors": [
-    "ficha https://kerubi.es/animales/perros-en-adopcion/candy-2/: 404 Client Error: Not Found for url: https://kerubi.es/animales/perros-en-adopcion/candy-2/",
-    "ficha https://kerubi.es/animales/perros-en-adopcion/blanco-3/: 404 Client Error: Not Found for url: https://kerubi.es/animales/perros-en-adopcion/blanco-3/",
-    "ficha https://kerubi.es/animales/perros-en-adopcion/noah/: 404 Client Error: Not Found for url: https://kerubi.es/animales/perros-en-adopcion/noah/"
-   ],
-   "seconds": 142.5
+   "errors": [],
+   "seconds": 139.1
   },
   "miwuki": {
    "ok": true,
    "dogs": 364,
    "pages": 17,
    "errors": [],
-   "seconds": 364.7
+   "seconds": 369.8
   },
   "reinasbiberon": {
    "ok": true,
    "dogs": 23,
    "pages": 1,
    "errors": [],
-   "seconds": 6.6
+   "seconds": 23.4
   },
   "villena": {
    "ok": true,
    "dogs": 68,
    "pages": 2,
    "errors": [],
-   "seconds": 9.6
+   "seconds": 8.4
   },
   "anaa": {
    "ok": true,
-   "dogs": 60,
+   "dogs": 56,
    "pages": 1,
    "errors": [],
-   "seconds": 50.5
+   "seconds": 50.2
   },
   "ibi": {
    "ok": true,
    "dogs": 5,
    "pages": 1,
    "errors": [],
-   "seconds": 3.4
+   "seconds": 3.2
   },
   "asoka": {
    "ok": true,
    "dogs": 12,
    "pages": 1,
    "errors": [],
-   "seconds": 7.5
+   "seconds": 8.0
   },
   "apaccampello": {
    "ok": true,
@@ -3810,13 +3867,5 @@
   }
  },
  "last_digest_sent": "2026-08-26T05:40:02Z",
- "removed_ids": [
-  "asoka:asokaelgrande-org-canela",
-  "kerubi:luna-10",
-  "kerubi:laia",
-  "kerubi:brownie-3",
-  "kerubi:georgi",
-  "kerubi:zipi-y-zape",
-  "kerubi:coco-4"
- ]
+ "removed_ids": []
 }
