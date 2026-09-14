@@ -4987,38 +4987,163 @@
      "seconds": 0.4
     }
    }
+  },
+  {
+   "at": "2026-09-14T00:02:52Z",
+   "new": 34,
+   "changed": 18,
+   "total": 757,
+   "sources": {
+    "apadac": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 2,
+     "errors": [],
+     "seconds": 18.4
+    },
+    "kerubi": {
+     "ok": true,
+     "dogs": 109,
+     "pages": 5,
+     "errors": [],
+     "seconds": 102.9
+    },
+    "miwuki": {
+     "ok": true,
+     "dogs": 369,
+     "pages": 17,
+     "errors": [],
+     "seconds": 380.8
+    },
+    "reinasbiberon": {
+     "ok": true,
+     "dogs": 19,
+     "pages": 1,
+     "errors": [],
+     "seconds": 5.1
+    },
+    "villena": {
+     "ok": true,
+     "dogs": 75,
+     "pages": 2,
+     "errors": [],
+     "seconds": 9.1
+    },
+    "anaa": {
+     "ok": true,
+     "dogs": 51,
+     "pages": 1,
+     "errors": [],
+     "seconds": 51.1
+    },
+    "ibi": {
+     "ok": true,
+     "dogs": 5,
+     "pages": 1,
+     "errors": [],
+     "seconds": 3.4
+    },
+    "asoka": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 1,
+     "errors": [],
+     "seconds": 8.1
+    },
+    "apaccampello": {
+     "ok": true,
+     "dogs": 0,
+     "pages": 1,
+     "errors": [],
+     "seconds": 0.3
+    }
+   }
   }
  ],
- "last_run": "2026-09-13T00:43:32Z",
- "new_ids": [],
+ "last_run": "2026-09-14T00:02:52Z",
+ "new_ids": [
+  "kerubi:beily",
+  "kerubi:fredy",
+  "kerubi:lana-4374",
+  "kerubi:loky-4329",
+  "kerubi:yago-2493",
+  "kerubi:candy-2",
+  "kerubi:indie",
+  "kerubi:mel-3",
+  "kerubi:ares-2",
+  "kerubi:adopcion-conjunta",
+  "kerubi:kiara",
+  "kerubi:linda-5",
+  "kerubi:braiar-y-cardea",
+  "kerubi:trueno-y-mango",
+  "kerubi:atenea-3",
+  "kerubi:urgente-2",
+  "kerubi:thor-2",
+  "kerubi:scotex",
+  "kerubi:dante",
+  "kerubi:yoshi",
+  "kerubi:flora",
+  "kerubi:grelo",
+  "miwuki:p6w9aoclwm",
+  "miwuki:do4h3je4zc",
+  "miwuki:pypvvvtanx",
+  "villena:10328",
+  "villena:10303",
+  "villena:10297",
+  "villena:10316",
+  "villena:10310",
+  "villena:10285",
+  "villena:10279",
+  "villena:10291",
+  "villena:10322"
+ ],
  "counts": {
-  "total": 723,
-  "disponibles": 547,
-  "hembras": 496,
-  "cachorras": 42
+  "total": 757,
+  "disponibles": 641,
+  "hembras": 514,
+  "cachorras": 47
  },
- "changed_ids": [],
+ "changed_ids": [
+  "miwuki:2ijftv6ry4",
+  "miwuki:p9cxb4p5fk",
+  "miwuki:opef0i9g6p",
+  "miwuki:1pwtzvdzjp",
+  "miwuki:sndu2tvvdd",
+  "miwuki:8vsvttlohj",
+  "miwuki:mnubpbf3c6",
+  "miwuki:atadu4eoho",
+  "miwuki:octpxvdg8e",
+  "miwuki:dlrz1yqqhy",
+  "villena:10258",
+  "villena:10183",
+  "villena:10087",
+  "villena:10081",
+  "villena:10045",
+  "villena:10208",
+  "asoka:asokaelgrande-org-alek",
+  "asoka:asokaelgrande-org-nox"
+ ],
  "source_health": {
   "apadac": {
    "ok": true,
    "dogs": 12,
    "pages": 2,
    "errors": [],
-   "seconds": 19.6
+   "seconds": 18.4
   },
   "kerubi": {
    "ok": true,
-   "dogs": 17,
+   "dogs": 109,
    "pages": 5,
    "errors": [],
-   "seconds": 102.5
+   "seconds": 102.9
   },
   "miwuki": {
    "ok": true,
-   "dogs": 366,
+   "dogs": 369,
    "pages": 17,
    "errors": [],
-   "seconds": 379.8
+   "seconds": 380.8
   },
   "reinasbiberon": {
    "ok": true,
@@ -5029,46 +5154,40 @@
   },
   "villena": {
    "ok": true,
-   "dogs": 68,
+   "dogs": 75,
    "pages": 2,
    "errors": [],
-   "seconds": 7.0
+   "seconds": 9.1
   },
   "anaa": {
    "ok": true,
    "dogs": 51,
    "pages": 1,
    "errors": [],
-   "seconds": 49.6
+   "seconds": 51.1
   },
   "ibi": {
    "ok": true,
    "dogs": 5,
    "pages": 1,
    "errors": [],
-   "seconds": 3.3
+   "seconds": 3.4
   },
   "asoka": {
-   "ok": false,
-   "dogs": 0,
-   "pages": 0,
-   "errors": [
-    "listado https://asokaelgrande.org/la-45-perros: HTTPSConnectionPool(host='asokaelgrande.org', port=443): Max retries exceeded with url: /la-45-perros (Caused by ConnectTimeoutError(<HTTPSConnection(host='asokaelgrande.org', port=443) at 0x7f244464af90>, 'Connection to asokaelgrande.org timed out. (connect timeout=30)'))"
-   ],
-   "seconds": 128.5
+   "ok": true,
+   "dogs": 12,
+   "pages": 1,
+   "errors": [],
+   "seconds": 8.1
   },
   "apaccampello": {
    "ok": true,
    "dogs": 0,
    "pages": 1,
    "errors": [],
-   "seconds": 0.4
+   "seconds": 0.3
   }
  },
  "last_digest_sent": "2026-09-05T08:54:58Z",
- "removed_ids": [
-  "reinasbiberon:15868",
-  "reinasbiberon:16158",
-  "anaa:anaaweb-org-mike"
- ]
+ "removed_ids": []
 }
