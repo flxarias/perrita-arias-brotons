@@ -5703,35 +5703,103 @@
      "seconds": 0.5
     }
    }
+  },
+  {
+   "at": "2026-09-24T00:24:19Z",
+   "new": 7,
+   "changed": 8,
+   "total": 735,
+   "sources": {
+    "apadac": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 2,
+     "errors": [],
+     "seconds": 18.8
+    },
+    "kerubi": {
+     "ok": true,
+     "dogs": 145,
+     "pages": 5,
+     "errors": [],
+     "seconds": 144.2
+    },
+    "miwuki": {
+     "ok": true,
+     "dogs": 371,
+     "pages": 17,
+     "errors": [],
+     "seconds": 376.9
+    },
+    "reinasbiberon": {
+     "ok": true,
+     "dogs": 20,
+     "pages": 1,
+     "errors": [],
+     "seconds": 5.6
+    },
+    "villena": {
+     "ok": true,
+     "dogs": 65,
+     "pages": 2,
+     "errors": [],
+     "seconds": 7.1
+    },
+    "anaa": {
+     "ok": true,
+     "dogs": 49,
+     "pages": 1,
+     "errors": [],
+     "seconds": 50.6
+    },
+    "ibi": {
+     "ok": true,
+     "dogs": 5,
+     "pages": 1,
+     "errors": [],
+     "seconds": 3.3
+    },
+    "asoka": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 1,
+     "errors": [],
+     "seconds": 7.8
+    },
+    "apaccampello": {
+     "ok": true,
+     "dogs": 0,
+     "pages": 1,
+     "errors": [],
+     "seconds": 1.3
+    }
+   }
   }
  ],
- "last_run": "2026-09-23T00:08:32Z",
+ "last_run": "2026-09-24T00:24:19Z",
  "new_ids": [
-  "kerubi:oregano",
-  "miwuki:qu5j3uncte",
-  "ibi:protectoradeibi-com-songoku"
+  "kerubi:vegeta",
+  "kerubi:enzo-2",
+  "kerubi:brad",
+  "kerubi:tayron-2",
+  "kerubi:scotex",
+  "kerubi:valiente",
+  "kerubi:balto"
  ],
  "counts": {
-  "total": 747,
-  "disponibles": 685,
-  "hembras": 510,
+  "total": 735,
+  "disponibles": 672,
+  "hembras": 502,
   "cachorras": 47
  },
  "changed_ids": [
-  "miwuki:tp8zmcg6u8",
-  "miwuki:fxotwfhsju",
-  "miwuki:5qkvuxvumw",
-  "miwuki:8kglkzimvs",
-  "miwuki:duondz4r3v",
-  "miwuki:nl5s3ad2sr",
-  "miwuki:skvnraligj",
-  "miwuki:sdg3fhltcx",
-  "miwuki:uob4e5caso",
-  "miwuki:vjw9rlnbl8",
-  "miwuki:ygz0ccj2s9",
-  "miwuki:vbtyygmk63",
-  "miwuki:i3yfdhv48f",
-  "miwuki:qkalo7rfst",
+  "miwuki:ysayqpburi",
+  "miwuki:5ouhismzfc",
+  "miwuki:g1insl25po",
+  "miwuki:i2hzvnbd9w",
+  "miwuki:p9nszzprpe",
+  "anaa:anaaweb-org-nata",
+  "anaa:anaaweb-org-peter",
   "asoka:asokaelgrande-org-nox"
  ],
  "source_health": {
@@ -5740,85 +5808,85 @@
    "dogs": 12,
    "pages": 2,
    "errors": [],
-   "seconds": 18.9
+   "seconds": 18.8
   },
   "kerubi": {
    "ok": true,
-   "dogs": 158,
+   "dogs": 145,
    "pages": 5,
-   "errors": [
-    "ficha https://kerubi.es/animales/perros-en-adopcion/tonaa/: 404 Client Error: Not Found for url: https://kerubi.es/animales/perros-en-adopcion/tonaa/",
-    "ficha https://kerubi.es/animales/perros-en-adopcion/urgente-2/: 404 Client Error: Not Found for url: https://kerubi.es/animales/perros-en-adopcion/urgente-2/"
-   ],
-   "seconds": 115.5
+   "errors": [],
+   "seconds": 144.2
   },
   "miwuki": {
    "ok": true,
    "dogs": 371,
    "pages": 17,
    "errors": [],
-   "seconds": 361.6
+   "seconds": 376.9
   },
   "reinasbiberon": {
    "ok": true,
-   "dogs": 23,
+   "dogs": 20,
    "pages": 1,
    "errors": [],
-   "seconds": 6.3
+   "seconds": 5.6
   },
   "villena": {
    "ok": true,
    "dogs": 65,
    "pages": 2,
    "errors": [],
-   "seconds": 9.3
+   "seconds": 7.1
   },
   "anaa": {
    "ok": true,
    "dogs": 49,
    "pages": 1,
    "errors": [],
-   "seconds": 50.5
+   "seconds": 50.6
   },
   "ibi": {
    "ok": true,
    "dogs": 5,
    "pages": 1,
    "errors": [],
-   "seconds": 3.1
+   "seconds": 3.3
   },
   "asoka": {
    "ok": true,
    "dogs": 12,
    "pages": 1,
    "errors": [],
-   "seconds": 8.1
+   "seconds": 7.8
   },
   "apaccampello": {
    "ok": true,
    "dogs": 0,
    "pages": 1,
    "errors": [],
-   "seconds": 0.5
+   "seconds": 1.3
   }
  },
  "last_digest_sent": "2026-09-05T08:54:58Z",
  "removed_ids": [
-  "kerubi:urgente-2",
-  "kerubi:tonaa",
-  "kerubi:scotex",
-  "kerubi:tess",
-  "kerubi:lambo",
-  "kerubi:vegeta",
-  "kerubi:brownie-3",
-  "kerubi:balto",
-  "kerubi:brad",
-  "kerubi:canijo",
-  "kerubi:panda-ii",
-  "kerubi:tayron-2",
-  "kerubi:enzo-2",
-  "kerubi:valiente",
-  "miwuki:xann2ochrv",
-  "reinasbiberon:16222"
+  "reinasbiberon:16210",
+  "reinasbiberon:16410",
+  "ibi:protectoradeibi-com-macareno",
+  "kerubi:fee",
+  "kerubi:ruda",
+  "kerubi:beily",
+  "kerubi:balduina",
+  "kerubi:chop",
+  "kerubi:danae",
+  "kerubi:megan",
+  "kerubi:stacey",
+  "kerubi:friz",
+  "kerubi:dune",
+  "kerubi:baloo-3",
+  "kerubi:canelo-3",
+  "kerubi:manolito",
+  "kerubi:coco-8",
+  "kerubi:axel-2",
+  "kerubi:thor-3"
  ]
 }
