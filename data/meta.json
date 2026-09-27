@@ -5916,40 +5916,108 @@
      "seconds": 0.3
     }
    }
+  },
+  {
+   "at": "2026-09-27T00:24:07Z",
+   "new": 4,
+   "changed": 16,
+   "total": 785,
+   "sources": {
+    "apadac": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 2,
+     "errors": [],
+     "seconds": 18.6
+    },
+    "kerubi": {
+     "ok": true,
+     "dogs": 222,
+     "pages": 5,
+     "errors": [],
+     "seconds": 147.7
+    },
+    "miwuki": {
+     "ok": true,
+     "dogs": 370,
+     "pages": 17,
+     "errors": [],
+     "seconds": 357.2
+    },
+    "reinasbiberon": {
+     "ok": true,
+     "dogs": 17,
+     "pages": 1,
+     "errors": [],
+     "seconds": 17.6
+    },
+    "villena": {
+     "ok": true,
+     "dogs": 61,
+     "pages": 2,
+     "errors": [],
+     "seconds": 7.7
+    },
+    "anaa": {
+     "ok": true,
+     "dogs": 80,
+     "pages": 1,
+     "errors": [],
+     "seconds": 50.6
+    },
+    "ibi": {
+     "ok": true,
+     "dogs": 5,
+     "pages": 1,
+     "errors": [],
+     "seconds": 3.0
+    },
+    "asoka": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 1,
+     "errors": [],
+     "seconds": 7.3
+    },
+    "apaccampello": {
+     "ok": true,
+     "dogs": 0,
+     "pages": 1,
+     "errors": [],
+     "seconds": 1.2
+    }
+   }
   }
  ],
- "last_run": "2026-09-26T00:31:38Z",
+ "last_run": "2026-09-27T00:24:07Z",
  "new_ids": [
-  "kerubi:canelo-3",
-  "kerubi:stacey",
-  "kerubi:ceres",
-  "kerubi:reno",
-  "kerubi:pooh",
-  "kerubi:vega",
-  "kerubi:pin-y-pon",
-  "kerubi:kira-3",
-  "kerubi:freya-4",
-  "kerubi:brownie-3",
-  "kerubi:nena-2",
-  "kerubi:dimon",
-  "kerubi:brook"
+  "kerubi:duende-3",
+  "kerubi:demet",
+  "kerubi:malagueno-saleroso",
+  "villena:9571"
  ],
  "counts": {
-  "total": 781,
-  "disponibles": 767,
-  "hembras": 522,
-  "cachorras": 48
+  "total": 785,
+  "disponibles": 766,
+  "hembras": 523,
+  "cachorras": 49
  },
  "changed_ids": [
-  "miwuki:7pw5cuudxb",
-  "miwuki:z3utjnm3ag",
-  "miwuki:iangtnb8s9",
-  "miwuki:oesa7pnugh",
-  "miwuki:tvvyhxjvr5",
-  "miwuki:kguqn6abg0",
-  "anaa:anaaweb-org-boss",
-  "anaa:anaaweb-org-grosella-malaga",
-  "anaa:anaaweb-org-peter",
+  "miwuki:wgnlp1rro4",
+  "miwuki:fzopbcidf9",
+  "miwuki:zanxj6hfnp",
+  "miwuki:my5hsvjnb8",
+  "miwuki:kesrkk2eao",
+  "miwuki:us7ydnpghy",
+  "miwuki:5xam7fcntb",
+  "villena:10303",
+  "villena:10297",
+  "villena:10316",
+  "villena:10264",
+  "villena:10189",
+  "villena:10291",
+  "anaa:anaaweb-org-javi-huellas",
+  "anaa:anaaweb-org-mali-huellas",
   "asoka:asokaelgrande-org-nox"
  ],
  "source_health": {
@@ -5958,68 +6026,65 @@
    "dogs": 12,
    "pages": 2,
    "errors": [],
-   "seconds": 18.0
+   "seconds": 18.6
   },
   "kerubi": {
    "ok": true,
-   "dogs": 216,
+   "dogs": 222,
    "pages": 5,
    "errors": [],
-   "seconds": 144.3
+   "seconds": 147.7
   },
   "miwuki": {
    "ok": true,
    "dogs": 370,
    "pages": 17,
    "errors": [],
-   "seconds": 352.2
+   "seconds": 357.2
   },
   "reinasbiberon": {
    "ok": true,
-   "dogs": 20,
+   "dogs": 17,
    "pages": 1,
    "errors": [],
-   "seconds": 5.5
+   "seconds": 17.6
   },
   "villena": {
    "ok": true,
-   "dogs": 65,
+   "dogs": 61,
    "pages": 2,
    "errors": [],
-   "seconds": 8.5
+   "seconds": 7.7
   },
   "anaa": {
    "ok": true,
    "dogs": 80,
    "pages": 1,
    "errors": [],
-   "seconds": 51.2
+   "seconds": 50.6
   },
   "ibi": {
    "ok": true,
    "dogs": 5,
    "pages": 1,
    "errors": [],
-   "seconds": 3.3
+   "seconds": 3.0
   },
   "asoka": {
    "ok": true,
    "dogs": 12,
    "pages": 1,
    "errors": [],
-   "seconds": 7.1
+   "seconds": 7.3
   },
   "apaccampello": {
    "ok": true,
    "dogs": 0,
    "pages": 1,
    "errors": [],
-   "seconds": 0.3
+   "seconds": 1.2
   }
  },
  "last_digest_sent": "2026-09-05T08:54:58Z",
- "removed_ids": [
-  "miwuki:8kglkzimvs",
-  "anaa:anaaweb-org-polilla"
- ]
+ "removed_ids": []
 }
