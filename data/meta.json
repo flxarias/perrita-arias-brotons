@@ -1,21 +1,6 @@
 {
  "runs": [
   {
-   "at": "2026-08-03T10:39:22Z",
-   "new": 4,
-   "changed": 0,
-   "total": 731,
-   "sources": {
-    "apadac": {
-     "ok": true,
-     "dogs": 20,
-     "pages": 2,
-     "errors": [],
-     "seconds": 13.8
-    }
-   }
-  },
-  {
    "at": "2026-08-03T14:10:49Z",
    "new": 0,
    "changed": 27,
@@ -6250,122 +6235,126 @@
      "seconds": 1.4
     }
    }
+  },
+  {
+   "at": "2026-10-12T01:12:24Z",
+   "new": 1,
+   "changed": 34,
+   "total": 782,
+   "sources": {
+    "apadac": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 2,
+     "errors": [],
+     "seconds": 18.1
+    },
+    "kerubi": {
+     "ok": true,
+     "dogs": 221,
+     "pages": 5,
+     "errors": [],
+     "seconds": 191.5
+    },
+    "miwuki": {
+     "ok": true,
+     "dogs": 377,
+     "pages": 17,
+     "errors": [],
+     "seconds": 368.0
+    },
+    "reinasbiberon": {
+     "ok": false,
+     "dogs": 0,
+     "pages": 0,
+     "errors": [
+      "página 1: HTTPSConnectionPool(host='www.lasreinasdelbiberon.org', port=443): Max retries exceeded with url: /wp-json/wc/store/v1/products?per_page=50&page=1&category=20,98 (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host='www.lasreinasdelbiberon.org', port=443): Read timed out. (read timeout=30)\"))"
+     ],
+     "seconds": 186.7
+    },
+    "villena": {
+     "ok": true,
+     "dogs": 55,
+     "pages": 2,
+     "errors": [],
+     "seconds": 6.7
+    },
+    "anaa": {
+     "ok": true,
+     "dogs": 80,
+     "pages": 1,
+     "errors": [],
+     "seconds": 51.5
+    },
+    "ibi": {
+     "ok": true,
+     "dogs": 5,
+     "pages": 1,
+     "errors": [],
+     "seconds": 3.5
+    },
+    "asoka": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 1,
+     "errors": [],
+     "seconds": 7.4
+    },
+    "apaccampello": {
+     "ok": true,
+     "dogs": 0,
+     "pages": 1,
+     "errors": [],
+     "seconds": 1.7
+    }
+   }
   }
  ],
- "last_run": "2026-10-11T00:52:30Z",
+ "last_run": "2026-10-12T01:12:24Z",
  "new_ids": [
-  "kerubi:porthos",
-  "kerubi:zipi",
-  "kerubi:zape",
-  "kerubi:calcetines-3",
-  "kerubi:frida-6",
-  "miwuki:3icddmmfpd",
-  "miwuki:xfk3kuoawe",
-  "miwuki:e9vjtvbjz2"
+  "miwuki:tgyvyanr0e"
  ],
  "counts": {
-  "total": 797,
-  "disponibles": 768,
-  "hembras": 529,
-  "cachorras": 51
+  "total": 782,
+  "disponibles": 769,
+  "hembras": 521,
+  "cachorras": 50
  },
  "changed_ids": [
-  "kerubi:jakan",
-  "miwuki:honrs6pnim",
-  "miwuki:fll3iii8n2",
-  "miwuki:xejz1jqi5d",
-  "miwuki:0hkz7fchxt",
-  "miwuki:s1cgrqxuau",
-  "miwuki:at8gnduio7",
-  "miwuki:b6aqk1rv1v",
-  "miwuki:uya877otls",
-  "miwuki:qayigojopm",
-  "miwuki:p9cxb4p5fk",
-  "miwuki:22t6a3mftw",
-  "miwuki:3hjdogy7en",
-  "miwuki:suit4zqxc1",
-  "miwuki:jxmnno0g2j",
-  "miwuki:5alcxixqwn",
-  "miwuki:ag9o758hag",
-  "miwuki:i65sy889ss",
-  "miwuki:f4qntgwkef",
-  "miwuki:zn1jntsig7",
-  "miwuki:kx0s7sb9yf",
-  "miwuki:yhuxbfn1b9",
-  "miwuki:2sl9qlxpa3",
-  "miwuki:5bf8vozo32",
-  "miwuki:sz5czrnnum",
-  "miwuki:iplunfcxek",
-  "miwuki:rcgkgl08wp",
-  "miwuki:i90e2zf84e",
-  "miwuki:lii3abnj41",
-  "miwuki:pi70wnnvaq",
-  "miwuki:ld9jqtfzic",
-  "miwuki:hbpxdf8yqf",
-  "miwuki:ganpqmso3l",
-  "miwuki:ujjtzgxysr",
-  "miwuki:v6hp1exqoo",
-  "miwuki:hnm7nbyyyg",
-  "miwuki:sp3cbrfviy",
-  "miwuki:js6tcv0tjs",
-  "miwuki:eyqfrhkxap",
-  "miwuki:xrukokcqxs",
-  "miwuki:tauvqrh5eo",
-  "miwuki:uzfiytbzaf",
-  "miwuki:r2ixde5u7u",
-  "miwuki:ersghnbyir",
-  "miwuki:isxxnoqd0s",
-  "miwuki:d5ylcwpty5",
-  "miwuki:vez7nks0rg",
-  "miwuki:2oaopjlkwa",
-  "miwuki:2b0f62edj9",
-  "miwuki:twusxnfnd9",
-  "miwuki:bfdrfs87pm",
-  "miwuki:g9o5amjvbl",
-  "miwuki:m8qczrcgtv",
-  "miwuki:bt99bovobn",
-  "miwuki:pomu8cxcje",
-  "miwuki:nxlr8bsjzr",
-  "miwuki:cvfxcir2q7",
-  "miwuki:znusigvq3w",
-  "miwuki:jli49g4kce",
-  "miwuki:2lsdrbul67",
-  "miwuki:bqcwpfuogs",
-  "miwuki:ph5xgvu9hj",
-  "miwuki:rujfq2npu6",
-  "miwuki:0apyafepik",
-  "miwuki:bz554hrb1p",
-  "miwuki:aii9mi1bk4",
-  "miwuki:6rffs86jp1",
-  "miwuki:wyw1ufsnls",
-  "miwuki:4wtjvzxqol",
-  "miwuki:jko84zk7si",
-  "miwuki:fw8ji8nlr3",
-  "miwuki:et9ydwaeln",
-  "miwuki:x5cuqlud32",
-  "miwuki:z1wz3p7knc",
-  "miwuki:uzay3ygo5k",
-  "miwuki:qvpqjdz2or",
-  "miwuki:hffhuxry9n",
-  "miwuki:w1oicvqpp7",
-  "miwuki:v9mjwx32go",
+  "miwuki:5zixobquz6",
+  "miwuki:cgnj0gho2b",
+  "miwuki:zeotdyyey5",
+  "miwuki:bgnqhqp4cn",
+  "miwuki:d17kaxtpcl",
+  "miwuki:1o0vpzpnn6",
+  "miwuki:x50c8oxd3d",
+  "miwuki:ypfuggddvb",
+  "miwuki:95zwye3hvn",
   "anaa:anaaweb-org-anxelu",
+  "anaa:anaaweb-org-bretana",
+  "anaa:anaaweb-org-bulo",
+  "anaa:anaaweb-org-chuche",
   "anaa:anaaweb-org-chupachups",
+  "anaa:anaaweb-org-chupimuski",
   "anaa:anaaweb-org-daryl",
-  "anaa:anaaweb-org-estrella-caceres",
-  "anaa:anaaweb-org-gonzo",
-  "anaa:anaaweb-org-grosella-malaga",
-  "anaa:anaaweb-org-kiwi-malaga",
-  "anaa:anaaweb-org-lalka",
+  "anaa:anaaweb-org-evaristo",
+  "anaa:anaaweb-org-fantasma",
+  "anaa:anaaweb-org-goku",
+  "anaa:anaaweb-org-gominola",
+  "anaa:anaaweb-org-janet",
+  "anaa:anaaweb-org-kalea",
+  "anaa:anaaweb-org-katy-malagon",
+  "anaa:anaaweb-org-kitkat",
+  "anaa:anaaweb-org-lia",
+  "anaa:anaaweb-org-lois",
+  "anaa:anaaweb-org-loren",
+  "anaa:anaaweb-org-luisa",
   "anaa:anaaweb-org-malteado",
+  "anaa:anaaweb-org-merle",
+  "anaa:anaaweb-org-mirada",
   "anaa:anaaweb-org-nata",
-  "anaa:anaaweb-org-neo-malaga",
-  "ibi:protectoradeibi-com-charlie",
-  "ibi:protectoradeibi-com-oso",
-  "asoka:asokaelgrande-org-nox",
-  "asoka:asokaelgrande-org-luna",
-  "asoka:asokaelgrande-org-nica",
-  "asoka:asokaelgrande-org-gomi"
+  "anaa:anaaweb-org-pekas",
+  "anaa:anaaweb-org-peter"
  ],
  "source_health": {
   "apadac": {
@@ -6373,42 +6362,44 @@
    "dogs": 12,
    "pages": 2,
    "errors": [],
-   "seconds": 18.4
+   "seconds": 18.1
   },
   "kerubi": {
    "ok": true,
    "dogs": 221,
    "pages": 5,
    "errors": [],
-   "seconds": 241.1
+   "seconds": 191.5
   },
   "miwuki": {
    "ok": true,
-   "dogs": 376,
+   "dogs": 377,
    "pages": 17,
    "errors": [],
-   "seconds": 386.8
+   "seconds": 368.0
   },
   "reinasbiberon": {
-   "ok": true,
-   "dogs": 28,
-   "pages": 1,
-   "errors": [],
-   "seconds": 6.8
+   "ok": false,
+   "dogs": 0,
+   "pages": 0,
+   "errors": [
+    "página 1: HTTPSConnectionPool(host='www.lasreinasdelbiberon.org', port=443): Max retries exceeded with url: /wp-json/wc/store/v1/products?per_page=50&page=1&category=20,98 (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host='www.lasreinasdelbiberon.org', port=443): Read timed out. (read timeout=30)\"))"
+   ],
+   "seconds": 186.7
   },
   "villena": {
    "ok": true,
    "dogs": 55,
    "pages": 2,
    "errors": [],
-   "seconds": 7.8
+   "seconds": 6.7
   },
   "anaa": {
    "ok": true,
    "dogs": 80,
    "pages": 1,
    "errors": [],
-   "seconds": 50.6
+   "seconds": 51.5
   },
   "ibi": {
    "ok": true,
@@ -6422,18 +6413,33 @@
    "dogs": 12,
    "pages": 1,
    "errors": [],
-   "seconds": 7.9
+   "seconds": 7.4
   },
   "apaccampello": {
    "ok": true,
    "dogs": 0,
    "pages": 1,
    "errors": [],
-   "seconds": 1.4
+   "seconds": 1.7
   }
  },
  "last_digest_sent": "2026-09-05T08:54:58Z",
  "removed_ids": [
-  "asoka:asokaelgrande-org-simba"
+  "kerubi:luni",
+  "kerubi:blue-2",
+  "kerubi:kiara",
+  "kerubi:adopcion-conjunta",
+  "kerubi:oregano",
+  "miwuki:84icaiknal",
+  "villena:10045",
+  "villena:10316",
+  "villena:9097",
+  "villena:10164",
+  "anaa:anaaweb-org-caslista-zaorejas",
+  "anaa:anaaweb-org-hada",
+  "anaa:anaaweb-org-mali-huellas",
+  "anaa:anaaweb-org-ades-malaga",
+  "anaa:anaaweb-org-mochi-malaga",
+  "anaa:anaaweb-org-clementino"
  ]
 }
