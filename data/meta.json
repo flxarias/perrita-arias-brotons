@@ -1,79 +1,6 @@
 {
  "runs": [
   {
-   "at": "2026-08-08T23:32:20Z",
-   "new": 0,
-   "changed": 0,
-   "total": 727,
-   "sources": {
-    "apadac": {
-     "ok": true,
-     "dogs": 20,
-     "pages": 2,
-     "errors": [],
-     "seconds": 14.3
-    },
-    "kerubi": {
-     "ok": true,
-     "dogs": 46,
-     "pages": 5,
-     "errors": [],
-     "seconds": 98.4
-    },
-    "miwuki": {
-     "ok": true,
-     "dogs": 354,
-     "pages": 17,
-     "errors": [],
-     "seconds": 327.1
-    },
-    "reinasbiberon": {
-     "ok": true,
-     "dogs": 20,
-     "pages": 1,
-     "errors": [],
-     "seconds": 6.6
-    },
-    "villena": {
-     "ok": true,
-     "dogs": 56,
-     "pages": 2,
-     "errors": [],
-     "seconds": 9.1
-    },
-    "anaa": {
-     "ok": true,
-     "dogs": 62,
-     "pages": 1,
-     "errors": [],
-     "seconds": 51.3
-    },
-    "ibi": {
-     "ok": true,
-     "dogs": 4,
-     "pages": 1,
-     "errors": [],
-     "seconds": 3.3
-    },
-    "asoka": {
-     "ok": false,
-     "dogs": 0,
-     "pages": 0,
-     "errors": [
-      "listado https://asokaelgrande.org/la-45-perros: HTTPSConnectionPool(host='asokaelgrande.org', port=443): Max retries exceeded with url: /la-45-perros (Caused by ConnectTimeoutError(<HTTPSConnection(host='asokaelgrande.org', port=443) at 0x7f2b99c2faa0>, 'Connection to asokaelgrande.org timed out. (connect timeout=30)'))"
-     ],
-     "seconds": 127.7
-    },
-    "apaccampello": {
-     "ok": true,
-     "dogs": 0,
-     "pages": 1,
-     "errors": [],
-     "seconds": 1.1
-    }
-   }
-  },
-  {
    "at": "2026-08-09T22:39:14Z",
    "new": 17,
    "changed": 20,
@@ -6449,41 +6376,104 @@
      "seconds": 2.3
     }
    }
+  },
+  {
+   "at": "2026-10-24T00:26:53Z",
+   "new": 2,
+   "changed": 13,
+   "total": 775,
+   "sources": {
+    "apadac": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 2,
+     "errors": [],
+     "seconds": 17.8
+    },
+    "kerubi": {
+     "ok": true,
+     "dogs": 222,
+     "pages": 5,
+     "errors": [],
+     "seconds": 214.0
+    },
+    "miwuki": {
+     "ok": true,
+     "dogs": 382,
+     "pages": 17,
+     "errors": [],
+     "seconds": 382.5
+    },
+    "reinasbiberon": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 1,
+     "errors": [],
+     "seconds": 5.8
+    },
+    "villena": {
+     "ok": true,
+     "dogs": 55,
+     "pages": 2,
+     "errors": [],
+     "seconds": 9.0
+    },
+    "anaa": {
+     "ok": true,
+     "dogs": 80,
+     "pages": 1,
+     "errors": [],
+     "seconds": 49.1
+    },
+    "ibi": {
+     "ok": true,
+     "dogs": 5,
+     "pages": 1,
+     "errors": [],
+     "seconds": 3.4
+    },
+    "asoka": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 1,
+     "errors": [],
+     "seconds": 7.4
+    },
+    "apaccampello": {
+     "ok": true,
+     "dogs": 0,
+     "pages": 1,
+     "errors": [],
+     "seconds": 1.6
+    }
+   }
   }
  ],
- "last_run": "2026-10-23T00:35:21Z",
+ "last_run": "2026-10-24T00:26:53Z",
  "new_ids": [
-  "kerubi:tyron-2",
-  "kerubi:dante-3"
+  "reinasbiberon:17930",
+  "reinasbiberon:17927"
  ],
  "counts": {
-  "total": 774,
-  "disponibles": 761,
+  "total": 775,
+  "disponibles": 746,
   "hembras": 520,
   "cachorras": 52
  },
  "changed_ids": [
-  "kerubi:duende-3",
-  "miwuki:fxotwfhsju",
-  "miwuki:5qkvuxvumw",
-  "miwuki:tp8zmcg6u8",
-  "miwuki:duondz4r3v",
-  "miwuki:uob4e5caso",
-  "miwuki:sdg3fhltcx",
-  "miwuki:nl5s3ad2sr",
-  "miwuki:vjw9rlnbl8",
-  "miwuki:skvnraligj",
-  "miwuki:vbtyygmk63",
-  "miwuki:ygz0ccj2s9",
-  "miwuki:i3yfdhv48f",
-  "miwuki:qkalo7rfst",
-  "anaa:anaaweb-org-javi-huellas",
-  "anaa:anaaweb-org-lia",
-  "anaa:anaaweb-org-maya-cuenca",
-  "anaa:anaaweb-org-mayer",
-  "anaa:anaaweb-org-morrisey",
-  "anaa:anaaweb-org-neo-malaga",
-  "asoka:asokaelgrande-org-tiki"
+  "kerubi:woodie",
+  "miwuki:ysayqpburi",
+  "miwuki:5ouhismzfc",
+  "miwuki:g1insl25po",
+  "miwuki:i2hzvnbd9w",
+  "miwuki:p9nszzprpe",
+  "reinasbiberon:14058",
+  "reinasbiberon:14049",
+  "anaa:anaaweb-org-dona-o-hazte-teamer",
+  "anaa:anaaweb-org-bambi-bimba",
+  "anaa:anaaweb-org-boss",
+  "anaa:anaaweb-org-bulo",
+  "anaa:anaaweb-org-pekas"
  ],
  "source_health": {
   "apadac": {
@@ -6491,65 +6481,67 @@
    "dogs": 12,
    "pages": 2,
    "errors": [],
-   "seconds": 18.4
+   "seconds": 17.8
   },
   "kerubi": {
    "ok": true,
    "dogs": 222,
    "pages": 5,
    "errors": [],
-   "seconds": 213.0
+   "seconds": 214.0
   },
   "miwuki": {
    "ok": true,
-   "dogs": 383,
+   "dogs": 382,
    "pages": 17,
    "errors": [],
-   "seconds": 399.6
+   "seconds": 382.5
   },
   "reinasbiberon": {
    "ok": true,
-   "dogs": 26,
+   "dogs": 12,
    "pages": 1,
    "errors": [],
-   "seconds": 5.5
+   "seconds": 5.8
   },
   "villena": {
    "ok": true,
    "dogs": 55,
    "pages": 2,
    "errors": [],
-   "seconds": 8.1
+   "seconds": 9.0
   },
   "anaa": {
    "ok": true,
    "dogs": 80,
    "pages": 1,
    "errors": [],
-   "seconds": 51.0
+   "seconds": 49.1
   },
   "ibi": {
    "ok": true,
    "dogs": 5,
    "pages": 1,
    "errors": [],
-   "seconds": 3.5
+   "seconds": 3.4
   },
   "asoka": {
    "ok": true,
    "dogs": 12,
    "pages": 1,
    "errors": [],
-   "seconds": 8.3
+   "seconds": 7.4
   },
   "apaccampello": {
    "ok": true,
    "dogs": 0,
    "pages": 1,
    "errors": [],
-   "seconds": 2.3
+   "seconds": 1.6
   }
  },
  "last_digest_sent": "2026-09-05T08:54:58Z",
- "removed_ids": []
+ "removed_ids": [
+  "kerubi:demet"
+ ]
 }
