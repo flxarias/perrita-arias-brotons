@@ -1,77 +1,6 @@
 {
  "runs": [
   {
-   "at": "2026-08-09T23:33:41Z",
-   "new": 0,
-   "changed": 3,
-   "total": 743,
-   "sources": {
-    "apadac": {
-     "ok": true,
-     "dogs": 22,
-     "pages": 2,
-     "errors": [],
-     "seconds": 15.9
-    },
-    "kerubi": {
-     "ok": true,
-     "dogs": 116,
-     "pages": 5,
-     "errors": [],
-     "seconds": 121.2
-    },
-    "miwuki": {
-     "ok": true,
-     "dogs": 355,
-     "pages": 17,
-     "errors": [],
-     "seconds": 355.3
-    },
-    "reinasbiberon": {
-     "ok": true,
-     "dogs": 20,
-     "pages": 1,
-     "errors": [],
-     "seconds": 6.0
-    },
-    "villena": {
-     "ok": true,
-     "dogs": 56,
-     "pages": 2,
-     "errors": [],
-     "seconds": 5.9
-    },
-    "anaa": {
-     "ok": true,
-     "dogs": 62,
-     "pages": 1,
-     "errors": [],
-     "seconds": 50.6
-    },
-    "ibi": {
-     "ok": true,
-     "dogs": 4,
-     "pages": 1,
-     "errors": [],
-     "seconds": 3.3
-    },
-    "asoka": {
-     "ok": true,
-     "dogs": 12,
-     "pages": 1,
-     "errors": [],
-     "seconds": 7.7
-    },
-    "apaccampello": {
-     "ok": true,
-     "dogs": 0,
-     "pages": 1,
-     "errors": [],
-     "seconds": 0.4
-    }
-   }
-  },
-  {
    "at": "2026-08-10T22:45:22Z",
    "new": 17,
    "changed": 11,
@@ -6445,33 +6374,102 @@
      "seconds": 1.8
     }
    }
+  },
+  {
+   "at": "2026-10-26T00:00:23Z",
+   "new": 4,
+   "changed": 7,
+   "total": 777,
+   "sources": {
+    "apadac": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 2,
+     "errors": [],
+     "seconds": 18.5
+    },
+    "kerubi": {
+     "ok": true,
+     "dogs": 223,
+     "pages": 5,
+     "errors": [
+      "ficha https://kerubi.es/animales/perros-en-adopcion/win/: 404 Client Error: Not Found for url: https://kerubi.es/animales/perros-en-adopcion/win/"
+     ],
+     "seconds": 208.3
+    },
+    "miwuki": {
+     "ok": true,
+     "dogs": 382,
+     "pages": 17,
+     "errors": [],
+     "seconds": 397.9
+    },
+    "reinasbiberon": {
+     "ok": true,
+     "dogs": 13,
+     "pages": 1,
+     "errors": [],
+     "seconds": 4.9
+    },
+    "villena": {
+     "ok": true,
+     "dogs": 55,
+     "pages": 2,
+     "errors": [],
+     "seconds": 9.9
+    },
+    "anaa": {
+     "ok": true,
+     "dogs": 80,
+     "pages": 1,
+     "errors": [],
+     "seconds": 51.9
+    },
+    "ibi": {
+     "ok": true,
+     "dogs": 5,
+     "pages": 1,
+     "errors": [],
+     "seconds": 3.3
+    },
+    "asoka": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 1,
+     "errors": [],
+     "seconds": 7.8
+    },
+    "apaccampello": {
+     "ok": true,
+     "dogs": 0,
+     "pages": 1,
+     "errors": [],
+     "seconds": 0.3
+    }
+   }
   }
  ],
- "last_run": "2026-10-25T00:10:55Z",
+ "last_run": "2026-10-26T00:00:23Z",
  "new_ids": [
-  "apadac:kika",
-  "apadac:pau",
-  "kerubi:cairo",
-  "kerubi:fresita-2"
+  "miwuki:6jh8swjqdw",
+  "asoka:asokaelgrande-org-manchitas",
+  "asoka:asokaelgrande-org-boro",
+  "asoka:asokaelgrande-org-barney"
  ],
  "counts": {
-  "total": 778,
-  "disponibles": 748,
+  "total": 777,
+  "disponibles": 747,
   "hembras": 521,
   "cachorras": 53
  },
  "changed_ids": [
-  "apadac:ares",
-  "apadac:nana",
-  "miwuki:munvmu6nz4",
-  "miwuki:ex6gap6vms",
-  "miwuki:iw6t1c1aoj",
-  "miwuki:2n2fbq33yz",
-  "miwuki:2dkqr1uyjz",
-  "miwuki:7xmguy2ngu",
-  "miwuki:mujgdaiqxd",
-  "anaa:anaaweb-org-lois",
-  "anaa:anaaweb-org-monopoly"
+  "miwuki:7pw5cuudxb",
+  "miwuki:z3utjnm3ag",
+  "miwuki:iangtnb8s9",
+  "miwuki:oesa7pnugh",
+  "miwuki:tvvyhxjvr5",
+  "miwuki:kguqn6abg0",
+  "asoka:asokaelgrande-org-lulo"
  ],
  "source_health": {
   "apadac": {
@@ -6483,63 +6481,69 @@
   },
   "kerubi": {
    "ok": true,
-   "dogs": 224,
+   "dogs": 223,
    "pages": 5,
-   "errors": [],
-   "seconds": 191.3
+   "errors": [
+    "ficha https://kerubi.es/animales/perros-en-adopcion/win/: 404 Client Error: Not Found for url: https://kerubi.es/animales/perros-en-adopcion/win/"
+   ],
+   "seconds": 208.3
   },
   "miwuki": {
    "ok": true,
    "dogs": 382,
    "pages": 17,
    "errors": [],
-   "seconds": 399.9
+   "seconds": 397.9
   },
   "reinasbiberon": {
    "ok": true,
    "dogs": 13,
    "pages": 1,
    "errors": [],
-   "seconds": 5.1
+   "seconds": 4.9
   },
   "villena": {
    "ok": true,
    "dogs": 55,
    "pages": 2,
    "errors": [],
-   "seconds": 6.5
+   "seconds": 9.9
   },
   "anaa": {
    "ok": true,
    "dogs": 80,
    "pages": 1,
    "errors": [],
-   "seconds": 51.5
+   "seconds": 51.9
   },
   "ibi": {
    "ok": true,
    "dogs": 5,
    "pages": 1,
    "errors": [],
-   "seconds": 3.5
+   "seconds": 3.3
   },
   "asoka": {
    "ok": true,
    "dogs": 12,
    "pages": 1,
    "errors": [],
-   "seconds": 7.7
+   "seconds": 7.8
   },
   "apaccampello": {
    "ok": true,
    "dogs": 0,
    "pages": 1,
    "errors": [],
-   "seconds": 1.8
+   "seconds": 0.3
   }
  },
  "last_digest_sent": "2026-10-25T09:41:25Z",
  "removed_ids": [
-  "miwuki:95zwye3hvn"
+  "anaa:anaaweb-org-fer-bimba",
+  "anaa:anaaweb-org-hojaldre-malaga",
+  "anaa:anaaweb-org-clavileno-zaorejas",
+  "apadac:prada",
+  "apadac:kiarita"
  ]
 }
