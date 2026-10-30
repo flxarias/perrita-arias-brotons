@@ -1,77 +1,6 @@
 {
  "runs": [
   {
-   "at": "2026-08-11T23:43:19Z",
-   "new": 0,
-   "changed": 0,
-   "total": 748,
-   "sources": {
-    "apadac": {
-     "ok": true,
-     "dogs": 22,
-     "pages": 2,
-     "errors": [],
-     "seconds": 16.7
-    },
-    "kerubi": {
-     "ok": true,
-     "dogs": 109,
-     "pages": 5,
-     "errors": [],
-     "seconds": 134.0
-    },
-    "miwuki": {
-     "ok": true,
-     "dogs": 356,
-     "pages": 17,
-     "errors": [],
-     "seconds": 357.2
-    },
-    "reinasbiberon": {
-     "ok": true,
-     "dogs": 20,
-     "pages": 1,
-     "errors": [],
-     "seconds": 5.8
-    },
-    "villena": {
-     "ok": true,
-     "dogs": 68,
-     "pages": 2,
-     "errors": [],
-     "seconds": 6.4
-    },
-    "anaa": {
-     "ok": true,
-     "dogs": 61,
-     "pages": 1,
-     "errors": [],
-     "seconds": 50.1
-    },
-    "ibi": {
-     "ok": true,
-     "dogs": 4,
-     "pages": 1,
-     "errors": [],
-     "seconds": 3.3
-    },
-    "asoka": {
-     "ok": true,
-     "dogs": 12,
-     "pages": 1,
-     "errors": [],
-     "seconds": 7.5
-    },
-    "apaccampello": {
-     "ok": true,
-     "dogs": 0,
-     "pages": 1,
-     "errors": [],
-     "seconds": 0.4
-    }
-   }
-  },
-  {
    "at": "2026-08-12T22:47:18Z",
    "new": 6,
    "changed": 13,
@@ -6449,29 +6378,98 @@
      "seconds": 0.2
     }
    }
+  },
+  {
+   "at": "2026-10-30T01:43:47Z",
+   "new": 1,
+   "changed": 8,
+   "total": 773,
+   "sources": {
+    "apadac": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 2,
+     "errors": [],
+     "seconds": 18.0
+    },
+    "kerubi": {
+     "ok": true,
+     "dogs": 222,
+     "pages": 5,
+     "errors": [],
+     "seconds": 214.9
+    },
+    "miwuki": {
+     "ok": true,
+     "dogs": 384,
+     "pages": 17,
+     "errors": [],
+     "seconds": 389.0
+    },
+    "reinasbiberon": {
+     "ok": true,
+     "dogs": 13,
+     "pages": 1,
+     "errors": [],
+     "seconds": 7.3
+    },
+    "villena": {
+     "ok": true,
+     "dogs": 55,
+     "pages": 2,
+     "errors": [],
+     "seconds": 6.7
+    },
+    "anaa": {
+     "ok": true,
+     "dogs": 80,
+     "pages": 1,
+     "errors": [],
+     "seconds": 51.6
+    },
+    "ibi": {
+     "ok": true,
+     "dogs": 5,
+     "pages": 1,
+     "errors": [],
+     "seconds": 3.6
+    },
+    "asoka": {
+     "ok": true,
+     "dogs": 12,
+     "pages": 1,
+     "errors": [],
+     "seconds": 7.6
+    },
+    "apaccampello": {
+     "ok": true,
+     "dogs": 0,
+     "pages": 1,
+     "errors": [],
+     "seconds": 1.4
+    }
+   }
   }
  ],
- "last_run": "2026-10-29T01:44:07Z",
+ "last_run": "2026-10-30T01:43:47Z",
  "new_ids": [
-  "miwuki:rsmtiqqzrb"
+  "miwuki:akohcko7g0"
  ],
  "counts": {
-  "total": 774,
-  "disponibles": 747,
+  "total": 773,
+  "disponibles": 748,
   "hembras": 521,
-  "cachorras": 53
+  "cachorras": 54
  },
  "changed_ids": [
-  "miwuki:lajl7basbm",
-  "miwuki:xjl7zlohbs",
-  "miwuki:geoc4rbwk1",
-  "miwuki:qu5j3uncte",
-  "miwuki:oubi2swa7f",
-  "miwuki:wgxlnfxbcp",
-  "ibi:protectoradeibi-com-fausti",
-  "asoka:asokaelgrande-org-lulo",
-  "asoka:asokaelgrande-org-alfa",
-  "asoka:asokaelgrande-org-shira"
+  "miwuki:sngvjjzcnr",
+  "miwuki:hr8hxkn5we",
+  "miwuki:hnirsa7rhg",
+  "miwuki:nqlgbd4ids",
+  "miwuki:rrhvgpshlo",
+  "miwuki:rp1pdqficg",
+  "miwuki:c7cd6av9jw",
+  "miwuki:8yehrgwcki"
  ],
  "source_health": {
   "apadac": {
@@ -6479,67 +6477,68 @@
    "dogs": 12,
    "pages": 2,
    "errors": [],
-   "seconds": 19.0
+   "seconds": 18.0
   },
   "kerubi": {
    "ok": true,
    "dogs": 222,
    "pages": 5,
-   "errors": [
-    "ficha https://kerubi.es/animales/perros-en-adopcion/vegeta/: 404 Client Error: Not Found for url: https://kerubi.es/animales/perros-en-adopcion/vegeta/"
-   ],
-   "seconds": 185.9
+   "errors": [],
+   "seconds": 214.9
   },
   "miwuki": {
    "ok": true,
-   "dogs": 383,
+   "dogs": 384,
    "pages": 17,
    "errors": [],
-   "seconds": 403.3
+   "seconds": 389.0
   },
   "reinasbiberon": {
    "ok": true,
    "dogs": 13,
    "pages": 1,
    "errors": [],
-   "seconds": 5.2
+   "seconds": 7.3
   },
   "villena": {
    "ok": true,
    "dogs": 55,
    "pages": 2,
    "errors": [],
-   "seconds": 7.7
+   "seconds": 6.7
   },
   "anaa": {
    "ok": true,
    "dogs": 80,
    "pages": 1,
    "errors": [],
-   "seconds": 51.4
+   "seconds": 51.6
   },
   "ibi": {
    "ok": true,
    "dogs": 5,
    "pages": 1,
    "errors": [],
-   "seconds": 3.4
+   "seconds": 3.6
   },
   "asoka": {
    "ok": true,
    "dogs": 12,
    "pages": 1,
    "errors": [],
-   "seconds": 8.0
+   "seconds": 7.6
   },
   "apaccampello": {
    "ok": true,
    "dogs": 0,
    "pages": 1,
    "errors": [],
-   "seconds": 0.2
+   "seconds": 1.4
   }
  },
  "last_digest_sent": "2026-10-25T09:41:25Z",
- "removed_ids": []
+ "removed_ids": [
+  "kerubi:vegeta",
+  "miwuki:2lsdrbul67"
+ ]
 }
